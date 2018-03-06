@@ -6,21 +6,35 @@
 
 /* 
  * File:   ArrayDeque.h
- * Author: Gabriel
+ * Author: mpedembe7.alumnes
  *
- * Created on 6 de marzo de 2018, 9:00
+ * Created on 6 / de març / 2018, 08:58
  */
 
 #ifndef ARRAYDEQUE_H
 #define ARRAYDEQUE_H
 
-class ArrayDeque {
-public:
-    ArrayDeque();
-    ArrayDeque(const ArrayDeque& orig);
-    virtual ~ArrayDeque();
-private:
+#include<vector>
+using namespace std;
 
+class ArrayDeque {
+    public:
+        ArrayDeque(int maxSize);
+        ~ArrayDeque();
+        bool isEmpty() const;
+        bool isFull() const;
+        void insertFront(int element);
+        void insertRear(int element);
+        void deleteFront();
+        void deleteRear();
+        void print() const;
+        int getFront() const;
+        int getReat() const;
+    private:
+        int size;
+        std::vector<int> data ;
+        int front;
+        int rear;
 };
 
 #endif /* ARRAYDEQUE_H */

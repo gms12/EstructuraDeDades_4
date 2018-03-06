@@ -6,19 +6,58 @@
 
 /* 
  * File:   ArrayDeque.cpp
- * Author: Gabriel
+ * Author: mpedembe7.alumnes
  * 
- * Created on 6 de marzo de 2018, 9:00
+ * Created on 6 / de març / 2018, 08:58
  */
 
 #include "ArrayDeque.h"
 
-ArrayDeque::ArrayDeque() {
-}
-
-ArrayDeque::ArrayDeque(const ArrayDeque& orig) {
+ArrayDeque::ArrayDeque(int maxSize) {
+    this->data = vector(maxSize);
+    this->front = 0;
+    this->rear = 0;
+    this->size = 0;
 }
 
 ArrayDeque::~ArrayDeque() {
+    data.clear();
+    vector<int>().swap(data);
+    delete data;
 }
 
+bool ArrayDeque::isEmpty() {
+    return rear = front;
+}
+
+bool ArrayDeque::isFull() {
+    //TODO
+}
+
+void ArrayDeque::insertFront(int element) {
+    //TODO
+}
+
+void ArrayDeque::insertRear(int element) {
+    //TODO
+}
+
+void ArrayDeque::deleteFront() {
+    //TODO
+}
+
+void ArrayDeque::deleteRear() {
+    //TODO
+}
+
+void ArrayDeque::print() {
+    //TODO
+}
+
+int ArrayDeque::getFront() {
+    //TODO
+}
+
+int ArrayDeque::getRear() {
+    //TODO
+}
