@@ -41,6 +41,7 @@ int menu(vector<string> a){
 int main(int argc, char** argv) {
     vector<string> vec_options(6);
     int option, max;
+    ArrayDeque *array;
     
     vec_options[0]="Inserir element pel davant";
     vec_options[1]="Inserir element pel final";
@@ -52,7 +53,7 @@ int main(int argc, char** argv) {
     cout<<"Introdueix la mida de l'ArrayDEQUE: ";
     cin>>max;
     try{
-        ArrayDeque array=new ArrayDeque(max);
+        array=new ArrayDeque(max);
         do{
             cout<<"Que vols fer?"<<endl;
             option=menu(vec_options);
@@ -65,10 +66,12 @@ int main(int argc, char** argv) {
                 case 5:cout<<"Adéu!"<<endl;;
             }
         }while(option!=5);
+        delete array;
     }
     catch(invalid_argument& e){
         cout<<e.what()<<endl;
     }
+    
     vec_options.clear();
     vector<string>().swap(vec_options);
     delete vec_options;
