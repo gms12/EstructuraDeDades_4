@@ -14,10 +14,13 @@
 #include "ArrayDeque.h"
 
 ArrayDeque::ArrayDeque(int maxSize) {
-    this->data = vector(maxSize);
-    this->front = 0;
-    this->rear = 0;
-    this->size = 0;
+    if(maxSize>0){
+        this->data = vector(maxSize);
+        this->front = 0;
+        this->rear = 0;
+        this->size = 0;
+    }
+    else throw invalid_argument("Atenció: aquest valor no és acceptat.");
 }
 
 ArrayDeque::~ArrayDeque() {
@@ -27,11 +30,11 @@ ArrayDeque::~ArrayDeque() {
 }
 
 bool ArrayDeque::isEmpty() {
-    return rear = front;
+    return this->size==0;
 }
 
 bool ArrayDeque::isFull() {
-    //TODO
+    return this->size==this->data.size();
 }
 
 void ArrayDeque::insertFront(int element) {
@@ -55,9 +58,9 @@ void ArrayDeque::print() {
 }
 
 int ArrayDeque::getFront() {
-    //TODO
+    return this->front;
 }
 
 int ArrayDeque::getRear() {
-    //TODO
+    return this->rear;
 }

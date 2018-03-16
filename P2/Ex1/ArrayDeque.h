@@ -29,7 +29,7 @@ class ArrayDeque {
         void deleteRear();
         void print() const;
         int getFront() const;
-        int getReat() const;
+        int getRear() const;
     private:
         int size;
         std::vector<int> data ;

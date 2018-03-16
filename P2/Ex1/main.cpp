@@ -17,6 +17,8 @@
 #include <stdexcept>
 #include <string>
 
+#include "ArrayDeque.h"
+
 using namespace std;
 
 int menu(vector<string> a){
@@ -38,7 +40,7 @@ int menu(vector<string> a){
  */
 int main(int argc, char** argv) {
     vector<string> vec_options(6);
-    int option;
+    int option, max;
     
     vec_options[0]="Inserir element pel davant";
     vec_options[1]="Inserir element pel final";
@@ -46,18 +48,27 @@ int main(int argc, char** argv) {
     vec_options[3]="Eliminar element pel final";
     vec_options[4]="Imprimir contingut de l’ArrayDEQUE";
     vec_options[5]="Sortir";
-    do{
-        cout<<"Hola, que vols fer?"<<endl;
-        option=menu(vec_options);
-        switch(option){
-            case 0:break;
-            case 1:break;
-            case 2:break;
-            case 3:break;
-            case 4:break;
-            case 5:cout<<"Adéu!"<<endl;;
-        }
-    }while(option!=5);
+    
+    cout<<"Introdueix la mida de l'ArrayDEQUE: ";
+    cin>>max;
+    try{
+        ArrayDeque array=new ArrayDeque(max);
+        do{
+            cout<<"Que vols fer?"<<endl;
+            option=menu(vec_options);
+            switch(option){
+                case 0:break;
+                case 1:break;
+                case 2:break;
+                case 3:break;
+                case 4:break;
+                case 5:cout<<"Adéu!"<<endl;;
+            }
+        }while(option!=5);
+    }
+    catch(invalid_argument& e){
+        cout<<e.what()<<endl;
+    }
     vec_options.clear();
     vector<string>().swap(vec_options);
     delete vec_options;
