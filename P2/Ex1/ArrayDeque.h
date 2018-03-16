@@ -31,8 +31,8 @@ class ArrayDeque {
         int getFront() const;
         int getRear() const;
     private:
-        int size;
-        std::vector<int> data ;
+        int size; //comptador del nombre d'elements
+        std::vector<int> data;
         int front;
         int rear;
 };
