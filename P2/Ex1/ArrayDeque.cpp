@@ -15,31 +15,33 @@
 
 ArrayDeque::ArrayDeque(int maxSize) {
     if(maxSize>0){
-        this->data = vector(maxSize);
+        vector<int> d (maxSize);
+        this->data = d;
         this->front = 0;
         this->rear = 0;
         this->size = 0;
     }
     else throw invalid_argument("Atenció: aquest valor no és acceptat.");
+    cout << "Creada ArrayDeque de mida " << data.size() << endl;
 }
 
 ArrayDeque::~ArrayDeque() {
     data.clear();
     vector<int>().swap(data);
-    delete data;
+    delete &data;
 }
 
-bool ArrayDeque::isEmpty() {
+bool ArrayDeque::isEmpty() const {
     return this->size == 0;
 }//comprovem que el comptador sigui 0
 
-bool ArrayDeque::isFull() {
+bool ArrayDeque::isFull() const {
     return this->size == this->data.size();
 }//comprovem que el comptador sigui el mateix nombre que la mida de l'array
 
 void ArrayDeque::insertFront(int element) {
     if(!this->isFull()){
-        if(!this->isEmpty())front = (front-1)%data.size();
+        if(!this->isEmpty())front = (data.size() + front-1)%data.size();
         /*en el cas del front tirem cap enrere per tal de mantenir-me sempre
          al davant.*/
         data[front] = element;
@@ -51,7 +53,7 @@ void ArrayDeque::insertFront(int element) {
 
 void ArrayDeque::insertRear(int element) {
     if(!this->isFull()){
-        if(!this->isEmpty())rear = (rear+1)%data.size();
+        if(!this->isEmpty())rear = (data.size() + rear+1)%data.size();
         /*En el cas d'estar buida, front=rear=0. Inserir l'element davant o 
          darrera és indiferent.*/
         data[rear]=element;
@@ -68,7 +70,7 @@ void ArrayDeque::deleteFront() {
         }
         /*en el cas de només tenir un element, portem els dos valors a 0,
          valors inicials.*/
-        else front = (front+1)%data.size();
+        else front = (data.size() + front+1)%data.size();
         size--;
     }
     else throw invalid_argument("L'Array és buida.");
@@ -80,22 +82,23 @@ void ArrayDeque::deleteRear() {
             front = 0;
             rear = 0;
         }
-        else rear = (rear-1)%data.size();
+        else rear = (data.size() + rear-1)%data.size();
         size--;
     }
     else throw invalid_argument("L'Array és buida.");
 }
 
-void ArrayDeque::print() {
+void ArrayDeque::print() const {
     cout << "[";
     for(int i = front; i<front+size; i++){
         cout << this->data[(i)%data.size()];
         if(i < front+size-1) cout << ", ";
     }
-    cout << "]";
+    cout << "]" << endl;
+
 }
 
-int ArrayDeque::getFront() {
+int ArrayDeque::getFront() const {
     if(!this->isEmpty()){
         return this->data[front];
     }
@@ -103,7 +106,7 @@ int ArrayDeque::getFront() {
     return 0;    
 }
 
-int ArrayDeque::getRear() {
+int ArrayDeque::getRear() const {
     if(!this->isEmpty()){
         return this->data[rear];
     }

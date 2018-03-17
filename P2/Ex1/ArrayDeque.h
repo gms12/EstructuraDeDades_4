@@ -14,7 +14,9 @@
 #ifndef ARRAYDEQUE_H
 #define ARRAYDEQUE_H
 
-#include<vector>
+#include <vector>
+#include <stdexcept>
+#include <iostream>
 using namespace std;
 
 class ArrayDeque {

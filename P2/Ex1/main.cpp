@@ -103,16 +103,16 @@ int main(int argc, char** argv) {
             option=menu(vec_options);
             switch(option){
                 case 0:
-                    insertFront(array);
+                    insertFront(*array);
                     break;
                 case 1:
-                    insertRear(array);
+                    insertRear(*array);
                     break;
                 case 2:
-                    deleteFront(array);
+                    deleteFront(*array);
                     break;
                 case 3:
-                    deleteRear(array);
+                    deleteRear(*array);
                     break;
                 case 4:
                     array->print();
@@ -128,7 +128,7 @@ int main(int argc, char** argv) {
     
     vec_options.clear();
     vector<string>().swap(vec_options);
-    delete vec_options;
+    delete &vec_options;
     return 0;
 }
 
