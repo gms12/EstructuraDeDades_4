@@ -18,8 +18,10 @@ template <class Element> class LinkedDeque {
     public:
         LinkedDeque();
         ~LinkedDeque();
-        LinkedDeque(const LinkedDeque<Element>& deque); bool isEmpty()const;
-        void insertFront(const Element & element); void insertRear(const Element & element);
+        LinkedDeque(const LinkedDeque<Element>& deque); 
+        bool isEmpty()const;
+        void insertFront(const Element & element); 
+        void insertRear(const Element & element);
         void deleteFront();
         void deleteRear();
         void print();
@@ -30,6 +32,42 @@ template <class Element> class LinkedDeque {
         Node<Element> *_rear; 
         int num_elements;
 };
+
+template <class Element> LinkedDeque::LinkedDeque() {
+    //TODO
+}
+
+template <class Element> LinkedDeque::LinkedDeque(LinkedDeque<Element>& deque) {
+    //TODO
+}
+
+template <class Element> LinkedDeque::~LinkedDeque() {
+    //TODO
+}
+template <class Element> bool LinkedDeque::isEmpty() const{
+    //TODO
+}
+template <class Element> void LinkedDeque::insertFront(const Element& element){
+    //TODO
+}
+template <class Element> void LinkedDeque::insertRear(const Element& element){
+    //TODO
+}
+template <class Element> void LinkedDeque::deleteFront(){
+    //TODO
+}
+template <class Element> void LinkedDeque::deleteRear(){
+    //TODO
+}
+template <class Element> void LinkedDeque::print(){
+    //TODO
+}        
+template <class Element> const Element& LinkedDeque::getFront() const{
+    //TODO
+}
+template <class Element> const Element& LinkedDeque::getRear() const{
+    //TODO
+}
 
 #endif /* LINKEDDEQUE_H */
 
