@@ -35,7 +35,12 @@ template <class Element> class LinkedDeque {
 };
 
 template <class Element> LinkedDeque::LinkedDeque() {
-    //TODO
+    Node<Element> f1=new Node<Element>();
+    Node<Element> f2=new Node<Element>();
+    this->_front=&f1;
+    this->_rear=&f2;
+    f1.setNext(this->_rear);
+    f2.setPrevious(this->_front);
 }
 
 template <class Element> LinkedDeque::LinkedDeque(LinkedDeque<Element>& deque) {
