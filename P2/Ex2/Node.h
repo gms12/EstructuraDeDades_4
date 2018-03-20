@@ -37,39 +37,45 @@ template <class Element> class Node{
     private:
         Element element;
         Node* next;
-        Node* prevoius;
+        Node* previous;
 };
 
 template <class Element> Node<Element>::Node(){
-    
+    this->next=nullptr;
+    this->previous=nullptr;
+    this->element=NULL;
 }
 
 template <class Element> Node<Element>::Node(const Element e){
-    
+    this->next=nullptr;
+    this->previous=nullptr;
+    this->element=e;
 }
 
 template <class Element> Node<Element>::~Node(){
-    
+    this->next=nullptr;
+    this->previous=nullptr;
+    delete this->element;
 }
 
 template <class Element> Element& Node<Element>::getElement() const{
-    
+    return &(this->element);
 }
 
 template <class Element> Node* Node<Element>::getNext() const{
-    
+    return this->next;
 }
 
 template <class Element> void Node<Element>::setNext(const Node* n){
-    
+    this->next=n;
 }
 
 template <class Element> Node* Node<Element>::getPrevious() const{
-    
+    return this->previous;
 }
 
 template <class Element> void Node<Element>::setPrevious(const Node* n){
-    
+    this->previous=n;
 }
 
 
