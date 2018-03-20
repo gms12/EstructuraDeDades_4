@@ -13,6 +13,7 @@
 
 #ifndef LINKEDDEQUE_H
 #define LINKEDDEQUE_H
+#include "Node.h"
 
 template <class Element> class LinkedDeque {
     public:
