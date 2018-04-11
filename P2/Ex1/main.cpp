@@ -1,12 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Main per tal de comprovar el correcte funcionament del TAD ArrayDeque.
  */
 
 /* 
  * File:   main.cpp
- * Author: Gabriel
+ * Author: Martí Pedemonte i Gabriel Marín
  *
  * Created on 6 de marzo de 2018, 8:59
  */

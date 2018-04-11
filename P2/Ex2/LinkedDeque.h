@@ -1,12 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * TAD LinkedDeque amb una estructura enllaçada.
  */
 
 /* 
  * File:   LinkedDeque.h
- * Author: Gabriel
+ * Author: Martí Pedemonte i Gabriel Marín
  *
  * Created on 20 de marzo de 2018, 8:35
  */
@@ -20,6 +18,7 @@ template <class Element> class LinkedDeque {
         LinkedDeque();
         ~LinkedDeque();
         LinkedDeque(const LinkedDeque<Element>& deque); 
+        int size()const;
         bool isEmpty()const;
         void insertFront(const Element & element); 
         void insertRear(const Element & element);
@@ -33,7 +32,8 @@ template <class Element> class LinkedDeque {
         Node<Element> *_rear; 
         int num_elements;
 };
-
+//Constructor per defecte. Creem els "fantasmes" i hi apuntem els punters 
+//front i rear.
 template <class Element> LinkedDeque::LinkedDeque() {
     Node<Element> f1=new Node<Element>();
     Node<Element> f2=new Node<Element>();
@@ -50,8 +50,13 @@ template <class Element> LinkedDeque::LinkedDeque(LinkedDeque<Element>& deque) {
 template <class Element> LinkedDeque::~LinkedDeque() {
     //TODO
 }
+//Retorna el nombre d'elements que conté.
+template <class Element> int LinkedDeque::size() const{
+    return this->num_elements; 
+}
+//Retorna true si no hi ha cap element.
 template <class Element> bool LinkedDeque::isEmpty() const{
-    //TODO
+    return (this->num_elements==0); 
 }
 template <class Element> void LinkedDeque::insertFront(const Element& element){
     //TODO

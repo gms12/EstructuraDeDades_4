@@ -1,12 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Mètodes implementats del TAD ArrayDeque.
  */
 
 /* 
  * File:   ArrayDeque.cpp
- * Author: mpedembe7.alumnes
+ * Author: Martí Pedemonte i Gabriel Marín
  * 
  * Created on 6 / de març / 2018, 08:58
  */

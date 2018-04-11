@@ -1,12 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * TAD Node, que farà de suport al TAD LinkedDeque.
  */
 
 /* 
  * File:   Node.h
- * Author: mpedembe7.alumnes
+ * Author: Martí Pedemonte i Gabriel Marín
  *
  * Created on 20 / de març / 2018, 08:37
  */
@@ -39,41 +37,41 @@ template <class Element> class Node{
         Node* next;
         Node* previous;
 };
-
+//Constructor per defecte. Inicialitza els punters i element a null.
 template <class Element> Node<Element>::Node(){
     this->next=nullptr;
     this->previous=nullptr;
     this->element=NULL;
 }
-
+//Constructor amb pas d'element. Punters a null.
 template <class Element> Node<Element>::Node(const Element e){
     this->next=nullptr;
     this->previous=nullptr;
     this->element=e;
 }
-
+//Destructor del Node. Eliminem l'element i els punters ara apunten a null.
 template <class Element> Node<Element>::~Node(){
     this->next=nullptr;
     this->previous=nullptr;
     delete this->element;
 }
-
+//Aquest mètode retorna l'adreça de l'element que conté el Node.
 template <class Element> Element& Node<Element>::getElement() const{
     return &(this->element);
 }
-
+//Aquest mètode retorna l'adreça del Node al qual apunta el punter next.
 template <class Element> Node* Node<Element>::getNext() const{
     return this->next;
 }
-
+//Aquest mètode assigna el Node al qual apunta el punter next.
 template <class Element> void Node<Element>::setNext(const Node* n){
     this->next=n;
 }
-
+//Aquest mètode retorna l'adreça del Node al qual apunta el punter previous.
 template <class Element> Node* Node<Element>::getPrevious() const{
     return this->previous;
 }
-
+//Aquest mètode assigna el Node al qual apunta el punter previous.
 template <class Element> void Node<Element>::setPrevious(const Node* n){
     this->previous=n;
 }
