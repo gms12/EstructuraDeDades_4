@@ -37,12 +37,12 @@ template <class Element> class LinkedDeque {
 //Constructor per defecte. Creem els "fantasmes" i hi apuntem els punters 
 //front i rear.
 template <class Element> LinkedDeque::LinkedDeque() {
-    Node<Element> f1=new Node<Element>();
-    Node<Element> f2=new Node<Element>();
-    this->_front=&f1;
-    this->_rear=&f2;
-    f1.setNext(this->_rear);
-    f2.setPrevious(this->_front);
+    Node<Element> *f1=new Node<Element>();
+    Node<Element> *f2=new Node<Element>();
+    this->_front=f1;
+    this->_rear=f2;
+    f1->setNext(this->_rear);
+    f2->setPrevious(this->_front);
 }
 
 template <class Element> LinkedDeque::LinkedDeque(LinkedDeque<Element>& deque) {
@@ -69,10 +69,18 @@ template <class Element> bool LinkedDeque::isEmpty() const{
     return (this->num_elements==0); 
 }
 template <class Element> void LinkedDeque::insertFront(const Element& element){
-    //TODO
+    Node<Element> *_nou=new Node<Element>(element);
+    this->_front->getNext()->setPrevious(_nou);
+    _nou->setNext(this->_front->getNext());
+    _nou->setPrevious(this->_front);
+    this->_front->setNext(_nou); 
 }
 template <class Element> void LinkedDeque::insertRear(const Element& element){
-    //TODO
+    Node<Element> *_nou=new Node<Element>(element);
+    this->_rear->getPrevious()->setNext(_nou);
+    _nou->setPrevious(this->_rear->getPrevious());
+    _nou->setNext(this->_rear);
+    this->_rear->setPrevious(_nou);
 }
 //Si la llista no es buida, eliminem el node que apunta el front.
 template <class Element> void LinkedDeque::deleteFront(){
@@ -100,10 +108,11 @@ template <class Element> void LinkedDeque::print(){
     if(this->isEmpty())throw invalid_argument("La cua és buida.");
     else{
         Node<Element> *_aux; //node auxiliar que recorrera la cua
-        _aux=this->_front->getNext();//aux apunta al primer node no sentinella
+        _aux=this->_front;//aux apunta al primer node sentinella
         while(_aux->getNext()!=this->_rear){ //mentres el seguent no sigui l'ultim sentinella seguim
-            cout<<_aux->getElement()<<endl;//imprimim l'element
             _aux=_aux->getNext();//assignem al seguent node
+            cout<<_aux->getElement()<<endl;//imprimim l'element
+ 
         }
     }
 }
