@@ -97,7 +97,15 @@ template <class Element> void LinkedDeque::deleteRear(){
     }
 }
 template <class Element> void LinkedDeque::print(){
-    //TODO
+    if(this->isEmpty())throw invalid_argument("La cua és buida.");
+    else{
+        Node<Element> *_aux; //node auxiliar que recorrera la cua
+        _aux=this->_front->getNext();//aux apunta al primer node no sentinella
+        while(_aux->getNext()!=this->_rear){ //mentres el seguent no sigui l'ultim sentinella seguim
+            cout<<_aux->getElement()<<endl;//imprimim l'element
+            _aux=_aux->getNext();//assignem al seguent node
+        }
+    }
 }
 //Comprovem que la cua no sigui buida i si no es dona el cas retornem l'element
 //del node on apunta el front. Recordem que hi ha el sentinella.
