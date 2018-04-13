@@ -50,7 +50,15 @@ template <class Element> LinkedDeque::LinkedDeque(LinkedDeque<Element>& deque) {
 }
 
 template <class Element> LinkedDeque::~LinkedDeque() {
-    //TODO
+    while(!this->isEmpty()){
+        //mentres la cua no sigui buida, li anem treient l'element de davant
+        this->deleteFront();
+    }
+    //finalment eliminem els sentinelles
+    delete this->_front;
+    delete this->_rear;
+    this->_front=nullptr;
+    this->_rear=nullptr;
 }
 //Retorna el nombre d'elements que conté.
 template <class Element> int LinkedDeque::size() const{
