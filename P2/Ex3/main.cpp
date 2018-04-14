@@ -37,13 +37,16 @@ int menu(vector<string> a){
 void readFile(LinkedDeque<string> &link){
     ifstream myFile;
     myFile.open("input.txt");
-    string line;
+    string nom, prioritat, fitxer;
     if(!myFile.is_open()){
         cout << "Unable to open file." << endl;
         return;
     }else{
-        while(getline(myFile, line)){
-            link.insertRear(line);
+        while(!myFile.eof()){
+            myFile >> nom >> prioritat >> fitxer;
+            string element = nom + "\t" + prioritat + "\t" + fitxer;
+            if(prioritat == "1") link.insertFront(element);
+            else link.insertRear(element);
         }
     }
     cout << "Fitxer afegit a la llista." << endl;
@@ -79,7 +82,9 @@ void addRear(LinkedDeque<string> &link){
         cin >> prioritat;
         cout << "Introdueix el nom complet del fitxer: ";
         cin >> fitxer;
-        link.insertRear(nom + "\t" + prioritat + "\t" + fitxer);
+        string element = nom + "\t" + prioritat + "\t" + fitxer;
+        if(prioritat == "1") link.insertFront(element);
+        else link.insertRear(element);
     }
     
     cout << "Elements afegits pel darrera." << endl;
