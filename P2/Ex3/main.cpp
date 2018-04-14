@@ -1,12 +1,12 @@
 /*
- * Main per a comprovar el correcte funcionament de. TAD LinkedDeque.
+ * Exercici 3.
  */
 
 /* 
  * File:   main.cpp
  * Author: Martí Pedemonte i Gabriel Marín
  *
- * Created on 20 de marzo de 2018, 8:23
+ * Created on 14 de abril de 2018, 12:00
  */
 
 #include <cstdlib>
@@ -82,40 +82,47 @@ void deleteRear(LinkedDeque &array){
  */
 int main(int argc, char** argv) {
     vector<string> vec_options(6);
-    int option;
+    int option, max;
     LinkedDeque *link;
     
-    vec_options[0]="Inserir element pel davant";
-    vec_options[1]="Inserir element pel final";
-    vec_options[2]="Eliminar element pel davant";
-    vec_options[3]="Eliminar element pel final";
-    vec_options[4]="Imprimir contingut de l’ArrayDEQUE";
+    vec_options[0]="Llegir un fitxer amb les entrades de la cua d'impressió";
+    vec_options[1]="Eliminar una impressió pel davant";
+    vec_options[2]="Eliminar una impressió pel final";
+    vec_options[3]="Inserir n entrades d'impressió des de teclat (0 per finalitzar)";
+    vec_options[4]="Imprimir la cua d'impressió";
     vec_options[5]="Sortir";
     
-    link=new LinkedDeque();
-    do{
-        cout<<"Que vols fer?"<<endl;
-        option=menu(vec_options);
-        switch(option){
-            case 0:
-                insertFront(*link);
-                break;
-            case 1:
-                insertRear(*link);
-                break;
-            case 2:
-                deleteFront(*link);
-                break;
-            case 3:
-                deleteRear(*link);
-                break;
-            case 4:
-                link->print();
-                break;
-            case 5:cout<<"Adéu!"<<endl;;
-        }
-    }while(option!=5);
-    delete link;
+    cout<<"Introdueix la mida de l'ArrayDEQUE: ";
+    cin>>max;
+    try{
+        link=new LinkedDeque(max);
+        do{
+            cout<<"Que vols fer?"<<endl;
+            option=menu(vec_options);
+            switch(option){
+                case 0:
+                    insertFront(*link);
+                    break;
+                case 1:
+                    insertRear(*link);
+                    break;
+                case 2:
+                    deleteFront(*link);
+                    break;
+                case 3:
+                    deleteRear(*link);
+                    break;
+                case 4:
+                    link->print();
+                    break;
+                case 5:cout<<"Adéu!"<<endl;;
+            }
+        }while(option!=5);
+        delete link;
+    }
+    catch(invalid_argument& e){
+        cout<<e.what()<<endl;
+    }
     
     vec_options.clear();
     vector<string>().swap(vec_options);
