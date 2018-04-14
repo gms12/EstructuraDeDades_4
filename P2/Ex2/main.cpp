@@ -33,25 +33,25 @@ int menu(vector<string> a){
     return i;
 }
 
-void insertFront(LinkedDeque &link){
-    int element;
+void insertFront(LinkedDeque<string> &link){
+    string element;
     cout << "Introdueix l'element a inserir: ";
     cin >> element;
     link.insertFront(element);
     cout << "Element " << element << " agregat pel davant." << endl;
 }
 
-void insertRear(LinkedDeque &link){
-    int element;
+void insertRear(LinkedDeque<string> &link){
+    string element;
     cout << "Introdueix l'element a inserir: ";
     cin >> element;
     link.insertRear(element);
     cout << "Element " << element << " agregat pel darrera." << endl;
 }
 
-void deleteFront(LinkedDeque &link){
+void deleteFront(LinkedDeque<string> &link){
     try{
-        int element = link.getFront();
+        string element = link.getFront();
         link.deleteFront();
         cout << "Element " << element << " eliminat pel davant." << endl;
     }catch(invalid_argument& e){
@@ -59,16 +59,16 @@ void deleteFront(LinkedDeque &link){
     }
 }
 
-void deleteRear(LinkedDeque &link){
+void deleteRear(LinkedDeque<string> &link){
     try{
-        int element = link.getRear();
+        string element = link.getRear();
         link.deleteRear();
         cout << "Element " << element << " eliminat pel darrera." << endl;
     }catch(invalid_argument& e){
         cout<<e.what()<<endl;
     }
 }
-void print(LinkedDeque &link){
+void print(LinkedDeque<string> &link){
     try{
         link.print();
     }catch(invalid_argument& e){
@@ -82,7 +82,7 @@ void print(LinkedDeque &link){
 int main(int argc, char** argv) {
     vector<string> vec_options(6);
     int option;
-    LinkedDeque *link;
+    LinkedDeque<string> *link;
     
     vec_options[0]="Inserir element pel davant";
     vec_options[1]="Inserir element pel final";
@@ -91,7 +91,7 @@ int main(int argc, char** argv) {
     vec_options[4]="Imprimir contingut del LinkdeDeque";
     vec_options[5]="Sortir";
     
-    link=new LinkedDeque();
+    link = new LinkedDeque<string>();
     do{
         cout<<"Que vols fer?"<<endl;
         option=menu(vec_options);

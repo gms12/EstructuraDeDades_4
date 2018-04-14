@@ -36,7 +36,7 @@ template <class Element> class LinkedDeque {
 };
 //Constructor per defecte. Creem els "fantasmes" i hi apuntem els punters 
 //front i rear.
-template <class Element> LinkedDeque::LinkedDeque() {
+template <class Element> LinkedDeque<Element>::LinkedDeque() {
     Node<Element> *f1=new Node<Element>();
     Node<Element> *f2=new Node<Element>();
     this->_front=f1;
@@ -46,7 +46,7 @@ template <class Element> LinkedDeque::LinkedDeque() {
     this->num_elements = 0;
 }
 
-template <class Element> LinkedDeque::LinkedDeque(LinkedDeque<Element>& deque) {
+template <class Element> LinkedDeque<Element>::LinkedDeque(const LinkedDeque<Element>& deque) {
     Node<Element> *f1=new Node<Element>();//sentinella inicial
     Node<Element> *f2=new Node<Element>();//sentinella final
     this->_front=f1;
@@ -63,7 +63,7 @@ template <class Element> LinkedDeque::LinkedDeque(LinkedDeque<Element>& deque) {
     //delete aux; //eliminem aux, tot i que no se si es necessari
 }
 
-template <class Element> LinkedDeque::~LinkedDeque() {
+template <class Element> LinkedDeque<Element>::~LinkedDeque() {
     while(!this->isEmpty()){
         //mentres la cua no sigui buida, li anem treient l'element de davant
         this->deleteFront();
@@ -75,15 +75,15 @@ template <class Element> LinkedDeque::~LinkedDeque() {
     this->_rear=nullptr;
 }
 //Retorna el nombre d'elements que conté.
-template <class Element> int LinkedDeque::size() const{
+template <class Element> int LinkedDeque<Element>::size() const{
     return this->num_elements; 
 }
 //Retorna true si no hi ha cap element.
-template <class Element> bool LinkedDeque::isEmpty() const{
+template <class Element> bool LinkedDeque<Element>::isEmpty() const{
     return (this->num_elements == 0); //podriem fer servir metode size també
 }
 //Afegeix un element per davant
-template <class Element> void LinkedDeque::insertFront(const Element& element){
+template <class Element> void LinkedDeque<Element>::insertFront(const Element& element){
     Node<Element> *_nou=new Node<Element>(element);
     this->_front->getNext()->setPrevious(_nou);
     _nou->setNext(this->_front->getNext());
@@ -92,7 +92,7 @@ template <class Element> void LinkedDeque::insertFront(const Element& element){
     this->num_elements++;
 }
 //Afegeix un element per darrera
-template <class Element> void LinkedDeque::insertRear(const Element& element){
+template <class Element> void LinkedDeque<Element>::insertRear(const Element& element){
     Node<Element> *_nou=new Node<Element>(element);
     this->_rear->getPrevious()->setNext(_nou);
     _nou->setPrevious(this->_rear->getPrevious());
@@ -101,7 +101,7 @@ template <class Element> void LinkedDeque::insertRear(const Element& element){
     this->num_elements++;
 }
 //Si la llista no es buida, eliminem el node que apunta el front.
-template <class Element> void LinkedDeque::deleteFront(){
+template <class Element> void LinkedDeque<Element>::deleteFront(){
     if(this->isEmpty())throw invalid_argument("La cua és buida.");
     else{
         Node<Element> *_aux; //node auxiliar que apuntarà al node que volem eliminar
@@ -113,7 +113,7 @@ template <class Element> void LinkedDeque::deleteFront(){
     }
 }
 //Si la llista no es buida, eliminem el node que apunta el rear.
-template <class Element> void LinkedDeque::deleteRear(){
+template <class Element> void LinkedDeque<Element>::deleteRear(){
     if(this->isEmpty())throw invalid_argument("La cua és buida.");
     else{
         Node<Element> *_aux; //node auxiliar que apuntarà al node que volem eliminar
@@ -124,7 +124,7 @@ template <class Element> void LinkedDeque::deleteRear(){
         //delete _aux; //eliminem el node
     }
 }
-template <class Element> void LinkedDeque::print(){
+template <class Element> void LinkedDeque<Element>::print(){
     if(this->isEmpty())throw invalid_argument("La cua és buida.");
     else{
         Node<Element> *_aux; //node auxiliar que recorrera la cua
@@ -137,7 +137,7 @@ template <class Element> void LinkedDeque::print(){
 }
 //Comprovem que la cua no sigui buida i si no es dona el cas retornem l'element
 //del node on apunta el front. Recordem que hi ha el sentinella.
-template <class Element> const Element& LinkedDeque::getFront() const{
+template <class Element> const Element& LinkedDeque<Element>::getFront() const{
     if(this->isEmpty())throw invalid_argument("La cua és buida.");
     else{
         return this->_front->getNext()->getElement();
@@ -145,7 +145,7 @@ template <class Element> const Element& LinkedDeque::getFront() const{
 }
 //Comprovem que la cua no sigui buida i si no es dona el cas retornem l'element
 //del node on apunta el rear. Recordem que hi ha el sentinella.
-template <class Element> const Element& LinkedDeque::getRear() const{
+template <class Element> const Element& LinkedDeque<Element>::getRear() const{
     if(this->isEmpty())throw invalid_argument("La cua és buida.");
     else{
         return this->_rear->getPrevious()->getElement();

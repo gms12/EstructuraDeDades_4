@@ -13,7 +13,6 @@
 #define NODE_H
 
 #ifdef __cplusplus
-extern "C" {
 #endif
 
     
@@ -27,15 +26,15 @@ template <class Element> class Node{
         ~Node();
         Node(const Element e);
         const Element& getElement() const;
-        const Node* getNext() const;
-        void setNext(Node* node);
-        const Node* getPrevious() const;
-        void setPrevious(Node* node);        
+        const Node<Element> * getNext() ;
+        void setNext(const Node<Element> *node);
+        const Node<Element> * getPrevious() ;
+        void setPrevious(const Node<Element> *node);        
         
     private:
         Element element;
-        Node* next;
-        Node* previous;
+        Node<Element> *next;
+        Node<Element> *previous;
 };
 //Constructor per defecte. Inicialitza els punters i element a null.
 template <class Element> Node<Element>::Node(){
@@ -56,29 +55,29 @@ template <class Element> Node<Element>::~Node(){
     delete this->element;
 }
 //Aquest mètode retorna l'adreça de l'element que conté el Node.
-template <class Element> Element& Node<Element>::getElement() const{
+template <class Element> const Element& Node<Element>::getElement() const{
     return &(this->element);
 }
 //Aquest mètode retorna l'adreça del Node al qual apunta el punter next.
-template <class Element> Node* Node<Element>::getNext() const{
+template <class Element> const Node<Element>* Node<Element>::getNext() {
     return this->next;
 }
 //Aquest mètode assigna el Node al qual apunta el punter next.
-template <class Element> void Node<Element>::setNext(const Node* n){
+template <class Element> void Node<Element>::setNext(const Node<Element> *n){
     this->next=n;
 }
 //Aquest mètode retorna l'adreça del Node al qual apunta el punter previous.
-template <class Element> Node* Node<Element>::getPrevious() const{
+template <class Element> const Node<Element>* Node<Element>::getPrevious() {
     return this->previous;
 }
 //Aquest mètode assigna el Node al qual apunta el punter previous.
-template <class Element> void Node<Element>::setPrevious(const Node* n){
+template <class Element> void Node<Element>::setPrevious(const Node<Element> *n){
     this->previous=n;
 }
 
 
 #ifdef __cplusplus
-}
+
 #endif
 
 #endif /* NODE_H */
