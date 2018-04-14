@@ -58,7 +58,7 @@ template <class Element> LinkedDeque::LinkedDeque(LinkedDeque<Element>& deque) {
         aux=aux->getNext();//apuntem al seguent node
         this->getRear(aux->getElement());//anem posat els nodes pel darrera, aixi el primer que posem sempre estarà davant
     }
-    delete aux; //eliminem aux, tot i que no se si es necessari
+    //delete aux; //eliminem aux, tot i que no se si es necessari
 }
 
 template <class Element> LinkedDeque::~LinkedDeque() {
@@ -102,7 +102,7 @@ template <class Element> void LinkedDeque::deleteFront(){
         _aux=this->_front->getNext(); //assigmen el node auxiliar
         _aux->getNext()->setPrevious(this->_front); //movem la "fletxa" que apunta el node 2 al node 1
         this->_front->setNext(_aux->getNext()); //movem la "fletxa" del sentinella que apuntara al node 2 ara
-        delete _aux; //eliminem el node
+        //delete _aux; //eliminem el node
     }
 }
 //Si la llista no es buida, eliminem el node que apunta el rear.
@@ -113,7 +113,7 @@ template <class Element> void LinkedDeque::deleteRear(){
         _aux=this->_rear->getPrevious(); //assigmen el node auxiliar
         _aux->getPrevious()->setNext(this->_rear);//movem la "fletxa" que apunta el node n al node n-1
         this->_rear->setPrevious(_aux->getPrevious()); //movem la "fletxa" del sentinella que apuntara al node n-1 ara
-        delete _aux; //eliminem el node
+        //delete _aux; //eliminem el node
     }
 }
 template <class Element> void LinkedDeque::print(){
