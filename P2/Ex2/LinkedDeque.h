@@ -69,8 +69,6 @@ template <class Element> LinkedDeque<Element>::~LinkedDeque() {
         this->deleteFront();
     }
     //finalment eliminem els sentinelles
-    delete this->_front;
-    delete this->_rear;
     this->_front=nullptr;
     this->_rear=nullptr;
 }
@@ -124,15 +122,19 @@ template <class Element> void LinkedDeque<Element>::deleteRear(){
         //delete _aux; //eliminem el node
     }
 }
+//Imprimim la cua
 template <class Element> void LinkedDeque<Element>::print(){
     if(this->isEmpty())throw invalid_argument("La cua és buida.");
     else{
         Node<Element> *_aux; //node auxiliar que recorrera la cua
         _aux=this->_front;//aux apunta al primer node sentinella
+        cout << "[";
         while(_aux->getNext()!=this->_rear){ //mentres el seguent no sigui l'ultim sentinella seguim
             _aux=_aux->getNext();//assignem al seguent node
-            cout<<_aux->getElement()<<endl;//imprimim l'element
+            cout<<_aux->getElement();//imprimim l'element
+            if(_aux->getNext()!=this->_rear) cout<<", ";
         }
+        cout << "]" << endl;
     }
 }
 //Comprovem que la cua no sigui buida i si no es dona el cas retornem l'element

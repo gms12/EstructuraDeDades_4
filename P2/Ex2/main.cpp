@@ -115,10 +115,8 @@ int main(int argc, char** argv) {
         }
     }while(option!=5);
     delete link;
-    
     vec_options.clear();
     vector<string>().swap(vec_options);
-    delete &vec_options;
     return 0;
 }
 
