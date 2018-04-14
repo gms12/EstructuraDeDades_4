@@ -49,6 +49,42 @@ void readFile(LinkedDeque<string> &link){
     cout << "Fitxer afegit a la llista." << endl;
 }
 
+void deleteFront(LinkedDeque<string> &link){
+    try{
+        string element = link.getFront();
+        link.deleteFront();
+        cout << "Element " << element << " eliminat pel davant." << endl;
+    }catch(invalid_argument& e){
+        cout<<e.what()<<endl;
+    }
+}
+
+void deleteRear(LinkedDeque<string> &link){
+    try{
+        string element = link.getRear();
+        link.deleteRear();
+        cout << "Element " << element << " eliminat pel darrera." << endl;
+    }catch(invalid_argument& e){
+        cout<<e.what()<<endl;
+    }
+}
+
+void addRear(LinkedDeque<string> &link){
+    string nom, prioritat, fitxer;
+    while(true){
+        cout << "Introdueix el teu nom (0 per acabar): ";
+        cin >> nom;
+        if(nom == "0") break;
+        cout << "Introdueix la prioritat (1/2): ";
+        cin >> prioritat;
+        cout << "Introdueix el nom complet del fitxer: ";
+        cin >> fitxer;
+        link.insertRear(nom + "\t" + prioritat + "\t" + fitxer);
+    }
+    
+    cout << "Elements afegits pel darrera." << endl;
+}
+
 
 /*
  * 
@@ -75,13 +111,13 @@ int main(int argc, char** argv) {
                 readFile(*link);
                 break;
             case 1:
-                //insertRear(*link);
+                deleteFront(*link);
                 break;
             case 2:
-                //deleteFront(*link);
+                deleteRear(*link);
                 break;
             case 3:
-                //deleteRear(*link);
+                addRear(*link);
                 break;
             case 4:
                 link->print();
