@@ -43,6 +43,7 @@ template <class Element> LinkedDeque::LinkedDeque() {
     this->_rear=f2;
     f1->setNext(this->_rear);
     f2->setPrevious(this->_front);
+    this->num_elements = 0;
 }
 
 template <class Element> LinkedDeque::LinkedDeque(LinkedDeque<Element>& deque) {
@@ -54,10 +55,11 @@ template <class Element> LinkedDeque::LinkedDeque(LinkedDeque<Element>& deque) {
     f2->setPrevious(this->_front);//aixo es el mateix pels dos constructors
     Node<Element> *aux;//aux recorrera el deque.
     aux=deque->_front;//fem que aux apunti al sentinella frontal de deque
-    for(int i=0;i<deque->num_elements;i++){//recorrem en funcio del size de deque
+    for(int i=0;i<deque->size();i++){//recorrem en funcio del size de deque
         aux=aux->getNext();//apuntem al seguent node
         this->getRear(aux->getElement());//anem posat els nodes pel darrera, aixi el primer que posem sempre estarà davant
     }
+    this->num_elements = deque->size(); //tenen el mateix nombre d'elements
     //delete aux; //eliminem aux, tot i que no se si es necessari
 }
 
@@ -78,21 +80,25 @@ template <class Element> int LinkedDeque::size() const{
 }
 //Retorna true si no hi ha cap element.
 template <class Element> bool LinkedDeque::isEmpty() const{
-    return (this->num_elements==0); 
+    return (this->num_elements == 0); //podriem fer servir metode size també
 }
+//Afegeix un element per davant
 template <class Element> void LinkedDeque::insertFront(const Element& element){
     Node<Element> *_nou=new Node<Element>(element);
     this->_front->getNext()->setPrevious(_nou);
     _nou->setNext(this->_front->getNext());
     _nou->setPrevious(this->_front);
     this->_front->setNext(_nou); 
+    this->num_elements++;
 }
+//Afegeix un element per darrera
 template <class Element> void LinkedDeque::insertRear(const Element& element){
     Node<Element> *_nou=new Node<Element>(element);
     this->_rear->getPrevious()->setNext(_nou);
     _nou->setPrevious(this->_rear->getPrevious());
     _nou->setNext(this->_rear);
     this->_rear->setPrevious(_nou);
+    this->num_elements++;
 }
 //Si la llista no es buida, eliminem el node que apunta el front.
 template <class Element> void LinkedDeque::deleteFront(){
@@ -102,6 +108,7 @@ template <class Element> void LinkedDeque::deleteFront(){
         _aux=this->_front->getNext(); //assigmen el node auxiliar
         _aux->getNext()->setPrevious(this->_front); //movem la "fletxa" que apunta el node 2 al node 1
         this->_front->setNext(_aux->getNext()); //movem la "fletxa" del sentinella que apuntara al node 2 ara
+        this->num_elements--;
         //delete _aux; //eliminem el node
     }
 }
@@ -113,6 +120,7 @@ template <class Element> void LinkedDeque::deleteRear(){
         _aux=this->_rear->getPrevious(); //assigmen el node auxiliar
         _aux->getPrevious()->setNext(this->_rear);//movem la "fletxa" que apunta el node n al node n-1
         this->_rear->setPrevious(_aux->getPrevious()); //movem la "fletxa" del sentinella que apuntara al node n-1 ara
+        this->num_elements--;
         //delete _aux; //eliminem el node
     }
 }
@@ -124,7 +132,6 @@ template <class Element> void LinkedDeque::print(){
         while(_aux->getNext()!=this->_rear){ //mentres el seguent no sigui l'ultim sentinella seguim
             _aux=_aux->getNext();//assignem al seguent node
             cout<<_aux->getElement()<<endl;//imprimim l'element
- 
         }
     }
 }
