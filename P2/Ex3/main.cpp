@@ -14,6 +14,7 @@
 #include <vector>
 #include <stdexcept>
 #include <string>
+#include <fstream>
 
 #include "LinkedDeque.h"
 
@@ -33,6 +34,21 @@ int menu(vector<string> a){
     return i;
 }
 
+void readFile(LinkedDeque<string> &link){
+    ifstream myFile;
+    myFile.open("input.txt");
+    string line;
+    if(!myFile.is_open()){
+        cout << "Unable to open file." << endl;
+        return;
+    }else{
+        while(getline(myFile, line)){
+            link.insertRear(line);
+        }
+    }
+    cout << "Fitxer afegit a la llista." << endl;
+}
+
 
 /*
  * 
@@ -40,7 +56,7 @@ int menu(vector<string> a){
 int main(int argc, char** argv) {
     vector<string> vec_options(6);
     int option;
-    LinkedDeque *link;
+    LinkedDeque<string> *link;
     
     vec_options[0]="Llegir un fitxer amb les entrades de la cua d'impressió";
     vec_options[1]="Eliminar una impressió pel davant";
@@ -50,13 +66,13 @@ int main(int argc, char** argv) {
     vec_options[5]="Sortir";
     
     
-    link=new LinkedDeque();
+    link=new LinkedDeque<string>();
     do{
         cout<<"Que vols fer?"<<endl;
         option=menu(vec_options);
         switch(option){
             case 0:
-                //insertFront(*link);
+                readFile(*link);
                 break;
             case 1:
                 //insertRear(*link);
@@ -68,7 +84,7 @@ int main(int argc, char** argv) {
                 //deleteRear(*link);
                 break;
             case 4:
-                //link->print();
+                link->print();
                 break;
             case 5:cout<<"Adéu!"<<endl;
         }
@@ -77,7 +93,6 @@ int main(int argc, char** argv) {
     
     vec_options.clear();
     vector<string>().swap(vec_options);
-    delete &vec_options;
     return 0;
 }
 
