@@ -23,13 +23,13 @@ using namespace std;
 template <class Element> class Node{
     public:
         Node();
+        Node(const Element &e);
         ~Node();
-        Node(const Element e);
-        const Element& getElement() const;
-        const Node<Element> * getNext() ;
-        void setNext(const Node<Element> *node);
-        const Node<Element> * getPrevious() ;
-        void setPrevious(const Node<Element> *node);        
+        const Element& getElement() ;
+        Node<Element> * getNext() ;
+        void setNext(Node<Element> *node);
+        Node<Element> * getPrevious() ;
+        void setPrevious(Node<Element> *node);        
         
     private:
         Element element;
@@ -40,10 +40,11 @@ template <class Element> class Node{
 template <class Element> Node<Element>::Node(){
     this->next=nullptr;
     this->previous=nullptr;
-    this->element=NULL;
+    Element *e = &(this->element);
+    e = NULL;
 }
 //Constructor amb pas d'element. Punters a null.
-template <class Element> Node<Element>::Node(const Element e){
+template <class Element> Node<Element>::Node(const Element &e){
     this->next=nullptr;
     this->previous=nullptr;
     this->element=e;
@@ -52,26 +53,28 @@ template <class Element> Node<Element>::Node(const Element e){
 template <class Element> Node<Element>::~Node(){
     this->next=nullptr;
     this->previous=nullptr;
-    delete this->element;
+    Element *e = &(this->element);
+    delete e;
 }
 //Aquest mètode retorna l'adreça de l'element que conté el Node.
-template <class Element> const Element& Node<Element>::getElement() const{
-    return &(this->element);
+template <class Element> const Element& Node<Element>::getElement() {
+    const Element &e = this->element;
+    return e;
 }
 //Aquest mètode retorna l'adreça del Node al qual apunta el punter next.
-template <class Element> const Node<Element>* Node<Element>::getNext() {
+template <class Element> Node<Element>* Node<Element>::getNext() {
     return this->next;
 }
 //Aquest mètode assigna el Node al qual apunta el punter next.
-template <class Element> void Node<Element>::setNext(const Node<Element> *n){
+template <class Element> void Node<Element>::setNext(Node<Element> *n){
     this->next=n;
 }
 //Aquest mètode retorna l'adreça del Node al qual apunta el punter previous.
-template <class Element> const Node<Element>* Node<Element>::getPrevious() {
+template <class Element> Node<Element>* Node<Element>::getPrevious() {
     return this->previous;
 }
 //Aquest mètode assigna el Node al qual apunta el punter previous.
-template <class Element> void Node<Element>::setPrevious(const Node<Element> *n){
+template <class Element> void Node<Element>::setPrevious(Node<Element> *n){
     this->previous=n;
 }
 
