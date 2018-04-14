@@ -46,7 +46,19 @@ template <class Element> LinkedDeque::LinkedDeque() {
 }
 
 template <class Element> LinkedDeque::LinkedDeque(LinkedDeque<Element>& deque) {
-    //TODO
+    Node<Element> *f1=new Node<Element>();//sentinella inicial
+    Node<Element> *f2=new Node<Element>();//sentinella final
+    this->_front=f1;
+    this->_rear=f2; 
+    f1->setNext(this->_rear);
+    f2->setPrevious(this->_front);//aixo es el mateix pels dos constructors
+    Node<Element> *aux;//aux recorrera el deque.
+    aux=deque->_front;//fem que aux apunti al sentinella frontal de deque
+    for(int i=0;i<deque->num_elements;i++){//recorrem en funcio del size de deque
+        aux=aux->getNext();//apuntem al seguent node
+        this->getRear(aux->getElement());//anem posat els nodes pel darrera, aixi el primer que posem sempre estarà davant
+    }
+    delete aux; //eliminem aux, tot i que no se si es necessari
 }
 
 template <class Element> LinkedDeque::~LinkedDeque() {

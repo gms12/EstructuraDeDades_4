@@ -33,45 +33,44 @@ int menu(vector<string> a){
     return i;
 }
 
-void insertFront(LinkedDeque &array){
-    try{
-        int element;
-        cout << "Introdueix l'element a inserir: ";
-        cin >> element;
-        array.insertFront(element);
-        cout << "Element " << element << " agregat pel davant." << endl;
-    }catch(invalid_argument& e){
-        cout<<e.what()<<endl;
-    }
+void insertFront(LinkedDeque &link){
+    int element;
+    cout << "Introdueix l'element a inserir: ";
+    cin >> element;
+    link.insertFront(element);
+    cout << "Element " << element << " agregat pel davant." << endl;
 }
 
-void insertRear(LinkedDeque &array){
-    try{
-        int element;
-        cout << "Introdueix l'element a inserir: ";
-        cin >> element;
-        array.insertRear(element);
-        cout << "Element " << element << " agregat pel darrera." << endl;
-    }catch(invalid_argument& e){
-        cout<<e.what()<<endl;
-    }
+void insertRear(LinkedDeque &link){
+    int element;
+    cout << "Introdueix l'element a inserir: ";
+    cin >> element;
+    link.insertRear(element);
+    cout << "Element " << element << " agregat pel darrera." << endl;
 }
 
-void deleteFront(LinkedDeque &array){
+void deleteFront(LinkedDeque &link){
     try{
-        int element = array.getFront();
-        array.deleteFront();
+        int element = link.getFront();
+        link.deleteFront();
         cout << "Element " << element << " eliminat pel davant." << endl;
     }catch(invalid_argument& e){
         cout<<e.what()<<endl;
     }
 }
 
-void deleteRear(LinkedDeque &array){
+void deleteRear(LinkedDeque &link){
     try{
-        int element = array.getRear();
-        array.deleteRear();
+        int element = link.getRear();
+        link.deleteRear();
         cout << "Element " << element << " eliminat pel darrera." << endl;
+    }catch(invalid_argument& e){
+        cout<<e.what()<<endl;
+    }
+}
+void print(LinkedDeque &link){
+    try{
+        link.print();
     }catch(invalid_argument& e){
         cout<<e.what()<<endl;
     }
@@ -89,7 +88,7 @@ int main(int argc, char** argv) {
     vec_options[1]="Inserir element pel final";
     vec_options[2]="Eliminar element pel davant";
     vec_options[3]="Eliminar element pel final";
-    vec_options[4]="Imprimir contingut de l’ArrayDEQUE";
+    vec_options[4]="Imprimir contingut del LinkdeDeque";
     vec_options[5]="Sortir";
     
     link=new LinkedDeque();
@@ -110,7 +109,7 @@ int main(int argc, char** argv) {
                 deleteRear(*link);
                 break;
             case 4:
-                link->print();
+                print(*link);
                 break;
             case 5:cout<<"Adéu!"<<endl;;
         }

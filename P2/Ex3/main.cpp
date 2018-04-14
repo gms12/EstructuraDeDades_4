@@ -33,56 +33,13 @@ int menu(vector<string> a){
     return i;
 }
 
-void insertFront(LinkedDeque &array){
-    try{
-        int element;
-        cout << "Introdueix l'element a inserir: ";
-        cin >> element;
-        array.insertFront(element);
-        cout << "Element " << element << " agregat pel davant." << endl;
-    }catch(invalid_argument& e){
-        cout<<e.what()<<endl;
-    }
-}
-
-void insertRear(LinkedDeque &array){
-    try{
-        int element;
-        cout << "Introdueix l'element a inserir: ";
-        cin >> element;
-        array.insertRear(element);
-        cout << "Element " << element << " agregat pel darrera." << endl;
-    }catch(invalid_argument& e){
-        cout<<e.what()<<endl;
-    }
-}
-
-void deleteFront(LinkedDeque &array){
-    try{
-        int element = array.getFront();
-        array.deleteFront();
-        cout << "Element " << element << " eliminat pel davant." << endl;
-    }catch(invalid_argument& e){
-        cout<<e.what()<<endl;
-    }
-}
-
-void deleteRear(LinkedDeque &array){
-    try{
-        int element = array.getRear();
-        array.deleteRear();
-        cout << "Element " << element << " eliminat pel darrera." << endl;
-    }catch(invalid_argument& e){
-        cout<<e.what()<<endl;
-    }
-}
 
 /*
  * 
  */
 int main(int argc, char** argv) {
     vector<string> vec_options(6);
-    int option, max;
+    int option;
     LinkedDeque *link;
     
     vec_options[0]="Llegir un fitxer amb les entrades de la cua d'impressió";
@@ -92,37 +49,31 @@ int main(int argc, char** argv) {
     vec_options[4]="Imprimir la cua d'impressió";
     vec_options[5]="Sortir";
     
-    cout<<"Introdueix la mida de l'ArrayDEQUE: ";
-    cin>>max;
-    try{
-        link=new LinkedDeque(max);
-        do{
-            cout<<"Que vols fer?"<<endl;
-            option=menu(vec_options);
-            switch(option){
-                case 0:
-                    insertFront(*link);
-                    break;
-                case 1:
-                    insertRear(*link);
-                    break;
-                case 2:
-                    deleteFront(*link);
-                    break;
-                case 3:
-                    deleteRear(*link);
-                    break;
-                case 4:
-                    link->print();
-                    break;
-                case 5:cout<<"Adéu!"<<endl;;
-            }
-        }while(option!=5);
-        delete link;
-    }
-    catch(invalid_argument& e){
-        cout<<e.what()<<endl;
-    }
+    
+    link=new LinkedDeque();
+    do{
+        cout<<"Que vols fer?"<<endl;
+        option=menu(vec_options);
+        switch(option){
+            case 0:
+                //insertFront(*link);
+                break;
+            case 1:
+                //insertRear(*link);
+                break;
+            case 2:
+                //deleteFront(*link);
+                break;
+            case 3:
+                //deleteRear(*link);
+                break;
+            case 4:
+                //link->print();
+                break;
+            case 5:cout<<"Adéu!"<<endl;
+        }
+    }while(option!=5);
+    delete link;
     
     vec_options.clear();
     vector<string>().swap(vec_options);
