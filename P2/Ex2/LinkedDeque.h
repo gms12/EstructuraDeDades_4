@@ -107,7 +107,7 @@ template <class Element> void LinkedDeque<Element>::deleteFront(){
         _aux->getNext()->setPrevious(this->_front); //movem la "fletxa" que apunta el node 2 al node 1
         this->_front->setNext(_aux->getNext()); //movem la "fletxa" del sentinella que apuntara al node 2 ara
         this->num_elements--;
-        //delete _aux; //eliminem el node
+        delete _aux; //eliminem el node
     }
 }
 //Si la llista no es buida, eliminem el node que apunta el rear.
@@ -119,7 +119,7 @@ template <class Element> void LinkedDeque<Element>::deleteRear(){
         _aux->getPrevious()->setNext(this->_rear);//movem la "fletxa" que apunta el node n al node n-1
         this->_rear->setPrevious(_aux->getPrevious()); //movem la "fletxa" del sentinella que apuntara al node n-1 ara
         this->num_elements--;
-        //delete _aux; //eliminem el node
+        delete _aux; //eliminem el node
     }
 }
 //Imprimim la cua

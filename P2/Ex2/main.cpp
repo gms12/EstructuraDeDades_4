@@ -120,3 +120,39 @@ int main(int argc, char** argv) {
     return 0;
 }
 
+/*
+ * PREGUNTES
+ * 1- Sí que hem utilitzat templates. D'aquesta manera, l'usuari pot utilitzar
+ * aquest TAD amb qualsevol tipus de dada que desitgi, ja sigui pròpia del 
+ * llenguatge com ho seria int, string, bool, etc o bé una classe que es programi.
+ * 
+ * 2- COST TEÒRIC: A partir d'ara considerem n com el nombre d'elements que conté.
+ *      -constructor defecte: Creem dos punters a node i els assignem. Per tant el 
+ *      cost és constant, O(1).
+ *      -constructor alternatiu: Com abans, però ara recorrem la cua que es passa
+ *      per paràmetre, cost lineal. O(n).
+ *      -destructor: Fem un loop per eliminar cada element de la cua, és a dir
+ *      recorrem el loop n vegades, cost lineal. O(n).
+ *      -size: Retornem un valor, per tant constant. O(1).
+ *      -isEmpty: Comprovem que n sigui 0, per tant constant. O(1).
+ *      -insertFront: Creem un nou node i movem 4 enllaços, per tant el cost és
+ *      constant. O(1).
+ *      -insertRear: Igual que abans, cost constant. O(1).
+ *      -deleteFront: Similar al cas d'afegir. Apuntem al node de davant, canviem
+ *      4 enllaços i aleshores l'eliminem. No recorrem res, cost constant. O(1).
+ *      -deleteRear: El mateix cas que l'anterior, però seleccionant el node final, 
+ *      però com hem utilitzat enllaços doble, no hem de recòrrer res, sinó que
+ *      ja tenim apuntat el node final. Cost constant, O(1).
+ *      -print: Aquí sí que recorrem la cua, per tal d'imprimir cada element en 
+ *      el seu ordre. Cost lineal, O(n).
+ *      -getFront: Simplement retornem l'element del node que apunta el front 
+ *      (fent un next ja que hi ha el sentinella). Per tant cost constant, O(1).
+ *      -getRear: Com abans, i al tenir enllaç doble podem fer la selecció directe
+ *      pel final amb el punter rear. Cost constant, O(1).
+ * 
+ * 3- De fet hagués estat pitjor fer-ho amb encadenament simple, ja que no podriem
+ * inserir o esborrar per darrera de la cua sense haver de recòrrer la cua sencera
+ * des del davant (si ho haguéssim implementat amb encadenament simple del tipus next).
+ * Per tant, el cost teòric per als mètodes insertRear i deleteRear hauria estat
+ * lineal, O(n).
+ */

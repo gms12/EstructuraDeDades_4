@@ -89,7 +89,13 @@ void addRear(LinkedDeque<string> &link){
     
     cout << "Elements afegits pel darrera." << endl;
 }
-
+void print(LinkedDeque<string> &link){
+    try{
+        link.print();
+    }catch(invalid_argument& e){
+        cout<<e.what()<<endl;
+    }
+}
 
 /*
  * 
@@ -125,7 +131,7 @@ int main(int argc, char** argv) {
                 addRear(*link);
                 break;
             case 4:
-                link->print();
+                print(*link);
                 break;
             case 5:cout<<"Adéu!"<<endl;
         }
