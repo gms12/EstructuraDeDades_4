@@ -147,7 +147,7 @@ int main(int argc, char** argv) {
  *      el seu ordre. Cost lineal, O(n).
  *      -getFront: Simplement retornem l'element del node que apunta el front 
  *      (fent un next ja que hi ha el sentinella). Per tant cost constant, O(1).
- *      -getRear: Com abans, i al tenir enllaç doble podem fer la selecció directe
+ *      -getRear: Com abans, i al tenir enllaç doble podem fer la selecció directament
  *      pel final amb el punter rear. Cost constant, O(1).
  * 
  * 3- De fet hagués estat pitjor fer-ho amb encadenament simple, ja que no podriem

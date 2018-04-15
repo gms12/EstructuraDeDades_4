@@ -36,7 +36,10 @@ int menu(vector<string> a){
 
 void readFile(LinkedDeque<string> &link){
     ifstream myFile;
-    myFile.open("input.txt");
+    string name;
+    cout<<"Introdueix el nom o path del fitxer: ";
+    cin>>name;
+    myFile.open(name);
     string nom, prioritat, fitxer;
     if(!myFile.is_open()){
         cout << "Unable to open file." << endl;
