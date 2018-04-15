@@ -26,6 +26,7 @@ template <class Element> class Node{
         Node(const Element &e);
         ~Node();
         const Element& getElement() ;
+        void setElement(const Element &e);
         Node<Element> * getNext() ;
         void setNext(Node<Element> *node);
         Node<Element> * getPrevious() ;
@@ -80,7 +81,10 @@ template <class Element> Node<Element>* Node<Element>::getPrevious() {
 template <class Element> void Node<Element>::setPrevious(Node<Element> *n){
     this->previous=n;
 }
-
+//Aquest mètode assigna un nou element pel node
+template <class Element> void Node<Element>::setElement(const Element &e){
+    *(this->element)=e;
+}
 
 #ifdef __cplusplus
 
