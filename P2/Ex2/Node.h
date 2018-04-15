@@ -26,13 +26,14 @@ template <class Element> class Node{
         Node(const Element &e);
         ~Node();
         const Element& getElement() ;
+        void setElement(const Element &e);
         Node<Element> * getNext() ;
         void setNext(Node<Element> *node);
         Node<Element> * getPrevious() ;
         void setPrevious(Node<Element> *node);        
         
     private:
-        Element element;
+        Element *element;
         Node<Element> *next;
         Node<Element> *previous;
 };
@@ -40,26 +41,29 @@ template <class Element> class Node{
 template <class Element> Node<Element>::Node(){
     this->next=nullptr;
     this->previous=nullptr;
-    Element *e = &(this->element);
-    e = NULL;
+    this->element=new Element();
+    //Element *e = &(this->element);
+    //e = NULL;
 }
 //Constructor amb pas d'element. Punters a null.
 template <class Element> Node<Element>::Node(const Element &e){
     this->next=nullptr;
     this->previous=nullptr;
-    this->element=e;
+    this->element=new Element(e);
 }
 //Destructor del Node. Eliminem l'element i els punters ara apunten a null.
 template <class Element> Node<Element>::~Node(){
     this->next=nullptr;
     this->previous=nullptr;
-    Element *e = &(this->element);
-    delete e;
+    delete this->element;
+    //Element *e = &(this->element);
+    //delete e;
 }
 //Aquest mètode retorna l'adreça de l'element que conté el Node.
 template <class Element> const Element& Node<Element>::getElement() {
-    const Element &e = this->element;
-    return e;
+    //const Element &e = this->element;
+    //return e;
+    return *(this->element);
 }
 //Aquest mètode retorna l'adreça del Node al qual apunta el punter next.
 template <class Element> Node<Element>* Node<Element>::getNext() {
@@ -77,7 +81,10 @@ template <class Element> Node<Element>* Node<Element>::getPrevious() {
 template <class Element> void Node<Element>::setPrevious(Node<Element> *n){
     this->previous=n;
 }
-
+//Aquest mètode assigna un nou element pel node
+template <class Element> void Node<Element>::setElement(const Element &e){
+    *(this->element)=e;
+}
 
 #ifdef __cplusplus
 
