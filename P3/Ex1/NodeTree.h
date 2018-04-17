@@ -32,7 +32,7 @@ template <class Type> class NodeTree {
         bool hasLeft() const;
         bool isRoot() const;
         bool isExternal() const;
-        const Type& getElement() const;
+        const Type& getData() const;
         int getHeight() const;
         //Modificadors
         void setHeight(int h);
@@ -111,7 +111,7 @@ template <class Type> bool NodeTree<Type>:: isExternal() const{
 }
 
 //Retorna l'element que conté el NodeTree.
-template <class Type> const Type& NodeTree<Type>:: getElement() const{
+template <class Type> const Type& NodeTree<Type>:: getData() const{
     //const Type &e = this->data;
     //return e;
     return this->data;
