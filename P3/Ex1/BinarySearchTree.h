@@ -1,12 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * TAD BinarySearchTree, utilitzant NodeTree.
  */
 
 /* 
  * File:   BinarySearchTree.h
- * Author: mpedembe7.alumnes
+ * Author: Gabriel Marín i Martí Pedemonte
  *
  * Created on 17 / d’abril / 2018, 08:33
  */
