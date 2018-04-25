@@ -109,6 +109,10 @@ template <class Type> int BinarySearchTree<Type>::getHeight(){
 
 //Afegeix un nou NodeTree a l'arbre binari.
 template <class Type> void BinarySearchTree<Type>::insert(const Type& element){
+    if(this->isEmpty()){//comprovem si l'arbre esta buit
+        this->pRoot=new NodeTree<Type>(element);
+        return;
+    }
     NodeTree<Type>* aux; //node auxiliar que recorrera l'arbre
     aux=this->pRoot;
     while(!aux->isExternal()){//fem un bucle mentres no arribem a una fulla
