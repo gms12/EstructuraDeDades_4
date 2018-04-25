@@ -46,6 +46,7 @@ template <class Type> class BinarySearchTree{
         void printPostorder(NodeTree<Type>* p) const;
         void printInorder(NodeTree<Type>* p) const;
         int getHeight(NodeTree<Type>* p);
+        void insert(NodeTree<Type>* p,const Type& element); //NOU METODE
         //Atributs
         NodeTree<Type>* pRoot;
 };
@@ -111,29 +112,23 @@ template <class Type> int BinarySearchTree<Type>::getHeight(){
 template <class Type> void BinarySearchTree<Type>::insert(const Type& element){
     if(this->isEmpty()){//comprovem si l'arbre esta buit
         this->pRoot=new NodeTree<Type>(element);
-        return;
     }
-    NodeTree<Type>* aux; //node auxiliar que recorrera l'arbre
-    aux=this->pRoot;
-    while(!aux->isExternal()){//fem un bucle mentres no arribem a una fulla
-        if(aux->getData()>element){//si es mes petit, anira a l'esq
-            if(!aux->hasLeft()){
-                aux->setLeft(new NodeTree<Type>(element));
-                return;
-            }
-            else aux=aux->getLeft();
-        }
-        else{//si es mes gran, anira a la dreta
-            if(!aux->hasRight()){
-                aux->setRight(new NodeTree<Type>(element));
-                return;
-            }
-            else aux=aux->getRight();
-        }
+    else this->insert(pRoot,element);//si no esta buit cridem el metode auxiliar
+}
+//Metode auxiliar a insert. Se li passa també un node, per a poder ser recursiu
+template <class Type> void BinarySearchTree<Type>::insert(NodeTree<Type>* p, const Type& element){
+    if(p->getData()>element){//si el valor es inferior, anira a l'esq
+        if(!p->hasLeft()){
+            p->setLeft(new NodeTree<Type>(element));
+        }//si no te fill esq, l'afegim. Si no, cridem el metode pel fill de lesq
+        else this->insert(p->getLeft(),element);
     }
-    //si arribem a la fulla, comprovem si el nou element ha d'anar a l'esq o dret
-    if(aux->getData()>element)aux->setLeft(new NodeTree<Type>(element));
-    else aux->setRight(new NodeTree<Type>(element));
+    else{//si es superior anira a la dreta
+       if(!p->hasRight()){//Igual que abans pero per l'altre costat
+            p->setRight(new NodeTree<Type>(element));
+        }
+        else this->insert(p->getRight(),element);    
+    }
 }
 
 //Destrueix un arbre donada la seva arrel.
