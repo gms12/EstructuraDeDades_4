@@ -63,7 +63,7 @@ template <class Type> NodeTree<Type>::NodeTree(const NodeTree& orig){
     this->pParent = orig->getParent();
     this->pLeft = orig->getLeft();
     this->pRight = orig->getRight();
-    this->data = orig->getElement();
+    this->data = orig->getData();
     this->height = orig->getHeight();
 }
 

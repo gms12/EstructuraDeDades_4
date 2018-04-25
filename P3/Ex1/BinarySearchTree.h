@@ -12,6 +12,9 @@
 #ifndef BINARYSEARCHTREE_H
 #define BINARYSEARCHTREE_H
 
+#include "NodeTree.h"
+
+
 #ifdef __cplusplus
 
 #endif
@@ -106,8 +109,27 @@ template <class Type> int BinarySearchTree<Type>::getHeight(){
 
 //Afegeix un nou NodeTree a l'arbre binari.
 template <class Type> void BinarySearchTree<Type>::insert(const Type& element){
-    //TODO
-    //...
+    NodeTree<Type>* aux; //node auxiliar que recorrera l'arbre
+    aux=this->pRoot;
+    while(!aux->isExternal()){//fem un bucle mentres no arribem a una fulla
+        if(aux->getData()>element){//si es mes petit, anira a l'esq
+            if(!aux->hasLeft()){
+                aux->setLeft(new NodeTree<Type>(element));
+                return;
+            }
+            else aux=aux->getLeft();
+        }
+        else{//si es mes gran, anira a la dreta
+            if(!aux->hasRight()){
+                aux->setRight(new NodeTree<Type>(element));
+                return;
+            }
+            else aux=aux->getRight();
+        }
+    }
+    //si arribem a la fulla, comprovem si el nou element ha d'anar a l'esq o dret
+    if(aux->getData()>element)aux->setLeft(new NodeTree<Type>(element));
+    else aux->setRight(new NodeTree<Type>(element));
 }
 
 //Destrueix un arbre donada la seva arrel.
