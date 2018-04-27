@@ -34,6 +34,10 @@ int main(int argc, char** argv) {
     //bst->printPostorder();
     //Fer el mirall de l'arbre
     //Imprimir en preordre el mirall de l'arbre
+    
+    //Comrpovacions del height i size
+    cout<<bst->getHeight()<<endl;
+    cout<<bst->size()<<endl;
     //Eliminar l'arbre
     delete bst;
     return 0;

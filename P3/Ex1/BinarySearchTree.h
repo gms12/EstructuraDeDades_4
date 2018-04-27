@@ -72,7 +72,7 @@ template <class Type> /*virtual*/ BinarySearchTree<Type>::~BinarySearchTree(){
 
 //Retorna el nombre de NodeTrees que hi ha a l'arbre.
 template <class Type> int BinarySearchTree<Type>::size() const{
-    this->size(this->pRoot);
+    return this->size(this->pRoot);
 }
 
 //Retorna true si l'arbre està buit, false en cas contrari.
@@ -104,7 +104,7 @@ template <class Type> NodeTree<Type>* BinarySearchTree<Type>::search(NodeTree<Ty
 template <class Type> void BinarySearchTree<Type>::printInorder() const{
     cout<<"Inordre ={ ";
     this->printInorder(this->pRoot);
-    cout<<"}";
+    cout<<"}"<<endl;
     return; 
 }
 
@@ -120,7 +120,7 @@ template <class Type> void BinarySearchTree<Type>::printPostorder() const{
 
 //Retorna un enter amb l'alçada de l'arbre.
 template <class Type> int BinarySearchTree<Type>::getHeight(){
-    this->getHeight(this->pRoot);
+    return this->getHeight(this->pRoot);
 }
 
 //Afegeix un nou NodeTree a l'arbre binari.
