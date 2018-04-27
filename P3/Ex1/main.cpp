@@ -6,7 +6,7 @@
 
 /* 
  * File:   main.cpp
- * Author: mpedembe7.alumnes
+ * Author: Martí Pedemonte i Gabriel Marín
  *
  * Created on 17 / d’abril / 2018, 08:32
  */
