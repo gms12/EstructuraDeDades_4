@@ -4,6 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>BSTMovieFinder.h</itemPath>
       <itemPath>Movie.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -13,6 +14,7 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>BSTMovieFinder.cpp</itemPath>
       <itemPath>Movie.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
@@ -38,6 +40,10 @@
       </toolsSet>
       <compileType>
       </compileType>
+      <item path="BSTMovieFinder.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="BSTMovieFinder.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Movie.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Movie.h" ex="false" tool="3" flavor2="0">
@@ -65,6 +71,10 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="BSTMovieFinder.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="BSTMovieFinder.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Movie.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Movie.h" ex="false" tool="3" flavor2="0">

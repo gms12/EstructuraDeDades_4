@@ -35,6 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/BSTMovieFinder.o \
 	${OBJECTDIR}/Movie.o \
 	${OBJECTDIR}/main.o
 
@@ -62,6 +63,11 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/ex2: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/ex2 ${OBJECTFILES} ${LDLIBSOPTIONS}
+
+${OBJECTDIR}/BSTMovieFinder.o: BSTMovieFinder.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/BSTMovieFinder.o BSTMovieFinder.cpp
 
 ${OBJECTDIR}/Movie.o: Movie.cpp
 	${MKDIR} -p ${OBJECTDIR}
