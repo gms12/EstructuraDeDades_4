@@ -63,11 +63,13 @@ template <class Type> class BinarySearchTree{
 //Constructor per defecte. Punter arrel a null.
 template <class Type> BinarySearchTree<Type>::BinarySearchTree(){
     this->pRoot = nullptr;
+    cout << "Arbre creat" << endl;
 }
 
 //Constructor còpia.
 template <class Type> BinarySearchTree<Type>::BinarySearchTree(const BinarySearchTree& orig){
     this->pRoot = constructor_copia(orig->root());
+    cout << "Arbre creat" << endl;
 }
 //Metode auxuliar per al constructor. Recorrem en preordre i anem copiant node a node
 template <class Type> NodeTree<Type>* BinarySearchTree<Type>::constructor_copia(NodeTree<Type>* from){

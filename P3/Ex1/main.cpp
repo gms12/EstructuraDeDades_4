@@ -21,7 +21,7 @@ using namespace std;
 int main(int argc, char** argv) {
     int testArray [] = {2, 0, 8, 45, 76, 5, 3, 40 };
     BinarySearchTree<int> *bst;
-    bst=new BinarySearchTree<int>();//creem el nou bst
+    bst = new BinarySearchTree<int>();//creem el nou bst
     //inserim els elements de l'array a l'arbre
     for(int i=0;i<8;i++){
         bst->insert(testArray[i]);
@@ -32,18 +32,18 @@ int main(int argc, char** argv) {
     bst->printInorder();
     //Imprimir en postordre l’arbre per 
     bst->printPostorder();
-    //Comrpovacions del height i size
+    //Comprovacions del height i size
     cout<<"Height: "<<bst->getHeight()<<endl;
     cout<<"Size: "<<bst->size()<<endl;
     //Fer el mirall de l'arbre
-    BinarySearchTree<int> *bst_mirror=bst->mirror();
+    BinarySearchTree<int> *bst_mirror = bst->mirror();
     //Imprimir en preordre el mirall de l'arbre
     bst_mirror->printPreorder();
     
     
     //Eliminar l'arbre
     delete bst;
-    delete bst_mirror;
+    //delete bst_mirror; //No podem fer delete si no fem new bst mirror!
     return 0;
 }
 
