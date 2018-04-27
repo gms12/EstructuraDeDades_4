@@ -66,7 +66,7 @@ template <class Type> BinarySearchTree<Type>::BinarySearchTree(const BinarySearc
 }
 
 //Destructor.
-template <class Type> virtual BinarySearchTree<Type>::~BinarySearchTree(){
+template <class Type> /*virtual*/ BinarySearchTree<Type>::~BinarySearchTree(){
     this->postDelete(this->pRoot);
 }
 
@@ -102,9 +102,9 @@ template <class Type> NodeTree<Type>* BinarySearchTree<Type>::search(NodeTree<Ty
 
 //Mostra el contingut de l'arbre en recorregut inordre.
 template <class Type> void BinarySearchTree<Type>::printInorder() const{
-    //cout<<"Inordre ={";
+    cout<<"Inordre ={ ";
     this->printInorder(this->pRoot);
-    //cout<<"}";
+    cout<<"}";
     return; 
 }
 
@@ -129,18 +129,22 @@ template <class Type> void BinarySearchTree<Type>::insert(const Type& element){
         this->pRoot=new NodeTree<Type>(element);
     }
     else this->insert(pRoot,element);//si no esta buit cridem el metode auxiliar
+    cout<<"S'insereix a l'arbre l'element "<<element<<endl;
 }
 //Metode auxiliar a insert. Se li passa també un node, per a poder ser recursiu
 template <class Type> void BinarySearchTree<Type>::insert(NodeTree<Type>* p, const Type& element){
     if(p->getData()>element){//si el valor es inferior, anira a l'esq
         if(!p->hasLeft()){
             p->setLeft(new NodeTree<Type>(element));
+            
+            
         }//si no te fill esq, l'afegim. Si no, cridem el metode pel fill de lesq
         else this->insert(p->getLeft(),element);
     }
     else{//si es superior anira a la dreta
        if(!p->hasRight()){//Igual que abans pero per l'altre costat
             p->setRight(new NodeTree<Type>(element));
+            
         }
         else this->insert(p->getRight(),element);    
     }
