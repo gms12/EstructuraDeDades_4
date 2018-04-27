@@ -34,13 +34,16 @@ int main(int argc, char** argv) {
     bst->printPostorder();
     //Comrpovacions del height i size
     cout<<"Height: "<<bst->getHeight()<<endl;
-    cout<<"Size: "<<<<bst->size()<<endl;
+    cout<<"Size: "<<bst->size()<<endl;
     //Fer el mirall de l'arbre
+    BinarySearchTree<int> *bst_mirror=bst->mirror();
     //Imprimir en preordre el mirall de l'arbre
+    bst_mirror->printPreorder();
     
     
     //Eliminar l'arbre
     delete bst;
+    delete bst_mirror;
     return 0;
 }
 

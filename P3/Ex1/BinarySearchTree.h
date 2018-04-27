@@ -40,6 +40,8 @@ template <class Type> class BinarySearchTree{
         int getHeight();
         //Modificadors
         void insert(const Type& element);
+        //Mirall
+        BinarySearchTree<Type>* mirror();
     private:
         //Mètodes privats interns
         void postDelete(NodeTree<Type>* p);
@@ -51,6 +53,7 @@ template <class Type> class BinarySearchTree{
         void insert(NodeTree<Type>* p,const Type& element); //nou metode
         NodeTree<Type>* search(NodeTree<Type>* p,const Type& element);//nou metode
         NodeTree<Type>* constructor_copia(NodeTree<Type>* from);//nou metode
+        NodeTree<Type>* constructor_mirall(NodeTree<Type>* from);//nou metode
         //Atributs
         NodeTree<Type>* pRoot;
 };
@@ -68,7 +71,7 @@ template <class Type> BinarySearchTree<Type>::BinarySearchTree(const BinarySearc
 template <class Type> NodeTree<Type>* BinarySearchTree<Type>::constructor_copia(NodeTree<Type>* from){
     if(from==nullptr)return nullptr;//si el node es null fem el nostre null
     else{
-        NodeTree<Type>* to=new NodeTree(from);//copiem el node
+        NodeTree<Type>* to=new NodeTree<Type>(*from);//copiem el node
         to->setLeft(constructor_copia(from->getLeft()));//cridem per copiar el node de l'esq
         to->setRight(constructor_copia(from->getRight()));//cridem per copiar el node de la dreta
         return to;//retornem el node
@@ -228,6 +231,22 @@ template <class Type> int BinarySearchTree<Type>::getHeight(NodeTree<Type>* p){
     if(p==nullptr)return -1;
     //altrament, sabem que n'hi ha un i mirem els seus fills
     else return 1+max(getHeight(p->getLeft()),getHeight(p->getRight()));
+}
+//Retorna un arbre que sera el mirall de l'actual
+template <class Type> BinarySearchTree<Type>* BinarySearchTree<Type>::mirror(){
+    BinarySearchTree<Type>* bst_mirror=new BinarySearchTree<Type>();
+    bst_mirror->pRoot=this->constructor_mirall(this->pRoot);
+    return bst_mirror;
+}
+//Metode auxuliar per a mirror. Recorrem en preordre i anem copiant node a node, pero el de l'esq anira a la dreta
+template <class Type> NodeTree<Type>* BinarySearchTree<Type>::constructor_mirall(NodeTree<Type>* from){
+    if(from==nullptr)return nullptr;//si el node es null fem el nostre null
+    else{
+        NodeTree<Type>* to=new NodeTree<Type>(*from);//copiem el node
+        to->setLeft(constructor_mirall(from->getRight()));//cridem per copiar el node de la dreta a l'esq
+        to->setRight(constructor_mirall(from->getLeft()));//cridem per copiar el node de l'esq a la dreta
+        return to;//retornem el node
+    }
 }
 
 #ifdef __cplusplus
