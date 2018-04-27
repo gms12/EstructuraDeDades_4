@@ -50,6 +50,7 @@ template <class Type> class BinarySearchTree{
         int getHeight(NodeTree<Type>* p);
         void insert(NodeTree<Type>* p,const Type& element); //nou metode
         NodeTree<Type>* search(NodeTree<Type>* p,const Type& element);//nou metode
+        NodeTree<Type>* constructor_copia(NodeTree<Type>* from);//nou metode
         //Atributs
         NodeTree<Type>* pRoot;
 };
@@ -61,8 +62,17 @@ template <class Type> BinarySearchTree<Type>::BinarySearchTree(){
 
 //Constructor còpia.
 template <class Type> BinarySearchTree<Type>::BinarySearchTree(const BinarySearchTree& orig){
-    //TODO
-    //...
+    this->pRoot=constructor_copia(orig->root());
+}
+//Metode auxuliar per al constructor. Recorrem en preordre i anem copiant node a node
+template <class Type> NodeTree<Type>* BinarySearchTree<Type>::constructor_copia(NodeTree<Type>* from){
+    if(from==nullptr)return nullptr;//si el node es null fem el nostre null
+    else{
+        NodeTree<Type>* to=new NodeTree(from);//copiem el node
+        to->setLeft(constructor_copia(from->getLeft()));//cridem per copiar el node de l'esq
+        to->setRight(constructor_copia(from->getRight()));//cridem per copiar el node de la dreta
+        return to;//retornem el node
+    }
 }
 
 //Destructor.
