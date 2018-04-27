@@ -12,6 +12,12 @@
 #ifndef NODETREE_H
 #define NODETREE_H
 
+#include <cstdlib>
+#include <stdexcept>
+#include <iostream>
+
+using namespace std;
+
 #ifdef __cplusplus
 
 #endif

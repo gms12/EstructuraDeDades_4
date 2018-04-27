@@ -12,14 +12,30 @@
  */
 
 #include <cstdlib>
-
+#include "BinarySearchTree.h"
 using namespace std;
 
 /*
  * 
  */
 int main(int argc, char** argv) {
-
+    int testArray [] = {2, 0, 8, 45, 76, 5, 3, 40 };
+    BinarySearchTree<int> *bst;
+    bst=new BinarySearchTree<int>();//creem el nou bst
+    //inserim els elements de l'array a l'arbre
+    for(int i=0;i<8;i++){
+        bst->insert(testArray[i]);
+    }
+    //Imprimir en preordre l’arbre per pantalla
+    bst->printPreorder();
+    //Imprimir en inordre l’arbre per pantalla
+    bst->printInorder();
+    //Imprimir en postordre l’arbre per 
+    bst->printPostorder();
+    //Fer el mirall de l'arbre
+    //Imprimir en preordre el mirall de l'arbre
+    //Eliminar l'arbre
+    delete bst;
     return 0;
 }
 

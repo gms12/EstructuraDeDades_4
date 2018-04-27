@@ -46,7 +46,8 @@ template <class Type> class BinarySearchTree{
         void printPostorder(NodeTree<Type>* p) const;
         void printInorder(NodeTree<Type>* p) const;
         int getHeight(NodeTree<Type>* p);
-        void insert(NodeTree<Type>* p,const Type& element); //NOU METODE
+        void insert(NodeTree<Type>* p,const Type& element); //nou metode
+        NodeTree<Type>* search(NodeTree<Type>* p,const Type& element);//nou metode
         //Atributs
         NodeTree<Type>* pRoot;
 };
@@ -84,8 +85,17 @@ template <class Type> NodeTree<Type>* BinarySearchTree<Type>::root(){
 
 //Cerca un element. Retorna true si el troba, false en cas contrari.
 template <class Type> bool BinarySearchTree<Type>::search(const Type& element) {
-    //TODO
-    //...
+    //si el node que retorna search es null, retornem false
+    return this->search(pRoot,element)!=nullptr;
+}
+//Cerca un element a partir d'un node. Quan el troba retorna el node.
+template <class Type> NodeTree<Type>* BinarySearchTree<Type>::search(NodeTree<Type>* p,const Type& element) {
+    //si el node es null o el seu valor es el que busquem, el retornem
+    if(p==nullptr || p->getData()==element)return p;
+    //si el seu valor es mes gran, busquem al fill de l'esquerra
+    else if(p->getData()>element)return search(p->getLeft(),element);
+    //si no, com tindra un valor inferior, busquem al fill de la dreta
+    else return search(p->getRight(),element);
 }
 
 //Mostra el contingut de l'arbre en recorregut inordre.
@@ -131,13 +141,13 @@ template <class Type> void BinarySearchTree<Type>::insert(NodeTree<Type>* p, con
     }
 }
 
-//Destrueix un arbre donada la seva arrel.
+//Destrueix un subarbre donada la seva arrel.
 template <class Type> void BinarySearchTree<Type>::postDelete(NodeTree<Type>* p){
     //TODO
     //...
 }
 
-//Retorna el nombre de NodeTrees que hi ha en un arbre donada la seva arrel.
+//Retorna el nombre de NodeTrees que hi ha en un subarbre donada la seva arrel.
 template <class Type> int BinarySearchTree<Type>::size(NodeTree<Type>* p) const{
     //TODO
     //...
