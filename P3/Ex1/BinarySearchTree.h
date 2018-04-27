@@ -12,6 +12,8 @@
 #ifndef BINARYSEARCHTREE_H
 #define BINARYSEARCHTREE_H
 
+#include <iostream>
+#include <math.h>
 #include "NodeTree.h"
 
 
@@ -100,7 +102,10 @@ template <class Type> NodeTree<Type>* BinarySearchTree<Type>::search(NodeTree<Ty
 
 //Mostra el contingut de l'arbre en recorregut inordre.
 template <class Type> void BinarySearchTree<Type>::printInorder() const{
+    //cout<<"Inordre ={";
     this->printInorder(this->pRoot);
+    //cout<<"}";
+    return; 
 }
 
 //Mostra el contingut de l'arbre en recorregut preordre.
@@ -149,8 +154,10 @@ template <class Type> void BinarySearchTree<Type>::postDelete(NodeTree<Type>* p)
 
 //Retorna el nombre de NodeTrees que hi ha en un subarbre donada la seva arrel.
 template <class Type> int BinarySearchTree<Type>::size(NodeTree<Type>* p) const{
-    //TODO
-    //...
+    //si el Node p es nul, retornem 0
+    if(p==nullptr)return 0;
+    //altrament, sabem que n'hi ha un i mirem els seus fills
+    else return 1+size(p->getLeft())+size(p->getRight());
 }
 
 //Mostra el contingut d'un arbre en recorregut preordre, donada la seva arrel.
@@ -167,14 +174,23 @@ template <class Type> void BinarySearchTree<Type>::printPostorder(NodeTree<Type>
 
 //Mostra el contingut d'un arbre en recorregut inordre, donada la seva arrel.
 template <class Type> void BinarySearchTree<Type>::printInorder(NodeTree<Type>* p) const{
-    //TODO
-    //...
+    if(p!=nullptr){
+        //primer cridem el subarbre de l'esquerra
+        this->printInorder(p->getLeft());
+        //despres imprimim el seu element
+        cout<<p->getData()<<" ";
+        //per ultim cridem al subarbre de la dreta
+        this->printInorder(p->getRight());
+    }
+      
 }
 
 //Retorna un enter amb l'alçada d'un arbre, donada la seva arrel.
 template <class Type> int BinarySearchTree<Type>::getHeight(NodeTree<Type>* p){
-    //TODO
-    //...
+    //si el Node p es nul, retornem -1. L'alçada d'una fulla serà 0
+    if(p==nullptr)return -1;
+    //altrament, sabem que n'hi ha un i mirem els seus fills
+    else return 1+max(getHeight(p->getLeft()),getHeight(p->getRight()));
 }
 
 #ifdef __cplusplus
