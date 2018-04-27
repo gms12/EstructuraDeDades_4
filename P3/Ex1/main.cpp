@@ -27,17 +27,18 @@ int main(int argc, char** argv) {
         bst->insert(testArray[i]);
     }
     //Imprimir en preordre l’arbre per pantalla
-    //bst->printPreorder();
+    bst->printPreorder();
     //Imprimir en inordre l’arbre per pantalla
     bst->printInorder();
     //Imprimir en postordre l’arbre per 
-    //bst->printPostorder();
+    bst->printPostorder();
+    //Comrpovacions del height i size
+    cout<<"Height: "<<bst->getHeight()<<endl;
+    cout<<"Size: "<<<<bst->size()<<endl;
     //Fer el mirall de l'arbre
     //Imprimir en preordre el mirall de l'arbre
     
-    //Comrpovacions del height i size
-    cout<<bst->getHeight()<<endl;
-    cout<<bst->size()<<endl;
+    
     //Eliminar l'arbre
     delete bst;
     return 0;

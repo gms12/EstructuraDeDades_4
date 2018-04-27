@@ -68,6 +68,7 @@ template <class Type> BinarySearchTree<Type>::BinarySearchTree(const BinarySearc
 //Destructor.
 template <class Type> /*virtual*/ BinarySearchTree<Type>::~BinarySearchTree(){
     this->postDelete(this->pRoot);
+    cout<<"Arbre eliminat"<<endl;
 }
 
 //Retorna el nombre de NodeTrees que hi ha a l'arbre.
@@ -110,12 +111,16 @@ template <class Type> void BinarySearchTree<Type>::printInorder() const{
 
 //Mostra el contingut de l'arbre en recorregut preordre.
 template <class Type> void BinarySearchTree<Type>::printPreorder() const{
+    cout<<"Preordre ={ ";
     this->printPreorder(this->pRoot);
+    cout<<"}"<<endl;
 }
 
 //Mostra el contingut de l'arbre en recorregut postordre.
 template <class Type> void BinarySearchTree<Type>::printPostorder() const{
+    cout<<"Postordre ={ ";
     this->printPostorder(this->pRoot);
+    cout<<"}"<<endl;
 }
 
 //Retorna un enter amb l'alçada de l'arbre.
@@ -152,8 +157,14 @@ template <class Type> void BinarySearchTree<Type>::insert(NodeTree<Type>* p, con
 
 //Destrueix un subarbre donada la seva arrel.
 template <class Type> void BinarySearchTree<Type>::postDelete(NodeTree<Type>* p){
-    //TODO
-    //...
+    if(p!=nullptr){    
+        //primer eliminem el subarbre de l'esquerra
+        this->postDelete(p->getLeft());
+        //despres eliminem al subarbre de la dreta
+        this->postDelete(p->getRight());
+        //per ultim eliminem el node en questio
+        delete p;
+    }
 }
 
 //Retorna el nombre de NodeTrees que hi ha en un subarbre donada la seva arrel.
@@ -166,14 +177,26 @@ template <class Type> int BinarySearchTree<Type>::size(NodeTree<Type>* p) const{
 
 //Mostra el contingut d'un arbre en recorregut preordre, donada la seva arrel.
 template <class Type> void BinarySearchTree<Type>::printPreorder(NodeTree<Type>* p) const{
-    //TODO
-    //...
+    if(p!=nullptr){
+        //primer imprimim l'element del node
+        cout<<p->getData()<<" ";
+        //despres cridem el subarbre de l'esquerra
+        this->printPreorder(p->getLeft());
+        //per ultim cridem al subarbre de la dreta
+        this->printPreorder(p->getRight());
+    }
 }
 
 //Mostra el contingut d'un arbre en recorregut postordre, donada la seva arrel.
 template <class Type> void BinarySearchTree<Type>::printPostorder(NodeTree<Type>* p) const{
-    //TODO
-    //...
+    if(p!=nullptr){    
+        //primer cridem el subarbre de l'esquerra
+        this->printPostorder(p->getLeft());
+        //despres cridem al subarbre de la dreta
+        this->printPostorder(p->getRight());
+        //per ultim imprimim l'element del node
+        cout<<p->getData()<<" ";
+    }
 }
 
 //Mostra el contingut d'un arbre en recorregut inordre, donada la seva arrel.
