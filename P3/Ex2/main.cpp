@@ -99,6 +99,7 @@ int main(int argc, char** argv) {
     clock_t finalTime = clock();
     //cout<<t<<endl;
     cout<<"It took "<< ((float)(finalTime-initialTime))/(CLOCKS_PER_SEC)<<" seconds."<<endl;
+    mF->printAscendingOrder();
     
     
     

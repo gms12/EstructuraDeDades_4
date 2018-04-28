@@ -36,12 +36,14 @@ template <class Type> class BinarySearchTree{
         bool isEmpty() const;//TEST: OK
         NodeTree<Type>* root() const;//TEST: OK
         NodeTree<Type>* search(int key);//TEST: OK
-        void printInorder() const;//TEST: OK
+        void printInorder();//TEST: OK
         void printPreorder() const;//TEST: OK
         void printPostorder() const;//TEST: OK
         int getHeight();//TEST: OK
+        int getCounter() const;//TEST: OK
         //Modificadors
         void insert(const Type& element, int key);//TEST: OK
+        void setCounter(int c);
         //Mirall
         BinarySearchTree<Type>* mirror();//TEST: OK
     private:
@@ -50,7 +52,7 @@ template <class Type> class BinarySearchTree{
         int size(NodeTree<Type>* p) const;
         void printPreorder(NodeTree<Type>* p) const;
         void printPostorder(NodeTree<Type>* p) const;
-        void printInorder(NodeTree<Type>* p) const;
+        void printInorder(NodeTree<Type>* p);
         int getHeight(NodeTree<Type>* p);
         void insert(NodeTree<Type>* p, const Type& element, int key); //nou metode
         NodeTree<Type>* search(NodeTree<Type>* p, int key);//nou metode
@@ -58,17 +60,20 @@ template <class Type> class BinarySearchTree{
         NodeTree<Type>* constructor_mirall(NodeTree<Type>* from);//nou metode
         //Atributs
         NodeTree<Type>* pRoot;
+        int counter;
 };
 
 //Constructor per defecte. Punter arrel a null.
 template <class Type> BinarySearchTree<Type>::BinarySearchTree(){
     this->pRoot = nullptr;
+    this->counter = 0;
     cout << "Arbre creat" << endl;
 }
 
 //Constructor còpia.
 template <class Type> BinarySearchTree<Type>::BinarySearchTree(const BinarySearchTree& orig){
     this->pRoot = constructor_copia(orig.root());
+    this->counter = orig.getCounter();
     cout << "Arbre creat" << endl;
 }
 //Metode auxuliar per al constructor. Recorrem en preordre i anem copiant node a node
@@ -124,10 +129,11 @@ template <class Type> NodeTree<Type>* BinarySearchTree<Type>::search(NodeTree<Ty
 }
 
 //Mostra el contingut de l'arbre en recorregut inordre.
-template <class Type> void BinarySearchTree<Type>::printInorder() const{
+template <class Type> void BinarySearchTree<Type>::printInorder() {
     cout<<"Inordre = {"<<endl;
     this->printInorder(this->pRoot);
     cout<<"}"<<endl;
+    this->counter = 0;
     return; 
 }
 
@@ -150,6 +156,11 @@ template <class Type> int BinarySearchTree<Type>::getHeight(){
     return this->getHeight(this->pRoot);
 }
 
+//Retorna un enter el comptador
+template <class Type> int BinarySearchTree<Type>::getCounter() const{
+    return this->counter;
+}
+
 //Afegeix un nou NodeTree a l'arbre binari.
 template <class Type> void BinarySearchTree<Type>::insert(const Type& element, int key){
     if(this->isEmpty()){//comprovem si l'arbre esta buit
@@ -157,6 +168,11 @@ template <class Type> void BinarySearchTree<Type>::insert(const Type& element, i
     }
     else this->insert(pRoot,element, key);//si no esta buit cridem el metode auxiliar
     cout<<"S'insereix a l'arbre l'element "<<element.toString()<<endl;
+}
+
+//Retorna un enter el comptador
+template <class Type> void BinarySearchTree<Type>::setCounter(int c){
+    this->counter = c;
 }
 
 //Metode auxiliar a insert. Se li passa també un node, per a poder ser recursiu
@@ -215,17 +231,33 @@ template <class Type> void BinarySearchTree<Type>::printPostorder(NodeTree<Type>
         //despres cridem al subarbre de la dreta
         if(p->hasRight()) this->printPostorder(p->getRight());
         //per ultim imprimim l'element del node
-        cout<<p->getValue().toString()<<endl;
+        cout<<p->getValue().toString()<<endl;       
     }
 }
 
 //Mostra el contingut d'un arbre en recorregut inordre, donada la seva arrel.
-template <class Type> void BinarySearchTree<Type>::printInorder(NodeTree<Type>* p) const{
+template <class Type> void BinarySearchTree<Type>::printInorder(NodeTree<Type>* p) {
+    if(this->counter < 0) return;
     if(p!=nullptr){
         //primer cridem el subarbre de l'esquerra
         if(p->hasLeft()) this->printInorder(p->getLeft());
         //despres imprimim el seu element
+        if(this->counter < 0) return;
         cout<<p->getValue().toString()<<endl;
+        this->counter++;
+        if(counter >= 40){
+            cout<<endl<<"Do you want to continue? (Y/N)";
+            string resposta;
+            cin>>resposta;
+            while(resposta != "Y" && resposta != "N" && resposta != "y" && resposta != "n"){
+                cout<<"It's not that hard, dude. Do you want to continue? (Y/N)";
+                cin>>resposta;
+            }
+            if(resposta == "Y" || resposta == "y") this->counter = 0;
+            else {this->counter = -10; return;}
+            cout<<endl;
+        }
+        if(this->counter < 0) return;
         //per ultim cridem al subarbre de la dreta
         if(p->hasRight()) this->printInorder(p->getRight());
     }

@@ -34,6 +34,7 @@ class BSTMovieFinder {
         Movie findMovie(const int id);//TEST: OK
         float findRatingMovie(const int id);//TEST: OK
         BinarySearchTree<Movie>* getTree() const;//TEST: OK
+        void printAscendingOrder();//TEST: OK
         //Modificadores
         void appendMovies(const string filename);//TEST: OK
         void insertMovie(const int id, const string title, const float rating);//TEST: OK
@@ -122,7 +123,11 @@ void BSTMovieFinder::appendMovies(const string filename) {
 void BSTMovieFinder::insertMovie(const int id, const string title, const float rating) {
     Movie* newMovie = new Movie(id, title, rating);
     this->bst->insert(*newMovie, id);
-    
+}
+
+//Imprimeix segons ordre creixent
+void BSTMovieFinder::printAscendingOrder() {
+    this->bst->printInorder();
 }
 
 #endif /* BSTMOVIEFINDER_H */
