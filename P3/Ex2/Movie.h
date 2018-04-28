@@ -20,7 +20,7 @@ class Movie {
     public:
         //Constructors
         Movie();
-        Movie(string s,float r, int i);
+        Movie(int i, string s, float r);
         Movie(const Movie& orig);
         //Destructor
         virtual ~Movie();
@@ -43,13 +43,13 @@ class Movie {
 
 //Constructor per defecte
 Movie::Movie() {
-    this->id=NULL;
-    this->rating=NULL;
+    this->id = -1;
+    this->rating = -1;
     this->name="";  
 }
 
 //Constructor per parametres
-Movie::Movie(string s, float r, int i){
+Movie::Movie(int i, string s, float r){
     this->id=i;
     this->rating=r;
     this->name=s;

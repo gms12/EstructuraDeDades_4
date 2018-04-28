@@ -13,6 +13,7 @@
 
 #include <cstdlib>
 #include <vector>
+#include "BSTMovieFinder.h"
 
 using namespace std;
 
@@ -35,6 +36,7 @@ int menu(vector<string> a){
  * 
  */
 int main(int argc, char** argv) {
+    /*
     vector<string> vec_options(5);
     int option;
     
@@ -68,6 +70,9 @@ int main(int argc, char** argv) {
     }while(option!=4);
     vec_options.clear();
     vector<string>().swap(vec_options);
+    */
+    BSTMovieFinder* mF = new BSTMovieFinder();
+    
     return 0;
 }
 

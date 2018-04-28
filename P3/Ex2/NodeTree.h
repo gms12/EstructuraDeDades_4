@@ -26,7 +26,7 @@ using namespace std;
 template <class Type> class NodeTree {
     public:
         //Constructors
-        NodeTree(const Type& data, const string& key);
+        NodeTree(const Type& data, int key);
         NodeTree(const NodeTree& orig);
         //Destructor
         virtual ~NodeTree();
@@ -59,7 +59,7 @@ template <class Type> class NodeTree {
 };
 
 //Constructor amb pas d'element. Inicialitza els punters a null i l'element donat.
-template <class Type> NodeTree<Type>::NodeTree(const Type& dataIn, const string& key){
+template <class Type> NodeTree<Type>::NodeTree(const Type& dataIn, int key){
     this->pParent = nullptr;
     this->pLeft = nullptr;
     this->pRight = nullptr;

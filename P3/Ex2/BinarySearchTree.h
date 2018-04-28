@@ -34,7 +34,7 @@ template <class Type> class BinarySearchTree{
         //Consultors
         int size() const;//TEST: OK
         bool isEmpty() const;//TEST: OK
-        NodeTree<Type>* root();//TEST: OK
+        NodeTree<Type>* root() const;//TEST: OK
         NodeTree<Type>* search(int key);//TEST: OK
         void printInorder() const;//TEST: OK
         void printPreorder() const;//TEST: OK
@@ -68,14 +68,14 @@ template <class Type> BinarySearchTree<Type>::BinarySearchTree(){
 
 //Constructor còpia.
 template <class Type> BinarySearchTree<Type>::BinarySearchTree(const BinarySearchTree& orig){
-    this->pRoot = constructor_copia(orig->root());
+    this->pRoot = constructor_copia(orig.root());
     cout << "Arbre creat" << endl;
 }
 //Metode auxuliar per al constructor. Recorrem en preordre i anem copiant node a node
 template <class Type> NodeTree<Type>* BinarySearchTree<Type>::constructor_copia(NodeTree<Type>* from){
     if(from==nullptr)return nullptr;//si l'arbre donat és null fem el nostre null
     else{
-        NodeTree<Type>* newNode = new NodeTree<Type>(*from, from->getKey());//copiem el node
+        NodeTree<Type>* newNode = new NodeTree<Type>(*from);//copiem el node
         newNode->setLeft(constructor_copia(from->getLeft()));//cridem per copiar el node de l'esq
         newNode->setRight(constructor_copia(from->getRight()));//cridem per copiar el node de la dreta    
         return newNode;//retornem el node
@@ -99,7 +99,7 @@ template <class Type> bool BinarySearchTree<Type>::isEmpty() const{
 }
 
 //Retorna l'adreça de l'arrel.
-template <class Type> NodeTree<Type>* BinarySearchTree<Type>::root(){
+template <class Type> NodeTree<Type>* BinarySearchTree<Type>::root() const{
     return this->pRoot;
 }
 
@@ -156,7 +156,7 @@ template <class Type> void BinarySearchTree<Type>::insert(const Type& element, i
         this->pRoot=new NodeTree<Type>(element, key);
     }
     else this->insert(pRoot,element, key);//si no esta buit cridem el metode auxiliar
-    cout<<"S'insereix a l'arbre l'element "<<element<<endl;
+    cout<<"S'insereix a l'arbre l'element "<<element.toString()<<endl;
 }
 
 //Metode auxiliar a insert. Se li passa també un node, per a poder ser recursiu

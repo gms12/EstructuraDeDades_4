@@ -17,6 +17,8 @@
 #include "BinarySearchTree.h"
 #include "NodeTree.h"
 #include <string>
+#include <fstream>
+#include <stdexcept>
 using namespace std;
 
 
@@ -31,13 +33,13 @@ class BSTMovieFinder {
         string showMovie(const int id);
         Movie findMovie(const int id);
         float findRatingMovie(const int id);
-        BinarySearchTree<Movie> getTree();
+        BinarySearchTree<Movie> getTree() const;
         //Modificadores
-        void appendMovies(const string file);
+        void appendMovies(const string filename);
         void insertMovie(const int id, const string title, const float rating);
         
     private:
-        BinarySearchTree<Movie> bst;
+        BinarySearchTree<Movie>* bst;
 };
 
 
@@ -56,19 +58,70 @@ BSTMovieFinder::~BSTMovieFinder() {
     delete this->bst;
 }
 
-//Mostra la informació d'una película donat el seu id
+//Mostra la informació d'una pel·lícula donat el seu id
 string BSTMovieFinder::showMovie(const int id) {
-    NodeTree<Movie>* movieNode = this->bst.search(id);
+    try{
+        return this->findMovie(id).toString();
+    }catch(invalid_argument& e){
+        throw e;
+    }
+}
+
+//Mostra la Movie donat el seu id
+Movie BSTMovieFinder::findMovie(const int id) {
+    NodeTree<Movie>* movieNode = this->bst->search(id);
     if( movieNode == nullptr){
-        return "Movie not in tree.";
+        throw invalid_argument("Movie not in tree.");
     }else{
-        return movieNode->getValue().toString();
+        return movieNode->getValue();
+    }
+}
+
+//Mostra la puntuació d'una pel·lícula donat el seu id
+float BSTMovieFinder::findRatingMovie(const int id) {
+    try{
+        return this->findMovie(id).getRating();
+    }catch(invalid_argument& e){
+        throw e;
     }
 }
 
 //Retorna el seu bst
-BinarySearchTree<Movie> BSTMovieFinder::getTree() {
-    return this->bst;
+BinarySearchTree<Movie> BSTMovieFinder::getTree() const{
+    return *(this->bst);
+}
+
+//Afegeix movies a partir d'un fitxer
+void BSTMovieFinder::appendMovies(const string filename) {
+    ifstream myFile;
+    myFile.open(filename);
+    int id;
+    string movieName, input;
+    float rating;
+    
+    if(!myFile.is_open()){
+        throw invalid_argument("Unable to open file.");
+        return;
+    }else{
+        while(!myFile.eof()){
+            
+            myFile >> input;
+            int found1 = input.find("::");
+            int found2 = input.find("::", found1+1);
+            string sub1 = input.substr(0,found1-1);
+            string sub2 = input.substr(found1+2, found2-1);
+            string sub3 = input.substr(found2+2);
+            cout<<input<<endl;
+            cout<<sub1<<"\t"<<sub2<<"\t"<<sub3<<endl;
+        }
+    }
+}
+
+//Afegeix una movie donada tota la seva informació
+void BSTMovieFinder::insertMovie(const int id, const string title, const float rating) {
+    Movie* newMovie = new Movie(id, title, rating);
+    this->bst->insert(*newMovie, id);
+    
 }
 
 #endif /* BSTMOVIEFINDER_H */
