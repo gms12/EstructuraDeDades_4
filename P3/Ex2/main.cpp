@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /* 
  * File:   main.cpp
  * Author: Gabriel Marín i Martí Pedemonte
@@ -12,6 +6,7 @@
  */
 
 #include <cstdlib>
+#include <ctime>
 #include <vector>
 #include "BSTMovieFinder.h"
 
@@ -39,8 +34,7 @@ int main(int argc, char** argv) {
     /*
     vector<string> vec_options(5);
     int option;
-    
-    
+
     vec_options[0]="Llegir fitxer";
     vec_options[1]="Mostrar l’arbre segons l’ID en ordre creixent";
     vec_options[2]="Llegir el fitxer cercaPelicules.txt i mostrar nºelements";
@@ -71,6 +65,10 @@ int main(int argc, char** argv) {
     vec_options.clear();
     vector<string>().swap(vec_options);
     */
+    
+    //PROVES:
+    //---------------
+    /*
     BSTMovieFinder* mF = new BSTMovieFinder();
     mF->appendMovies("input");
     mF->getTree()->printPreorder();
@@ -81,6 +79,40 @@ int main(int argc, char** argv) {
     cout<<mF->findRatingMovie(8923)<<endl;
     cout<<mF->showMovie(8923)<<endl;
     delete mF;
+    */
+    //-------------
+    
+    //Main demanat:
+    string resposta, fileName;
+    cout<<"Quin fitxer vols (P/G)? ";
+    cin>>resposta;
+    while(resposta != "P" && resposta != "G" && resposta != "p" && resposta != "g"){
+        cout<<"A veure, no és tan difícil. Quin fitxer vols (P/G)? ";
+        cin>>resposta;
+    }
+    if(resposta == "P" || resposta == "p") fileName = "movie_rating_small.txt";
+    else fileName = "movie_rating.txt";
+    BSTMovieFinder* mF = new BSTMovieFinder();
+    clock_t initialTime = clock();
+    //cout<<t<<endl;
+    mF->appendMovies(fileName);
+    clock_t finalTime = clock();
+    //cout<<t<<endl;
+    cout<<"It took "<< ((float)(finalTime-initialTime))/(CLOCKS_PER_SEC)<<" seconds."<<endl;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     return 0;
 }
