@@ -245,7 +245,7 @@ template <class Type> void BinarySearchTree<Type>::printInorder(NodeTree<Type>* 
         if(this->counter < 0) return;
         cout<<p->getValue().toString()<<endl;
         this->counter++;
-        if(counter >= 40){
+        if(counter >= 39){
             cout<<endl<<"Do you want to continue? (Y/N)";
             string resposta;
             cin>>resposta;

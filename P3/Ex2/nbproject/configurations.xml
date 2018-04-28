@@ -12,6 +12,7 @@
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
                    projectFiles="true">
+      <itemPath>cercaPelicules.txt</itemPath>
       <itemPath>input</itemPath>
       <itemPath>movie_rating.txt</itemPath>
       <itemPath>movie_rating_small.txt</itemPath>
@@ -51,6 +52,8 @@
       </item>
       <item path="NodeTree.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="cercaPelicules.txt" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="input" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
@@ -87,6 +90,8 @@
       <item path="Movie.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="NodeTree.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="cercaPelicules.txt" ex="false" tool="3" flavor2="0">
       </item>
       <item path="input" ex="false" tool="3" flavor2="0">
       </item>

@@ -83,6 +83,8 @@ int main(int argc, char** argv) {
     //-------------
     
     //Main demanat:
+    
+    //PART 1-----------------------------------
     string resposta, fileName;
     cout<<"Quin fitxer vols (P/G)? ";
     cin>>resposta;
@@ -99,21 +101,30 @@ int main(int argc, char** argv) {
     clock_t finalTime = clock();
     //cout<<t<<endl;
     cout<<"It took "<< ((float)(finalTime-initialTime))/(CLOCKS_PER_SEC)<<" seconds."<<endl;
+    
+    //PART 2-----------------------------------
     mF->printAscendingOrder();
     
+    //PART 3-----------------------------------
+    initialTime = clock();
+    ifstream myFile;
+    myFile.open("cercaPelicules.txt");
+    int isInTree = 0;
+    string line;
     
+    if(!myFile.is_open()){
+        cout<< "Unable to open file."<<endl;
+    }else{
+        while( getline((myFile), line) ){
+            if( mF->searchMovie( atoi(line.c_str()) ) ) isInTree++;
+        }
+    }
+    finalTime = clock();
+    cout<<"It took "<< ((float)(finalTime-initialTime))/(CLOCKS_PER_SEC)<<" seconds to search the whole tree."<<endl;
+    cout<<"There are "<< isInTree <<" movies in the tree."<<endl;
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    //PART 4-----------------------------------
+    cout<<"Depth: "<< mF->getTree()->getHeight()<<endl;
     
     return 0;
 }

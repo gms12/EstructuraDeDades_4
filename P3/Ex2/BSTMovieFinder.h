@@ -33,6 +33,7 @@ class BSTMovieFinder {
         string showMovie(const int id);//TEST: OK
         Movie findMovie(const int id);//TEST: OK
         float findRatingMovie(const int id);//TEST: OK
+        bool searchMovie(const int id);//TEST: OK
         BinarySearchTree<Movie>* getTree() const;//TEST: OK
         void printAscendingOrder();//TEST: OK
         //Modificadores
@@ -71,10 +72,20 @@ string BSTMovieFinder::showMovie(const int id) {
 //Mostra la Movie donat el seu id
 Movie BSTMovieFinder::findMovie(const int id) {
     NodeTree<Movie>* movieNode = this->bst->search(id);
-    if( movieNode == nullptr){
+    if( movieNode == nullptr ){
         throw invalid_argument("Movie not in tree.");
     }else{
         return movieNode->getValue();
+    }
+}
+
+//Busca la Movie donat el seu id
+bool BSTMovieFinder::searchMovie(const int id) {
+    NodeTree<Movie>* movieNode = this->bst->search(id);
+    if( movieNode == nullptr ){
+        return false;
+    }else{
+        return true;
     }
 }
 
