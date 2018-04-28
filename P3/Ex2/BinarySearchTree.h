@@ -35,13 +35,13 @@ template <class Type> class BinarySearchTree{
         int size() const;//TEST: OK
         bool isEmpty() const;//TEST: OK
         NodeTree<Type>* root();//TEST: OK
-        bool search(const Type& element);//TEST: OK
+        bool search(int key);//TEST: OK
         void printInorder() const;//TEST: OK
         void printPreorder() const;//TEST: OK
         void printPostorder() const;//TEST: OK
         int getHeight();//TEST: OK
         //Modificadors
-        void insert(const Type& element);//TEST: OK
+        void insert(const Type& element, int key);//TEST: OK
         //Mirall
         BinarySearchTree<Type>* mirror();//TEST: OK
     private:
@@ -52,8 +52,8 @@ template <class Type> class BinarySearchTree{
         void printPostorder(NodeTree<Type>* p) const;
         void printInorder(NodeTree<Type>* p) const;
         int getHeight(NodeTree<Type>* p);
-        void insert(NodeTree<Type>* p,const Type& element); //nou metode
-        NodeTree<Type>* search(NodeTree<Type>* p,const Type& element);//nou metode
+        void insert(NodeTree<Type>* p, const Type& element, int key); //nou metode
+        NodeTree<Type>* search(NodeTree<Type>* p, int key);//nou metode
         NodeTree<Type>* constructor_copia(NodeTree<Type>* from);//nou metode
         NodeTree<Type>* constructor_mirall(NodeTree<Type>* from);//nou metode
         //Atributs
@@ -75,7 +75,7 @@ template <class Type> BinarySearchTree<Type>::BinarySearchTree(const BinarySearc
 template <class Type> NodeTree<Type>* BinarySearchTree<Type>::constructor_copia(NodeTree<Type>* from){
     if(from==nullptr)return nullptr;//si l'arbre donat és null fem el nostre null
     else{
-        NodeTree<Type>* newNode = new NodeTree<Type>(*from);//copiem el node
+        NodeTree<Type>* newNode = new NodeTree<Type>(*from, from->getKey());//copiem el node
         newNode->setLeft(constructor_copia(from->getLeft()));//cridem per copiar el node de l'esq
         newNode->setRight(constructor_copia(from->getRight()));//cridem per copiar el node de la dreta    
         return newNode;//retornem el node
@@ -104,22 +104,22 @@ template <class Type> NodeTree<Type>* BinarySearchTree<Type>::root(){
 }
 
 //Cerca un element. Retorna true si el troba, false en cas contrari.
-template <class Type> bool BinarySearchTree<Type>::search(const Type& element) {
+template <class Type> bool BinarySearchTree<Type>::search(int key) {
     //si el node que retorna search es null, retornem false
-    return this->search(pRoot,element)!=nullptr;
+    return this->search(pRoot,key)!=nullptr;
 }
 
 //Cerca un element a partir d'un node. Quan el troba retorna el node.
-template <class Type> NodeTree<Type>* BinarySearchTree<Type>::search(NodeTree<Type>* p, const Type& element) {
+template <class Type> NodeTree<Type>* BinarySearchTree<Type>::search(NodeTree<Type>* p, int key) {
     //si el node es null o el seu valor es el que busquem, el retornem
-    if(p==nullptr || p->getKey()==element)return p;
+    if(p==nullptr || p->getKey()==key)return p;
     //si el seu valor es mes gran, busquem al fill de l'esquerra
-    else if(p->getKey()>element && p->hasLeft()){
-        return search(p->getLeft(),element);
+    else if(p->getKey()>key && p->hasLeft()){
+        return search(p->getLeft(),key);
     }
     //si no, com tindra un valor inferior, busquem al fill de la dreta
     else if(p->hasRight()){
-        return search(p->getRight(),element);
+        return search(p->getRight(),key);
     }
     return nullptr;//Si no ha estat agafat en un dels dos ifs vol dir que no existeix l'element
 }
@@ -152,27 +152,27 @@ template <class Type> int BinarySearchTree<Type>::getHeight(){
 }
 
 //Afegeix un nou NodeTree a l'arbre binari.
-template <class Type> void BinarySearchTree<Type>::insert(const Type& element){
+template <class Type> void BinarySearchTree<Type>::insert(const Type& element, int key){
     if(this->isEmpty()){//comprovem si l'arbre esta buit
-        this->pRoot=new NodeTree<Type>(element);
+        this->pRoot=new NodeTree<Type>(element, key);
     }
-    else this->insert(pRoot,element);//si no esta buit cridem el metode auxiliar
+    else this->insert(pRoot,element, key);//si no esta buit cridem el metode auxiliar
     cout<<"S'insereix a l'arbre l'element "<<element<<endl;
 }
 
 //Metode auxiliar a insert. Se li passa també un node, per a poder ser recursiu
-template <class Type> void BinarySearchTree<Type>::insert(NodeTree<Type>* p, const Type& element){
-    if(p->getKey()>element){//si el valor es inferior, anira a l'esq
+template <class Type> void BinarySearchTree<Type>::insert(NodeTree<Type>* p, const Type& element, int key){
+    if(p->getKey()>key){//si el valor es inferior, anira a l'esq
         if(!p->hasLeft()){
-            p->setLeft(new NodeTree<Type>(element));
+            p->setLeft(new NodeTree<Type>(element, key));
         }//si no te fill esq, l'afegim. Si no, cridem el metode pel fill de lesq
-        else this->insert(p->getLeft(),element);
+        else this->insert(p->getLeft(),element, key);
     }
     else{//si es superior anira a la dreta
        if(!p->hasRight()){//Igual que abans pero per l'altre costat
-            p->setRight(new NodeTree<Type>(element));
+            p->setRight(new NodeTree<Type>(element, key));
         }
-        else this->insert(p->getRight(),element);    
+       else this->insert(p->getRight(),element, key);    
     }
 }
 
@@ -250,7 +250,7 @@ template <class Type> BinarySearchTree<Type>* BinarySearchTree<Type>::mirror(){
 template <class Type> NodeTree<Type>* BinarySearchTree<Type>::constructor_mirall(NodeTree<Type>* from){
     if(from==nullptr)return nullptr;//si el node es null fem el nostre null
     else{
-        NodeTree<Type>* to = new NodeTree<Type>(*from);//copiem el node
+        NodeTree<Type>* to = new NodeTree<Type>(*from, from->getKey());//copiem el node
         to->setLeft(constructor_mirall(from->getRight()));//cridem per copiar el node de la dreta a l'esq
         to->setRight(constructor_mirall(from->getLeft()));//cridem per copiar el node de l'esq a la dreta
         return to;//retornem el node

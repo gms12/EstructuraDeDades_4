@@ -31,8 +31,9 @@ class BSTMovieFinder {
         string showMovie(const int id);
         Movie findMovie(const int id);
         float findRatingMovie(const int id);
+        BinarySearchTree<Movie> getTree();
         //Modificadores
-        void appendMovies(const string s);
+        void appendMovies(const string file);
         void insertMovie(const int id, const string title, const float rating);
         
     private:

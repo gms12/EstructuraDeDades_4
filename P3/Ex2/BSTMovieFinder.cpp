@@ -12,13 +12,29 @@
  */
 
 #include "BSTMovieFinder.h"
-
+    
+//Constructor per defecte
 BSTMovieFinder::BSTMovieFinder() {
+    this->bst = new BinarySearchTree<Movie>();
 }
 
+//Constructor còpia
 BSTMovieFinder::BSTMovieFinder(const BSTMovieFinder& orig) {
+    this->bst = new BinarySearchTree<Movie>( orig.getTree() );
 }
 
+//Destructor
 BSTMovieFinder::~BSTMovieFinder() {
+    delete this->bst;
+}
+
+//Mostra la informació d'una película donat el seu id
+string BSTMovieFinder::showMovie(const int id) {
+    this->bst.search(id);
+}
+
+//Retorna el seu bst
+BinarySearchTree<Movie> BSTMovieFinder::getTree() {
+    return this->bst;
 }
 
