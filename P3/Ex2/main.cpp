@@ -73,7 +73,14 @@ int main(int argc, char** argv) {
     */
     BSTMovieFinder* mF = new BSTMovieFinder();
     mF->appendMovies("input");
-    mF->getTree().printPreorder();
+    mF->getTree()->printPreorder();
+    mF->insertMovie(56789, "Harry", 3.4567);
+    mF->getTree()->printPreorder();
+    Movie m = mF->findMovie(8923);
+    cout<<m.toString()<<endl;
+    cout<<mF->findRatingMovie(8923)<<endl;
+    cout<<mF->showMovie(8923)<<endl;
+    delete mF;
     
     return 0;
 }

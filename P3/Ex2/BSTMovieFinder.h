@@ -25,18 +25,18 @@ using namespace std;
 class BSTMovieFinder {
     public:
         //Constructors
-        BSTMovieFinder();
-        BSTMovieFinder(const BSTMovieFinder& orig);
+        BSTMovieFinder();//Test: OK
+        BSTMovieFinder(const BSTMovieFinder& orig);//TEST: OK
         //Destructor
-        virtual ~BSTMovieFinder();
+        virtual ~BSTMovieFinder();//TEST: OK
         //Consultores
-        string showMovie(const int id);
-        Movie findMovie(const int id);
-        float findRatingMovie(const int id);
-        BinarySearchTree<Movie> getTree() const;
+        string showMovie(const int id);//TEST: OK
+        Movie findMovie(const int id);//TEST: OK
+        float findRatingMovie(const int id);//TEST: OK
+        BinarySearchTree<Movie>* getTree() const;//TEST: OK
         //Modificadores
-        void appendMovies(const string filename);
-        void insertMovie(const int id, const string title, const float rating);
+        void appendMovies(const string filename);//TEST: OK
+        void insertMovie(const int id, const string title, const float rating);//TEST: OK
         
     private:
         BinarySearchTree<Movie>* bst;
@@ -50,7 +50,7 @@ BSTMovieFinder::BSTMovieFinder() {
 
 //Constructor còpia
 BSTMovieFinder::BSTMovieFinder(const BSTMovieFinder& orig) {
-    this->bst = new BinarySearchTree<Movie>( orig.getTree() );
+    this->bst = new BinarySearchTree<Movie>( *orig.getTree() );
 }
 
 //Destructor
@@ -87,8 +87,8 @@ float BSTMovieFinder::findRatingMovie(const int id) {
 }
 
 //Retorna el seu bst
-BinarySearchTree<Movie> BSTMovieFinder::getTree() const{
-    return *(this->bst);
+BinarySearchTree<Movie>* BSTMovieFinder::getTree() const{
+    return this->bst;
 }
 
 //Afegeix movies a partir d'un fitxer

@@ -68,7 +68,7 @@ template <class Type> BinarySearchTree<Type>::BinarySearchTree(){
 
 //Constructor còpia.
 template <class Type> BinarySearchTree<Type>::BinarySearchTree(const BinarySearchTree& orig){
-    this->pRoot = constructor_copia(orig->root());
+    this->pRoot = constructor_copia(orig.root());
     cout << "Arbre creat" << endl;
 }
 //Metode auxuliar per al constructor. Recorrem en preordre i anem copiant node a node
