@@ -26,7 +26,7 @@ using namespace std;
 template <class Type> class NodeTree {
     public:
         //Constructors
-        NodeTree(const Type& data);
+        NodeTree(const Type& data, const string& key);
         NodeTree(const NodeTree& orig);
         //Destructor
         virtual ~NodeTree();
@@ -38,13 +38,13 @@ template <class Type> class NodeTree {
         bool hasLeft() const;
         bool isRoot() const;
         bool isExternal() const;
-        const Type& getData() const;
-        const int& getId() const;
+        const Type& getValue() const;
+        const int& getKey() const;
         int getHeight() const;
         //Modificadors
         void setHeight(int h);
-        void setData(const Type& data);
-        void setId(const int& id);
+        void setValue(const Type& data);
+        void setKey(const int& id);
         void setRight(NodeTree<Type>* newRight);
         void setLeft(NodeTree<Type>* newLeft);
         void setParent(NodeTree<Type>* newParent);
@@ -54,16 +54,17 @@ template <class Type> class NodeTree {
         NodeTree<Type>* pLeft;
         NodeTree<Type>* pRight;
         Type data;
-        int id;
+        int key;
         int height;
 };
 
 //Constructor amb pas d'element. Inicialitza els punters a null i l'element donat.
-template <class Type> NodeTree<Type>::NodeTree(const Type& dataIn){
+template <class Type> NodeTree<Type>::NodeTree(const Type& dataIn, const string& key){
     this->pParent = nullptr;
     this->pLeft = nullptr;
     this->pRight = nullptr;
     this->data = dataIn;
+    this->key = key;
     this->height = 0;
 }
 
@@ -72,7 +73,8 @@ template <class Type> NodeTree<Type>::NodeTree(const NodeTree& orig){
     this->pParent = orig.getParent();
     this->pLeft = orig.getLeft();
     this->pRight = orig.getRight();
-    this->data = orig.getData();
+    this->data = orig.getValue();
+    this->key = orig.getKey();
     this->height = orig.getHeight();
 }
 
@@ -120,17 +122,17 @@ template <class Type> bool NodeTree<Type>:: isExternal() const{
 }
 
 //Retorna l'element que conté el NodeTree.
-template <class Type> const Type& NodeTree<Type>:: getData() const{
+template <class Type> const Type& NodeTree<Type>:: getValue() const{
     //const Type &e = this->data;
     //return e;
     return this->data;
 }
 
 //Retorna la clau de l'element que conté el NodeTree.
-template <class Type> const int& NodeTree<Type>:: getId() const{
+template <class Type> const int& NodeTree<Type>:: getKey() const{
     //const Type &e = this->data;
     //return e;
-    return this->id;
+    return this->key;
 }
 
 //Retorna l'alçada del NodeTree.
@@ -144,13 +146,13 @@ template <class Type> void NodeTree<Type>:: setHeight(int h){
 }
 
 //Assigna la dada del NodeTree.
-template <class Type> void NodeTree<Type>:: setData(const Type& dataIn){
+template <class Type> void NodeTree<Type>:: setValue(const Type& dataIn){
     this->data = dataIn;
 }
 
 //Assigna la id del NodeTree.
-template <class Type> void NodeTree<Type>:: setData(const int& idIn){
-    this->id = idIn;
+template <class Type> void NodeTree<Type>:: setKey(const int& idIn){
+    this->key = idIn;
 }
 
 //Assigna el fill dret.

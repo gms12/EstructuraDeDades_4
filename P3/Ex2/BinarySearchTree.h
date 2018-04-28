@@ -112,9 +112,9 @@ template <class Type> bool BinarySearchTree<Type>::search(const Type& element) {
 //Cerca un element a partir d'un node. Quan el troba retorna el node.
 template <class Type> NodeTree<Type>* BinarySearchTree<Type>::search(NodeTree<Type>* p, const Type& element) {
     //si el node es null o el seu valor es el que busquem, el retornem
-    if(p==nullptr || p->getData()==element)return p;
+    if(p==nullptr || p->getKey()==element)return p;
     //si el seu valor es mes gran, busquem al fill de l'esquerra
-    else if(p->getData()>element && p->hasLeft()){
+    else if(p->getKey()>element && p->hasLeft()){
         return search(p->getLeft(),element);
     }
     //si no, com tindra un valor inferior, busquem al fill de la dreta
@@ -162,7 +162,7 @@ template <class Type> void BinarySearchTree<Type>::insert(const Type& element){
 
 //Metode auxiliar a insert. Se li passa també un node, per a poder ser recursiu
 template <class Type> void BinarySearchTree<Type>::insert(NodeTree<Type>* p, const Type& element){
-    if(p->getData()>element){//si el valor es inferior, anira a l'esq
+    if(p->getKey()>element){//si el valor es inferior, anira a l'esq
         if(!p->hasLeft()){
             p->setLeft(new NodeTree<Type>(element));
         }//si no te fill esq, l'afegim. Si no, cridem el metode pel fill de lesq
@@ -200,7 +200,7 @@ template <class Type> int BinarySearchTree<Type>::size(NodeTree<Type>* p) const{
 template <class Type> void BinarySearchTree<Type>::printPreorder(NodeTree<Type>* p) const{
     if(p!=nullptr){
         //primer imprimim l'element del node
-        cout<<p->getData()<<" ";
+        cout<<p->getValue()<<" ";
         //despres cridem el subarbre de l'esquerra
         if(p->hasLeft()) this->printPreorder(p->getLeft());
         //per ultim cridem al subarbre de la dreta
@@ -216,7 +216,7 @@ template <class Type> void BinarySearchTree<Type>::printPostorder(NodeTree<Type>
         //despres cridem al subarbre de la dreta
         if(p->hasRight()) this->printPostorder(p->getRight());
         //per ultim imprimim l'element del node
-        cout<<p->getData()<<" ";
+        cout<<p->getValue()<<" ";
     }
 }
 
@@ -226,7 +226,7 @@ template <class Type> void BinarySearchTree<Type>::printInorder(NodeTree<Type>* 
         //primer cridem el subarbre de l'esquerra
         if(p->hasLeft()) this->printInorder(p->getLeft());
         //despres imprimim el seu element
-        cout<<p->getData()<<" ";
+        cout<<p->getValue()<<" ";
         //per ultim cridem al subarbre de la dreta
         if(p->hasRight()) this->printInorder(p->getRight());
     }
