@@ -39,12 +39,12 @@ template <class Type> class NodeTree {
         bool isRoot() const;
         bool isExternal() const;
         const Type& getValue() const;
-        const int& getKey() const;
+        const int getKey() const;
         int getHeight() const;
         //Modificadors
         void setHeight(int h);
         void setValue(const Type& data);
-        void setKey(const int& id);
+        void setKey(int newKey);
         void setRight(NodeTree<Type>* newRight);
         void setLeft(NodeTree<Type>* newLeft);
         void setParent(NodeTree<Type>* newParent);
@@ -129,7 +129,7 @@ template <class Type> const Type& NodeTree<Type>:: getValue() const{
 }
 
 //Retorna la clau de l'element que conté el NodeTree.
-template <class Type> const int& NodeTree<Type>:: getKey() const{
+template <class Type> const int NodeTree<Type>:: getKey() const{
     //const Type &e = this->data;
     //return e;
     return this->key;
@@ -151,8 +151,8 @@ template <class Type> void NodeTree<Type>:: setValue(const Type& dataIn){
 }
 
 //Assigna la id del NodeTree.
-template <class Type> void NodeTree<Type>:: setKey(const int& idIn){
-    this->key = idIn;
+template <class Type> void NodeTree<Type>:: setKey(int newKey){
+    this->key = newKey;
 }
 
 //Assigna el fill dret.

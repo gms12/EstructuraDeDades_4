@@ -36,9 +36,7 @@ class BSTMovieFinder {
         void insertMovie(const int id, const string title, const float rating);
         
     private:
-        BinarySearchTree<Movie>* bst;
-        
-
+        BinarySearchTree<Movie> bst;
 };
 
 #endif /* BSTMOVIEFINDER_H */
