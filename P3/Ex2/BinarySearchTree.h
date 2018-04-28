@@ -35,7 +35,7 @@ template <class Type> class BinarySearchTree{
         int size() const;//TEST: OK
         bool isEmpty() const;//TEST: OK
         NodeTree<Type>* root();//TEST: OK
-        bool search(int key);//TEST: OK
+        NodeTree<Type>* search(int key);//TEST: OK
         void printInorder() const;//TEST: OK
         void printPreorder() const;//TEST: OK
         void printPostorder() const;//TEST: OK
@@ -104,9 +104,8 @@ template <class Type> NodeTree<Type>* BinarySearchTree<Type>::root(){
 }
 
 //Cerca un element. Retorna true si el troba, false en cas contrari.
-template <class Type> bool BinarySearchTree<Type>::search(int key) {
-    //si el node que retorna search es null, retornem false
-    return this->search(pRoot,key)!=nullptr;
+template <class Type> NodeTree<Type>* BinarySearchTree<Type>::search(int key) {
+    return this->search(pRoot,key);
 }
 
 //Cerca un element a partir d'un node. Quan el troba retorna el node.
