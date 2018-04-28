@@ -125,7 +125,7 @@ template <class Type> NodeTree<Type>* BinarySearchTree<Type>::search(NodeTree<Ty
 
 //Mostra el contingut de l'arbre en recorregut inordre.
 template <class Type> void BinarySearchTree<Type>::printInorder() const{
-    cout<<"Inordre ={ ";
+    cout<<"Inordre = {"<<endl;
     this->printInorder(this->pRoot);
     cout<<"}"<<endl;
     return; 
@@ -133,14 +133,14 @@ template <class Type> void BinarySearchTree<Type>::printInorder() const{
 
 //Mostra el contingut de l'arbre en recorregut preordre.
 template <class Type> void BinarySearchTree<Type>::printPreorder() const{
-    cout<<"Preordre ={ ";
+    cout<<"Preordre = {"<<endl;
     this->printPreorder(this->pRoot);
     cout<<"}"<<endl;
 }
 
 //Mostra el contingut de l'arbre en recorregut postordre.
 template <class Type> void BinarySearchTree<Type>::printPostorder() const{
-    cout<<"Postordre ={ ";
+    cout<<"Postordre = {"<<endl;
     this->printPostorder(this->pRoot);
     cout<<"}"<<endl;
 }
@@ -199,7 +199,7 @@ template <class Type> int BinarySearchTree<Type>::size(NodeTree<Type>* p) const{
 template <class Type> void BinarySearchTree<Type>::printPreorder(NodeTree<Type>* p) const{
     if(p!=nullptr){
         //primer imprimim l'element del node
-        cout<<p->getValue()<<" ";
+        cout<<p->getValue().toString()<<endl;
         //despres cridem el subarbre de l'esquerra
         if(p->hasLeft()) this->printPreorder(p->getLeft());
         //per ultim cridem al subarbre de la dreta
@@ -215,7 +215,7 @@ template <class Type> void BinarySearchTree<Type>::printPostorder(NodeTree<Type>
         //despres cridem al subarbre de la dreta
         if(p->hasRight()) this->printPostorder(p->getRight());
         //per ultim imprimim l'element del node
-        cout<<p->getValue()<<" ";
+        cout<<p->getValue().toString()<<endl;
     }
 }
 
@@ -225,7 +225,7 @@ template <class Type> void BinarySearchTree<Type>::printInorder(NodeTree<Type>* 
         //primer cridem el subarbre de l'esquerra
         if(p->hasLeft()) this->printInorder(p->getLeft());
         //despres imprimim el seu element
-        cout<<p->getValue()<<" ";
+        cout<<p->getValue().toString()<<endl;
         //per ultim cridem al subarbre de la dreta
         if(p->hasRight()) this->printInorder(p->getRight());
     }

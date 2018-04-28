@@ -72,6 +72,8 @@ int main(int argc, char** argv) {
     vector<string>().swap(vec_options);
     */
     BSTMovieFinder* mF = new BSTMovieFinder();
+    mF->appendMovies("input");
+    mF->getTree().printPreorder();
     
     return 0;
 }

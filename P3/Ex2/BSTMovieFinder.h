@@ -103,16 +103,17 @@ void BSTMovieFinder::appendMovies(const string filename) {
         throw invalid_argument("Unable to open file.");
         return;
     }else{
-        while(!myFile.eof()){
+        while( getline((myFile), input) ){
+            int found1 = input.find("::");//Busco primera aparició de ::
+            int found2 = input.find("::", found1+1);//Busco segona aparició de ::
+            string sub1 = input.substr(0,found1);//Busco id
+            movieName = input.substr(found1+2, found2-(found1+2) );//Busco nom
+            string sub3 = input.substr(found2+2);//Busco rating
             
-            myFile >> input;
-            int found1 = input.find("::");
-            int found2 = input.find("::", found1+1);
-            string sub1 = input.substr(0,found1-1);
-            string sub2 = input.substr(found1+2, found2-1);
-            string sub3 = input.substr(found2+2);
-            cout<<input<<endl;
-            cout<<sub1<<"\t"<<sub2<<"\t"<<sub3<<endl;
+            id = atoi(sub1.c_str());
+            rating = atof(sub3.c_str());
+
+            this->insertMovie(id, movieName, rating);
         }
     }
 }
