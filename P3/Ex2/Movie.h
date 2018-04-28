@@ -15,30 +15,29 @@
 #define MOVIE_H
 #include <string>
 using namespace std;
-class Movie {
-public:
-    //Constructors
-    Movie();
-    Movie(string s,float r, int i);
-    Movie(const Movie& orig);
-    //Destructor
-    virtual ~Movie();
-    //Consultors
-    string getName()const;
-    float getRating()const;
-    int getID()const;
-    string toString() const;
-    //Modificadors
-    void setName(string s);
-    void setRating(float r);
-    void setID(int i);
-private:
-    //Atributs
-    string name;
-    float rating;
-    int ID;
-    
 
+class Movie {
+    public:
+        //Constructors
+        Movie();
+        Movie(string s,float r, int i);
+        Movie(const Movie& orig);
+        //Destructor
+        virtual ~Movie();
+        //Consultors
+        string getName()const;
+        float getRating()const;
+        int getId()const;
+        string toString() const;
+        //Modificadors
+        void setName(string s);
+        void setRating(float r);
+        void setId(int i);
+    private:
+        //Atributs
+        string name;
+        float rating;
+        int id;
 };
 
 #endif /* MOVIE_H */

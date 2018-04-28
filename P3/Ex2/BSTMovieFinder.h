@@ -13,13 +13,31 @@
 
 #ifndef BSTMOVIEFINDER_H
 #define BSTMOVIEFINDER_H
+#include "Movie.h"
+#include "BinarySearchTree.h"
+#include "NodeTree.h"
+#include <string>
+using namespace std;
+
 
 class BSTMovieFinder {
-public:
-    BSTMovieFinder();
-    BSTMovieFinder(const BSTMovieFinder& orig);
-    virtual ~BSTMovieFinder();
-private:
+    public:
+        //Constructors
+        BSTMovieFinder();
+        BSTMovieFinder(const BSTMovieFinder& orig);
+        //Destructor
+        virtual ~BSTMovieFinder();
+        //Consultores
+        string showMovie(const int id);
+        Movie findMovie(const int id);
+        float findRatingMovie(const int id);
+        //Modificadores
+        void appendMovies(const string s);
+        void insertMovie(const int id, const string title, const float rating);
+        
+    private:
+        BinarySearchTree<Movie>* bst;
+        
 
 };
 
