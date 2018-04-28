@@ -27,23 +27,23 @@ using namespace std;
 template <class Type> class BinarySearchTree{
     public:
         //Constructors
-        BinarySearchTree();
-        BinarySearchTree(const BinarySearchTree& orig);
+        BinarySearchTree();//TEST: OK
+        BinarySearchTree(const BinarySearchTree& orig);//TEST: OK
         //Destructor
-        virtual ~BinarySearchTree();
+        virtual ~BinarySearchTree();//TEST: OK
         //Consultors
-        int size() const;
-        bool isEmpty() const;
-        NodeTree<Type>* root();
-        bool search(const Type& element);
-        void printInorder() const;
-        void printPreorder() const;
-        void printPostorder() const;
-        int getHeight();
+        int size() const;//TEST: OK
+        bool isEmpty() const;//TEST: OK
+        NodeTree<Type>* root();//TEST: OK
+        bool search(const Type& element);//TEST: OK
+        void printInorder() const;//TEST: OK
+        void printPreorder() const;//TEST: OK
+        void printPostorder() const;//TEST: OK
+        int getHeight();//TEST: OK
         //Modificadors
-        void insert(const Type& element);
+        void insert(const Type& element);//TEST: OK
         //Mirall
-        BinarySearchTree<Type>* mirror();
+        BinarySearchTree<Type>* mirror();//TEST: OK
     private:
         //Mètodes privats interns
         void postDelete(NodeTree<Type>* p);
@@ -76,12 +76,8 @@ template <class Type> NodeTree<Type>* BinarySearchTree<Type>::constructor_copia(
     if(from==nullptr)return nullptr;//si l'arbre donat és null fem el nostre null
     else{
         NodeTree<Type>* newNode = new NodeTree<Type>(*from);//copiem el node
-        if(from->hasLeft()){
-            newNode->setLeft(constructor_copia(from->getLeft()));//cridem per copiar el node de l'esq
-        }
-        if(from->hasRight()){
-            newNode->setRight(constructor_copia(from->getRight()));//cridem per copiar el node de la dreta
-        }        
+        newNode->setLeft(constructor_copia(from->getLeft()));//cridem per copiar el node de l'esq
+        newNode->setRight(constructor_copia(from->getRight()));//cridem per copiar el node de la dreta    
         return newNode;//retornem el node
     }
 }
@@ -255,8 +251,8 @@ template <class Type> NodeTree<Type>* BinarySearchTree<Type>::constructor_mirall
     if(from==nullptr)return nullptr;//si el node es null fem el nostre null
     else{
         NodeTree<Type>* to = new NodeTree<Type>(*from);//copiem el node
-        if(from->hasRight()) to->setLeft(constructor_mirall(from->getRight()));//cridem per copiar el node de la dreta a l'esq
-        if(from->hasLeft()) to->setRight(constructor_mirall(from->getLeft()));//cridem per copiar el node de l'esq a la dreta
+        to->setLeft(constructor_mirall(from->getRight()));//cridem per copiar el node de la dreta a l'esq
+        to->setRight(constructor_mirall(from->getLeft()));//cridem per copiar el node de l'esq a la dreta
         return to;//retornem el node
     }
 }
