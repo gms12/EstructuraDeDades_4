@@ -30,10 +30,17 @@ int menu(vector<string> a){
 //metode per a realitzar la primera opcio del menu
 void initialize(BSTMovieFinder* mF){
     //PART 1-----------------------------------
-    //per si de cas:
-    //Aqui el que fem es borrar l'arbre i inicialitzar-ne un de nou
+    /*
+     * Aqui el que fem es borrar l'arbre i inicialitzar-ne un de nou
+     * Si no fessim aixo, aleshores al clicar l'opció 1 tindriem un arbre més
+     * gran amb els elements repetits, i no volem aixo. Aixi que el millor es
+     * esborrar l'arbre anterior i fer-ne un de nou amb els elements que
+     * l'usuari desitgi
+     * 
+     */
     delete mF;
     mF=new BSTMovieFinder();
+    
     string resposta, fileName;
     cout<<"Quin fitxer vols (P/G)? ";
     cin>>resposta;
