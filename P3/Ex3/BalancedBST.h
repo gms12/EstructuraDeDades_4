@@ -40,6 +40,7 @@ extern "C" {
         void printPostorder() const;//TEST: 
         int getHeight();//TEST: 
         int getCounter() const;//TEST:
+        string getTitleMaxLen() const;//Nou mètode. TEST:
         //Modificadors
         void insert(const Type& element, int key);//TEST: 
         void setCounter(int c);
@@ -211,6 +212,96 @@ template <class Type> int BalancedBST<Type>::getBalance(NodeTree<Type>* p){
     if(p==nullptr)return 0;
     return getHeight(p->getLeft())-getHeight(p->getRight());
 }
+
+template <class Type> string BalancedBST<Type>::getTitleMaxLen() const{
+    return this->getTitleMaxLen(this->pRoot);
+}
+
+template <class Type> string BalancedBST<Type>::getTitleMaxLen(NodeTree<Type>* p) const{
+    //TODO
+
+}
+
+
+//Mostra el contingut de l'arbre en recorregut inordre.
+template <class Type> void BalancedBST<Type>::printInorder() {
+    cout<<"Inordre = {"<<endl;
+    this->printInorder(this->pRoot);
+    cout<<"}"<<endl;
+    this->counter = 0;
+    return; 
+}
+
+//Mostra el contingut de l'arbre en recorregut preordre.
+template <class Type> void BalancedBST<Type>::printPreorder() const{
+    cout<<"Preordre = {"<<endl;
+    this->printPreorder(this->pRoot);
+    cout<<"}"<<endl;
+}
+
+//Mostra el contingut de l'arbre en recorregut postordre.
+template <class Type> void BalancedBST<Type>::printPostorder() const{
+    cout<<"Postordre = {"<<endl;
+    this->printPostorder(this->pRoot);
+    cout<<"}"<<endl;
+}
+
+//Mostra el contingut d'un arbre en recorregut preordre, donada la seva arrel.
+template <class Type> void BalancedBST<Type>::printPreorder(NodeTree<Type>* p) const{
+    if(p!=nullptr){
+        //primer imprimim l'element del node
+        cout<<p->getValue().toString()<<endl;
+        //despres cridem el subarbre de l'esquerra
+        if(p->hasLeft()) this->printPreorder(p->getLeft());
+        //per ultim cridem al subarbre de la dreta
+        if(p->hasRight()) this->printPreorder(p->getRight());
+    }
+}
+
+//Mostra el contingut d'un arbre en recorregut postordre, donada la seva arrel.
+template <class Type> void BalancedBST<Type>::printPostorder(NodeTree<Type>* p) const{
+    if(p!=nullptr){    
+        //primer cridem el subarbre de l'esquerra
+        if(p->hasLeft()) this->printPostorder(p->getLeft());
+        //despres cridem al subarbre de la dreta
+        if(p->hasRight()) this->printPostorder(p->getRight());
+        //per ultim imprimim l'element del node
+        cout<<p->getValue().toString()<<endl;       
+    }
+}
+
+//Mostra el contingut d'un arbre en recorregut inordre, donada la seva arrel.
+template <class Type> void BalancedBST<Type>::printInorder(NodeTree<Type>* p) {
+    if(this->counter < 0) return;
+    if(p!=nullptr){
+        //primer cridem el subarbre de l'esquerra
+        if(p->hasLeft()) this->printInorder(p->getLeft());
+        //despres imprimim el seu element
+        if(this->counter < 0) return;
+        cout<<p->getValue().toString()<<endl;
+        this->counter++;
+        if(counter >= 39){
+            cout<<endl<<"Do you want to continue? (Y/N)";
+            string resposta;
+            cin>>resposta;
+            while(resposta != "Y" && resposta != "N" && resposta != "y" && resposta != "n"){
+                cout<<"It's not that hard, dude. Do you want to continue? (Y/N)";
+                cin>>resposta;
+            }
+            if(resposta == "Y" || resposta == "y") this->counter = 0;
+            else {this->counter = -10; return;}
+            cout<<endl;
+        }
+        if(this->counter < 0) return;
+        //per ultim cridem al subarbre de la dreta
+        if(p->hasRight()) this->printInorder(p->getRight());
+    }
+}
+
+
+
+
+
 #ifdef __cplusplus
 }
 #endif
