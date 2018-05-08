@@ -221,8 +221,29 @@ template <class Type> string BalancedBST<Type>::getTitleMaxLen() const{
 }
 
 template <class Type> string BalancedBST<Type>::getTitleMaxLen(NodeTree<Type>* p) const{
-    //TODO
-
+    string dreta = "", esquerra = "", actual = "", maxTitle = "";
+    //si el node no es null
+    if(p!=nullptr){
+        actual = p->getValue().toString();
+    }
+    //esquerra
+    if(p->hasLeft()){
+        esquerra = getTitleMaxLen(p->getLeft());
+    }
+    //dreta
+    if(p->hasRight()){
+        dreta = getTitleMaxLen(p->getRight());
+    }
+    
+    if(actual.length() >= esquerra.length() && actual.length() >= dreta.length()){
+        maxTitle = actual;
+    }else if(dreta.length() >= esquerra.length() && dreta.length() >= actual.length()){
+        maxTitle = dreta;
+    }else if(esquerra.length() >= actual.length() && esquerra.length() >= dreta.length()){
+        maxTitle = esquerra;
+    }
+    
+    return maxTitle;
 }
 
 
@@ -301,7 +322,15 @@ template <class Type> void BalancedBST<Type>::printInorder(NodeTree<Type>* p) {
     }
 }
 
+//Retorna un enter el comptador
+template <class Type> void BalancedBST<Type>::setCounter(int c){
+    this->counter = c;
+}
 
+//Retorna un enter el comptador
+template <class Type> int BalancedBST<Type>::getCounter() const{
+    return this->counter;
+}
 
 
 
