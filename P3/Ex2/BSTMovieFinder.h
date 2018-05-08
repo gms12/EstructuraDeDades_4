@@ -128,6 +128,8 @@ void BSTMovieFinder::appendMovies(const string filename) {
             this->insertMovie(id, movieName, rating);
         }
     }
+   
+    myFile.close();
 }
 
 //Afegeix una movie donada tota la seva informació

@@ -31,10 +31,10 @@ int main(int argc, char** argv) {
     float rating;
     //Afegim les movies a l'arbre
     if(!myFile.is_open()){
-        throw invalid_argument("Unable to open file.");
+        cout<<"Unable to open file."<<endl;;
         return;
     }else{
-        while( getline((myFile), input) ){
+        while(getline((myFile), input)){
             int found1 = input.find("::");//Busco primera aparició de ::
             int found2 = input.find("::", found1+1);//Busco segona aparició de ::
             string sub1 = input.substr(0,found1);//Busco id
@@ -44,11 +44,19 @@ int main(int argc, char** argv) {
             id = atoi(sub1.c_str());
             rating = atof(sub3.c_str());
 
-             Movie* newMovie = new Movie(id, movieName, rating);
-             bst->insert(*newMovie, id);
+            Movie* newMovie = new Movie(id, movieName, rating);  
+            bst->insert(*newMovie, id);
         }
     }
+    ////////COMPROVAR METODES////////
     
+    cout<<bst->getTitleMaxLen()<<endl;
+    
+    //Nou arbre per a comprovar el funcionament correcte del balanceig
+    
+    
+    myFile.close();
+    delete bst;
     return 0;
 }
 
