@@ -39,7 +39,7 @@ extern "C" {
         void printPreorder() const;//TEST: 
         void printPostorder() const;//TEST: 
         int getHeight();//TEST: 
-        int getCounter() const;//TEST: 
+        int getCounter() const;//TEST:
         //Modificadors
         void insert(const Type& element, int key);//TEST: 
         void setCounter(int c);
@@ -53,10 +53,13 @@ extern "C" {
         void printPostorder(NodeTree<Type>* p) const;
         void printInorder(NodeTree<Type>* p);
         int getHeight(NodeTree<Type>* p);
-        void insert(NodeTree<Type>* p, const Type& element, int key); //nou metode
-        NodeTree<Type>* search(NodeTree<Type>* p, int key);//nou metode
-        NodeTree<Type>* constructor_copia(NodeTree<Type>* from);//nou metode
-        NodeTree<Type>* constructor_mirall(NodeTree<Type>* from);//nou metode
+        void insert(NodeTree<Type>* p, const Type& element, int key);
+        NodeTree<Type>* search(NodeTree<Type>* p, int key);
+        NodeTree<Type>* constructor_copia(NodeTree<Type>* from);
+        NodeTree<Type>* constructor_mirall(NodeTree<Type>* from);
+        NodeTree<Type>* rightRotation(NodeTree<Type>* p);//nou metode
+        NodeTree<Type>* leftRotation(NodeTree<Type>* p);//nou metode
+        int getBalance(NodeTree<Type>* p) const;//nou metode
         //Atributs
         NodeTree<Type>* pRoot;
         int counter;
@@ -152,7 +155,48 @@ template <class Type> int BalancedBST<Type>::getHeight(NodeTree<Type>* p){
     //altrament, sabem que n'hi ha un i mirem els seus fills
     else return 1 + max(getHeight(p->getLeft()),getHeight(p->getRight()));
 }
-
+//Afegeix un nou NodeTree a l'arbre binari.
+template <class Type> void BalancedBST<Type>::insert(const Type& element, int key){
+    if(this->isEmpty()){//comprovem si l'arbre esta buit
+        this->pRoot=new NodeTree<Type>(element, key);
+    }
+    else this->insert(pRoot,element, key);//si no esta buit cridem el metode auxiliar
+    cout<<"S'insereix a l'arbre l'element "<<element.toString()<<endl;
+}
+//Metode auxiliar a insert. Se li passa també un node, per a poder ser recursiu
+template <class Type> void BalancedBST<Type>::insert(NodeTree<Type>* p, const Type& element, int key){
+    if(p->getKey()>key){//si el valor es inferior, anira a l'esq
+        if(!p->hasLeft()){
+            p->setLeft(new NodeTree<Type>(element, key));
+        }//si no te fill esq, l'afegim. Si no, cridem el metode pel fill de lesq
+        else this->insert(p->getLeft(),element, key);
+    }
+    else{//si es superior anira a la dreta
+       if(!p->hasRight()){//Igual que abans pero per l'altre costat
+            p->setRight(new NodeTree<Type>(element, key));
+        }
+       else this->insert(p->getRight(),element, key);    
+    }
+    //Ara hem de fer les comprovacions i balancejar l'arbre si s'escau
+    int bal=getBalance(p);
+    //Cas simple esq
+    if(bal>1 && key<p->getLeft()->getKey()){}
+    //Cas simple dret
+    if(bal<-1 && key>p->getRight->getKey()){}
+    //Cas complexe esq
+    if(bal>1 && key>p->getLeft()->getKey()){}
+    //Cas complexe dret
+    if(bal<-1 && key>p->getRight->getKey()){}
+}
+//Metode per a fer una rotacio cap a la dreta
+template <class Type> void BalancedBST<Type>::rightRotation(NodeTree<Type>* p){}
+//Metode per a fer una rotacio cap a l'esquerra
+template <class Type> void BalancedBST<Type>::leftRotation(NodeTree<Type>* p){}
+//Metode per a calcular el balanceig d'un node
+template <class Type> int BalancedBST<Type>::getBalance(NodeTree<Type>* p){
+    if(p==nullptr)return 0;
+    return getHeight(p->getLeft())-getHeight(p->getRight());
+}
 #ifdef __cplusplus
 }
 #endif
