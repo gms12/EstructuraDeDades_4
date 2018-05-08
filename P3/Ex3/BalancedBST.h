@@ -41,6 +41,8 @@ extern "C" {
         int getHeight();//TEST: 
         int getCounter() const;//TEST:
         string getTitleMaxLen() const;//Nou mètode. TEST:
+        float getRatingMin() const;//Nou mètode. TEST:
+        float getRatingMax() const;//Nou mètode. TEST:
         //Modificadors
         void insert(const Type& element, int key);//TEST: 
         void setCounter(int c);
@@ -63,6 +65,8 @@ extern "C" {
         void leftRotation(NodeTree<Type>* p);//Nou mètode. TEST:
         int getBalance(NodeTree<Type>* p) const;//Nou mètode. TEST:
         string getTitleMaxLen(NodeTree<Type>* p) const;//Nou mètode. TEST:
+        float getRatingMin(NodeTree<Type>* p) const;//Nou mètode. TEST:
+        float getRatingMax(NodeTree<Type>* p) const;//Nou mètode. TEST:
 
         //Atributs
         NodeTree<Type>* pRoot;
@@ -330,6 +334,40 @@ template <class Type> void BalancedBST<Type>::setCounter(int c){
 //Retorna un enter el comptador
 template <class Type> int BalancedBST<Type>::getCounter() const{
     return this->counter;
+}
+
+template <class Type> float BalancedBST<Type>::getRatingMin() const{
+    return this->getRatingMin(this->pRoot);
+}
+
+template <class Type> float BalancedBST<Type>::getRatingMin(NodeTree<Type>* p) const{
+    float dreta = 10.0, esquerra = 10.0, actual = 10.0, minRating = 10.0;
+    //si el node no es null
+    if(p!=nullptr){
+        string info = p->getValue().toString();
+        int found1 = info.find("::");//Busco primera aparició de ::
+        string title = info.substr(0,found1);//Busco title
+        string rating = info.substr(found1+2);//Busco rating
+        actual = atof(rating.c_str());
+    }
+    //esquerra
+    if(p->hasLeft()){
+        //esquerra = getTitleMaxLen(p->getLeft());
+    }
+    //dreta
+    if(p->hasRight()){
+        //dreta = getTitleMaxLen(p->getRight());
+    }
+    /*
+    if(actual.length() >= esquerra.length() && actual.length() >= dreta.length()){
+        maxTitle = actual;
+    }else if(dreta.length() >= esquerra.length() && dreta.length() >= actual.length()){
+        maxTitle = dreta;
+    }else if(esquerra.length() >= actual.length() && esquerra.length() >= dreta.length()){
+        maxTitle = esquerra;
+    }
+    
+    return maxTitle;*/
 }
 
 
