@@ -58,9 +58,12 @@ extern "C" {
         NodeTree<Type>* search(NodeTree<Type>* p, int key);
         NodeTree<Type>* constructor_copia(NodeTree<Type>* from);
         NodeTree<Type>* constructor_mirall(NodeTree<Type>* from);
-        void rightRotation(NodeTree<Type>* p);//nou metode
-        void leftRotation(NodeTree<Type>* p);//nou metode
-        int getBalance(NodeTree<Type>* p) const;//nou metode
+
+        void rightRotation(NodeTree<Type>* p);//Nou mètode. TEST:
+        void leftRotation(NodeTree<Type>* p);//Nou mètode. TEST:
+        int getBalance(NodeTree<Type>* p) const;//Nou mètode. TEST:
+        string getTitleMaxLen(NodeTree<Type>* p) const;//Nou mètode. TEST:
+
         //Atributs
         NodeTree<Type>* pRoot;
         int counter;
