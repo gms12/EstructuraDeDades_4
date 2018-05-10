@@ -20,7 +20,7 @@
 using namespace std;
 
 #ifdef __cplusplus
-extern "C" {
+
 #endif
 
     template <class Type> class BalancedBST{
@@ -38,7 +38,7 @@ extern "C" {
         void printInorder();//TEST: 
         void printPreorder() const;//TEST: 
         void printPostorder() const;//TEST: 
-        int getHeight();//TEST: 
+        int getHeight() const;//TEST: 
         int getCounter() const;//TEST:
         string getTitleMaxLen() const;//Nou mètode. TEST:
         float getRatingMin() const;//Nou mètode. TEST:
@@ -55,7 +55,7 @@ extern "C" {
         void printPreorder(NodeTree<Type>* p) const;
         void printPostorder(NodeTree<Type>* p) const;
         void printInorder(NodeTree<Type>* p);
-        int getHeight(NodeTree<Type>* p);
+        int getHeightAux(const NodeTree<Type>* p) const;
         void insert(NodeTree<Type>* p, const Type& element, int key);
         NodeTree<Type>* search(NodeTree<Type>* p, int key);
         NodeTree<Type>* constructor_copia(NodeTree<Type>* from);
@@ -155,13 +155,17 @@ template <class Type> NodeTree<Type>* BalancedBST<Type>::search(NodeTree<Type>* 
     }
     return nullptr;//Si no ha estat agafat en un dels dos ifs vol dir que no existeix l'element
 }
+//Retorna un enter amb l'alçada de l'arbre.
+template <class Type> int BalancedBST<Type>::getHeight() const{
+    return this->getHeightAux(this->pRoot);
+}
 
 //Retorna un enter amb l'alçada d'un arbre, donada la seva arrel.
-template <class Type> int BalancedBST<Type>::getHeight(NodeTree<Type>* p){
+template <class Type> int BalancedBST<Type>::getHeightAux(const NodeTree<Type>* p)const{
     //si el Node p es nul, retornem 0. L'alçada d'una fulla serà 1
     if(p==nullptr)return 0;
     //altrament, sabem que n'hi ha un i mirem els seus fills
-    else return 1 + max(getHeight(p->getLeft()),getHeight(p->getRight()));
+    else return 1 + max(getHeightAux(p->getLeft()),getHeightAux(p->getRight()));
 }
 //Afegeix un nou NodeTree a l'arbre binari.
 template <class Type> void BalancedBST<Type>::insert(const Type& element, int key){
@@ -194,7 +198,7 @@ template <class Type> void BalancedBST<Type>::insert(NodeTree<Type>* p, const Ty
     }
     //Cas dreta
     else if(bal<-1){
-        if(key<p->getRight->getKey())rightRotation(p->getRight());//cas complexe
+        if(key<(p->getRight()->getKey()))rightRotation(p->getRight());//cas complexe
         leftRotation(p);
     }
 }
@@ -215,9 +219,10 @@ template <class Type> void BalancedBST<Type>::leftRotation(NodeTree<Type>* p){
     p->setRight(s);
 }
 //Metode per a calcular el balanceig d'un node
-template <class Type> int BalancedBST<Type>::getBalance(NodeTree<Type>* p){
+template <class Type> int BalancedBST<Type>::getBalance(NodeTree<Type>* p)const{
     if(p==nullptr)return 0;
-    return getHeight(p->getLeft())-getHeight(p->getRight());
+    
+    return (getHeightAux(p->getLeft())-getHeightAux(p->getRight()));
 }
 
 template <class Type> string BalancedBST<Type>::getTitleMaxLen() const{
@@ -335,6 +340,22 @@ template <class Type> void BalancedBST<Type>::setCounter(int c){
 template <class Type> int BalancedBST<Type>::getCounter() const{
     return this->counter;
 }
+//Retorna un arbre que sera el mirall de l'actual
+template <class Type> BalancedBST<Type>* BalancedBST<Type>::mirror(){
+    BalancedBST<Type>* bst_mirror = new BalancedBST<Type>();
+    bst_mirror->pRoot = this->constructor_mirall(this->pRoot);
+    return bst_mirror;
+}
+//Metode auxuliar per a mirror. Recorrem en preordre i anem copiant node a node, pero el de l'esq anira a la dreta
+template <class Type> NodeTree<Type>* BalancedBST<Type>::constructor_mirall(NodeTree<Type>* from){
+    if(from==nullptr)return nullptr;//si el node es null fem el nostre null
+    else{
+        NodeTree<Type>* to = new NodeTree<Type>(*from, from->getKey());//copiem el node
+        to->setLeft(constructor_mirall(from->getRight()));//cridem per copiar el node de la dreta a l'esq
+        to->setRight(constructor_mirall(from->getLeft()));//cridem per copiar el node de l'esq a la dreta
+        return to;//retornem el node
+    }
+}
 
 template <class Type> float BalancedBST<Type>::getRatingMin() const{
     return this->getRatingMin(this->pRoot);
@@ -373,7 +394,7 @@ template <class Type> float BalancedBST<Type>::getRatingMin(NodeTree<Type>* p) c
 
 
 #ifdef __cplusplus
-}
+
 #endif
 
 #endif /* BALANCEDBST_H */
