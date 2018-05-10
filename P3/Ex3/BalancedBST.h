@@ -59,7 +59,7 @@ using namespace std;
         void insert(NodeTree<Type>* p, const Type& element, int key);
         NodeTree<Type>* search(NodeTree<Type>* p, int key);
         NodeTree<Type>* constructor_copia(NodeTree<Type>* from);
-        NodeTree<Type>* constructor_mirall(NodeTree<Type>* from);
+        NodeTree<Type>* constructor_mirall(const NodeTree<Type>* from);
 
         void rightRotation(NodeTree<Type>* p);//Nou mètode. TEST:
         void leftRotation(NodeTree<Type>* p);//Nou mètode. TEST:
@@ -347,10 +347,10 @@ template <class Type> BalancedBST<Type>* BalancedBST<Type>::mirror(){
     return bst_mirror;
 }
 //Metode auxuliar per a mirror. Recorrem en preordre i anem copiant node a node, pero el de l'esq anira a la dreta
-template <class Type> NodeTree<Type>* BalancedBST<Type>::constructor_mirall(NodeTree<Type>* from){
+template <class Type> NodeTree<Type>* BalancedBST<Type>::constructor_mirall(const NodeTree<Type>* from){
     if(from==nullptr)return nullptr;//si el node es null fem el nostre null
     else{
-        NodeTree<Type>* to = new NodeTree<Type>(*from, from->getKey());//copiem el node
+        NodeTree<Type>* to = new NodeTree<Type>(from->getValue(), from->getKey());//copiem el node
         to->setLeft(constructor_mirall(from->getRight()));//cridem per copiar el node de la dreta a l'esq
         to->setRight(constructor_mirall(from->getLeft()));//cridem per copiar el node de l'esq a la dreta
         return to;//retornem el node

@@ -77,16 +77,16 @@ int main(int argc, char** argv) {
     cout<<"Títol de pel·lícula més llarg: "<<bst2->getTitleMaxLen()<<endl;
     
     //Fer el mirall de l'arbre
-    //BalancedBST<Movie> *bst_mirror2 = bst2->mirror();
+    BalancedBST<Movie> *bst_mirror2 = bst2->mirror();
     //const BinarySearchTree<int> *test = bst;
     //BinarySearchTree<int> *bst_mirror1 = new BinarySearchTree<int>(test);
     //Imprimir en preordre el mirall de l'arbre
-    //bst_mirror2->printPreorder();
+    bst_mirror2->printPreorder();
     
     myFile.close();
     delete bst;
     delete bst2;
-    //delete bst_mirror2;
+    delete bst_mirror2;
     return 0;
 }
 

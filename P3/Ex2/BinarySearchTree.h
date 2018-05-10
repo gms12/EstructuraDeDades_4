@@ -281,7 +281,7 @@ template <class Type> BinarySearchTree<Type>* BinarySearchTree<Type>::mirror(){
 template <class Type> NodeTree<Type>* BinarySearchTree<Type>::constructor_mirall(NodeTree<Type>* from){
     if(from==nullptr)return nullptr;//si el node es null fem el nostre null
     else{
-        NodeTree<Type>* to = new NodeTree<Type>(*from, from->getKey());//copiem el node
+        NodeTree<Type>* to = new NodeTree<Type>(from->getValue(), from->getKey());//copiem el node
         to->setLeft(constructor_mirall(from->getRight()));//cridem per copiar el node de la dreta a l'esq
         to->setRight(constructor_mirall(from->getLeft()));//cridem per copiar el node de l'esq a la dreta
         return to;//retornem el node
