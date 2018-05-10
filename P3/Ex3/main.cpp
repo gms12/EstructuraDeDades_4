@@ -71,13 +71,13 @@ int main(int argc, char** argv) {
     //Imprimir en postordre l’arbre per 
     bst2->printPostorder();
     //Comprovacions del height i size
-    cout<<"Height: "<<bst->getHeight()<<endl;
-    cout<<"Size: "<<bst->size()<<endl;
+    cout<<"Height: "<<bst2->getHeight()<<endl;
+    cout<<"Size: "<<bst2->size()<<endl;
     
     cout<<"Títol de pel·lícula més llarg: "<<bst2->getTitleMaxLen()<<endl;
     
     //Fer el mirall de l'arbre
-    //BalancedBST<Movie> *bst_mirror2 = bst->mirror();
+    //BalancedBST<Movie> *bst_mirror2 = bst2->mirror();
     //const BinarySearchTree<int> *test = bst;
     //BinarySearchTree<int> *bst_mirror1 = new BinarySearchTree<int>(test);
     //Imprimir en preordre el mirall de l'arbre
