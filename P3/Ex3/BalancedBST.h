@@ -35,6 +35,7 @@ using namespace std;
         bool isEmpty() const;//TEST: 
         NodeTree<Type>* root() const;//TEST: 
         NodeTree<Type>* search(int key);//TEST: 
+        void searchMovieRating(float rating);//TEST: 
         void printInorder();//TEST: 
         void printPreorder() const;//TEST: 
         void printPostorder() const;//TEST: 
@@ -58,6 +59,7 @@ using namespace std;
         int getHeightAux(const NodeTree<Type>* p) const;
         void insert(NodeTree<Type>* p, const Type& element, int key);
         NodeTree<Type>* search(NodeTree<Type>* p, int key);
+        void searchMovieRating(NodeTree<Type>* p, float rating);
         NodeTree<Type>* constructor_copia(NodeTree<Type>* from);
         NodeTree<Type>* constructor_mirall(const NodeTree<Type>* from);
 
@@ -136,7 +138,7 @@ template <class Type> NodeTree<Type>* BalancedBST<Type>::root() const{
     return this->pRoot;
 }
 
-//Cerca un element. Retorna true si el troba, false en cas contrari.
+//Cerca un element. Retorna node.
 template <class Type> NodeTree<Type>* BalancedBST<Type>::search(int key) {
     return this->search(pRoot,key);
 }
@@ -155,6 +157,31 @@ template <class Type> NodeTree<Type>* BalancedBST<Type>::search(NodeTree<Type>* 
     }
     return nullptr;//Si no ha estat agafat en un dels dos ifs vol dir que no existeix l'element
 }
+
+//Cerca una película en funció del rating.
+template <class Type> void BalancedBST<Type>::searchMovieRating(float rating) {
+    return this->searchMovieRating(pRoot,rating);
+}
+
+//Cerca una película en funció del rating.
+template <class Type> void BalancedBST<Type>::searchMovieRating(NodeTree<Type>* p, float rating) {
+    
+    if(p!=nullptr){
+
+        string info = p->getValue().toString();
+        int found1 = info.find("::");//Busco primera aparició de ::
+        string title = info.substr(0,found1);//Busco title
+        string rat = info.substr(found1+2);//Busco rating
+        float actual = atof(rat.c_str());
+        if(actual == rating) cout<<title<<endl;
+        
+        //esquerra
+        if(p->hasLeft()) searchMovieRating(p->getLeft(), rating);
+        //dreta
+        if(p->hasRight()) searchMovieRating(p->getRight(), rating);
+    }
+}
+
 //Retorna un enter amb l'alçada de l'arbre.
 template <class Type> int BalancedBST<Type>::getHeight() const{
     return this->getHeightAux(this->pRoot);
@@ -173,7 +200,7 @@ template <class Type> void BalancedBST<Type>::insert(const Type& element, int ke
         this->pRoot=new NodeTree<Type>(element, key);
     }
     else this->insert(pRoot,element, key);//si no esta buit cridem el metode auxiliar
-    cout<<"S'insereix a l'arbre l'element "<<element.toString()<<endl;
+    //cout<<"S'insereix a l'arbre l'element "<<element.toString()<<endl;
 }
 //Metode auxiliar a insert. Se li passa també un node, per a poder ser recursiu
 template <class Type> void BalancedBST<Type>::insert(NodeTree<Type>* p, const Type& element, int key){
@@ -233,7 +260,9 @@ template <class Type> string BalancedBST<Type>::getTitleMaxLen(NodeTree<Type>* p
     string dreta = "", esquerra = "", actual = "", maxTitle = "";
     //si el node no es null
     if(p!=nullptr){
-        actual = p->getValue().toString();
+        string info = p->getValue().toString();
+        int found1 = info.find("::");//Busco primera aparició de ::
+        actual = info.substr(0,found1);//Busco title
     }
     //esquerra
     if(p->hasLeft()){
@@ -367,28 +396,66 @@ template <class Type> float BalancedBST<Type>::getRatingMin(NodeTree<Type>* p) c
     if(p!=nullptr){
         string info = p->getValue().toString();
         int found1 = info.find("::");//Busco primera aparició de ::
-        string title = info.substr(0,found1);//Busco title
+        //string title = info.substr(0,found1);//Busco title
         string rating = info.substr(found1+2);//Busco rating
         actual = atof(rating.c_str());
-    }
-    //esquerra
-    if(p->hasLeft()){
-        //esquerra = getTitleMaxLen(p->getLeft());
-    }
-    //dreta
-    if(p->hasRight()){
-        //dreta = getTitleMaxLen(p->getRight());
-    }
-    /*
-    if(actual.length() >= esquerra.length() && actual.length() >= dreta.length()){
-        maxTitle = actual;
-    }else if(dreta.length() >= esquerra.length() && dreta.length() >= actual.length()){
-        maxTitle = dreta;
-    }else if(esquerra.length() >= actual.length() && esquerra.length() >= dreta.length()){
-        maxTitle = esquerra;
-    }
+        
+        //esquerra
+        if(p->hasLeft()){
+            esquerra = getRatingMin(p->getLeft());
+        }
+        //dreta
+        if(p->hasRight()){
+            dreta = getRatingMin(p->getRight());
+        }
+        //Escollim el mínim dels 3
+        if(actual <= esquerra && actual <= dreta){
+            minRating = actual;
+        }else if(dreta <= esquerra && dreta <= actual){
+            minRating = dreta;
+        }else if(esquerra <= actual && esquerra <= dreta){
+            minRating = esquerra;
+        }
+        return minRating;
+
+    }else return 10.0;
     
-    return maxTitle;*/
+}
+
+template <class Type> float BalancedBST<Type>::getRatingMax() const{
+    return this->getRatingMax(this->pRoot);
+}
+
+template <class Type> float BalancedBST<Type>::getRatingMax(NodeTree<Type>* p) const{
+    float dreta = 0.0, esquerra = 0.0, actual = 0.0, maxRating = 0.0;
+    //si el node no es null
+    if(p!=nullptr){
+        string info = p->getValue().toString();
+        int found1 = info.find("::");//Busco primera aparició de ::
+        //string title = info.substr(0,found1);//Busco title
+        string rating = info.substr(found1+2);//Busco rating
+        actual = atof(rating.c_str());
+        
+        //esquerra
+        if(p->hasLeft()){
+            esquerra = getRatingMax(p->getLeft());
+        }
+        //dreta
+        if(p->hasRight()){
+            dreta = getRatingMax(p->getRight());
+        }
+        //Escollim el màxim dels 3
+        if(actual >= esquerra && actual >= dreta){
+            maxRating = actual;
+        }else if(dreta >= esquerra && dreta >= actual){
+            maxRating = dreta;
+        }else if(esquerra >= actual && esquerra >= dreta){
+            maxRating = esquerra;
+        }
+        return maxRating;
+    }else return 0.0;
+    
+    
 }
 
 

@@ -51,7 +51,13 @@ int main(int argc, char** argv) {
     }
     ////////COMPROVAR METODES////////
     
-    cout<<"Títol de pel·lícula més llarg"<<bst->getTitleMaxLen()<<endl;
+    cout<<endl<<"Títol de pel·lícula més llarg: "<<bst->getTitleMaxLen()<<endl<<endl;
+    cout<<"Pel·licules millor puntuades amb un "<<bst->getRatingMax()<<":"<<endl;
+    bst->searchMovieRating(bst->getRatingMax());
+    cout<<endl;
+    cout<<"Pel·licules pitjor puntuades amb un "<<bst->getRatingMin()<<":"<<endl;
+    bst->searchMovieRating(bst->getRatingMin());
+    cout<<endl;
     
     //Nou arbre per a comprovar el funcionament correcte del balanceig
     int testArray [] = {2, 0, 8, 45, 76, 5, 3, 40 };
@@ -75,6 +81,12 @@ int main(int argc, char** argv) {
     cout<<"Size: "<<bst2->size()<<endl;
     
     cout<<"Títol de pel·lícula més llarg: "<<bst2->getTitleMaxLen()<<endl;
+    cout<<"Pel·licules millor puntuades amb un "<<bst2->getRatingMax()<<":"<<endl;
+    bst->searchMovieRating(bst->getRatingMax());
+    cout<<endl;
+    cout<<"Pel·licules pitjor puntuades amb un "<<bst2->getRatingMin()<<":"<<endl;
+    bst->searchMovieRating(bst->getRatingMin());
+    cout<<endl;
     
     //Fer el mirall de l'arbre
     BalancedBST<Movie> *bst_mirror2 = bst2->mirror();
