@@ -5,7 +5,6 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>BSTMovieFinder.h</itemPath>
-      <itemPath>BalancedBST.h</itemPath>
       <itemPath>Movie.h</itemPath>
       <itemPath>NodeTree.h</itemPath>
     </logicalFolder>
@@ -33,6 +32,17 @@
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -45,8 +55,6 @@
       <compileType>
       </compileType>
       <item path="BSTMovieFinder.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="BalancedBST.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Movie.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -84,8 +92,6 @@
         </asmTool>
       </compileType>
       <item path="BSTMovieFinder.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="BalancedBST.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Movie.h" ex="false" tool="3" flavor2="0">
       </item>
