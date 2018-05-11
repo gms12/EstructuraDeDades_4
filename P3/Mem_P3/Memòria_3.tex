@@ -1,0 +1,150 @@
+\documentclass[oneside]{book}
+\usepackage[utf8]{inputenc}
+\usepackage{AlegreyaSans}
+\usepackage[catalan]{babel}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[font=footnotesize,labelfont=bf]{caption}
+\usepackage{dsfont}
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{amsfonts}
+\usepackage{multirow}
+\usepackage{multicol}%dues culumnes en una pagina
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{commath}
+\usepackage{afterpage}
+\usepackage{mathrsfs}
+\usepackage{enumerate}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage{anysize}
+\usepackage[official]{eurosym}
+\usepackage[bottom]{footmisc}%fixar notes de peu de pagina al final
+\usepackage{fancyhdr}
+\usepackage{upgreek}%per fer la \upvarphi
+\usepackage{titlesec}   %per modificar espai chapters
+\usepackage{lipsum} %dummy text
+\usepackage{lmodern}% http://ctan.org/pkg/lmodern
+\usepackage{slantsc}% http://ctan.org/pkg/slantsc
+\usepackage{xcolor}
+\usepackage{setspace}
+\usepackage[breaklinks, colorlinks=true, linkcolor=black, citecolor=red, urlcolor=black]{hyperref}
+%COLORS
+%------------------------------------------------------------------------------------------------
+\definecolor{yellow}{RGB}{255,255,153}
+\definecolor{blue}{RGB}{138,232,255}
+\definecolor{sblue}{RGB}{212,227,255}
+\definecolor{gray}{RGB}{190,190,190}
+\definecolor{sgray}{RGB}{220,220,220}
+%COLORS DE LONGITUD D'ONA:
+%------------------------------------------------------------------------------------------------
+\definecolor{ona644}{RGB}{255,9,0}
+\definecolor{ona634}{RGB}{255,62,0}
+\definecolor{ona624}{RGB}{255,103,0}
+\definecolor{ona613}{RGB}{255,145,0}
+\definecolor{ona611}{RGB}{255,152,0}
+\definecolor{ona610}{RGB}{255,155,0}
+\definecolor{ona607}{RGB}{255,166,0}
+\definecolor{ona589}{RGB}{255,226,0}
+\definecolor{ona586}{RGB}{255,236,0}
+\definecolor{ona580}{RGB}{255,255,0}
+\definecolor{ona579}{RGB}{252,255,0}
+\definecolor{ona577}{RGB}{246,255,0}
+\definecolor{ona567}{RGB}{216,255,0}
+\definecolor{ona546}{RGB}{150,255,0}
+\definecolor{ona540}{RGB}{129,255,0}
+\definecolor{ona516}{RGB}{36,255,0}
+\definecolor{ona509}{RGB}{0,255,23}
+\definecolor{ona492}{RGB}{0,255,234}
+\definecolor{ona481}{RGB}{0,218,255}
+\definecolor{ona468}{RGB}{0,160,255}
+\definecolor{ona467}{RGB}{0,156,255}
+\definecolor{ona442}{RGB}{0,19,255}
+\definecolor{ona436}{RGB}{29,0,255}
+\definecolor{ona435}{RGB}{35,0,255}
+\definecolor{ona434}{RGB}{40,0,255}
+\definecolor{ona431}{RGB}{56,0,255}
+\definecolor{ona411}{RGB}{124,0,222}
+\definecolor{ona408}{RGB}{128,0,211}
+\definecolor{ona405}{RGB}{130,0,200}
+\definecolor{ona398}{RGB}{130,0,173}
+\definecolor{ona391}{RGB}{123,0,145}
+\definecolor{ona390}{RGB}{121,0,141}
+%CAPÇALERA
+%------------------------------------------------------------------------------------------------
+%\pagestyle{fancy}
+%\fancyhf{}
+%\lhead{Gabriel Marín i Martí Pedemonte \\ Òptica}
+%\rhead{24 de novembre de 2016 \\ Grup D2}
+%\cfoot{\thepage}
+%\fancyheadoffset{0cm}
+%\setlength{\headsep}{10pt}
+%\setlength{\headheight}{24pt}
+%NEW COMMANDS
+%------------------------------------------------------------------------------------------------
+\renewcommand{\labelitemi}{$\bullet$}
+\renewcommand{\labelitemii}{$-$}
+\renewcommand{\baselinestretch}{1.25}
+\newcommand{\bs}{\boldsymbol}
+\renewcommand\labelenumi{\textbf{\theenumi.}}
+\newcommand{\cl}[1]{\textbf{\AlegreyaSansOsF #1}}
+\newcommand{\met}[1]{{\AlegreyaSansOsF #1}}
+\newcommand\HUGE{\fontsize{32}{38}\selectfont}%nova font size
+
+%UNITATS
+%------------------------------------------------------------------------------------------------
+\newcommand{\kg}{\text{kg}}
+\newcommand{\ohm}{\Omega}
+\newcommand{\mm}{\text{mm}}
+\newcommand{\nm}{\text{nm}}
+\newcommand{\cm}{\text{cm}}
+\newcommand{\Angs}{\text{\AA}}
+\newcommand{\m}{\text{m}}
+\newcommand{\K}{\text{K}}
+\newcommand{\A}{\text{A}}
+\newcommand{\V}{\text{V}}
+\newcommand{\C}{\text{ºC}}
+\newcommand{\graus}{\text{º}}
+\newcommand{\s}{\text{s}}
+\newcommand{\J}{\text{J}}
+\newcommand{\rad}{\text{rad}}
+\newcommand{\g}{\text{g}}
+\newcommand{\N}{\text{N}}
+\newcommand{\slfrac}[2]{\left.#1\middle/#2\right.}%fraccions amb slash
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}%definim nova columna per a taula
+%MARGES
+%------------------------------------------------------------------------------------------------
+\marginsize{2.8cm}{2.3cm}{2.3cm}{2.8cm}%{left}{right}{top}{bottom}
+%Espai Capítol
+\titleformat{\chapter}[hang]  
+{\normalfont\Huge\bfseries}{}{5pt}{\Huge}  
+\titlespacing*{\chapter}{0pt}{-25pt}{15pt}  %{identació}{abans titol}{despres titol}
+\titleformat{\section}
+	{\normalfont\Large\bfseries}{}{5pt}{}
+\titlespacing*{\section}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}  %{identació}{alçada abans titol}{despres titol}
+\titleformat{\subsection}
+	{\normalfont\large\bfseries}{}{5pt}{}
+\titlespacing*{\subsection}{12pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}  %{identació}{alçada abans titol}{despres titol}
+%------------------------------------------------------------------------------------------------
+
+%------------------------------------------------------------------------------------------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%----------DOCUMENT------------%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%------------------------------------------------------------------------------------------------
+\begin{document}
+\hypersetup{pageanchor = false}
+\include{portada}
+\frontmatter
+\hypersetup{pageanchor = true}
+%\tableofcontents
+%\include{intro}
+\mainmatter
+\include{contingut}
+%\include{comportament}
+%\include{conclusions}
+%\include{annex}
+\end{document}
