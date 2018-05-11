@@ -83,10 +83,10 @@ int main(int argc, char** argv) {
     
     cout<<"Títol de pel·lícula més llarg: "<<bst2->getTitleMaxLen()<<endl;
     cout<<"Pel·licules millor puntuades amb un "<<bst2->getRatingMax()<<":"<<endl;
-    bst->searchMovieRating(bst->getRatingMax());
+    bst2->searchMovieRating(bst2->getRatingMax());
     cout<<endl;
     cout<<"Pel·licules pitjor puntuades amb un "<<bst2->getRatingMin()<<":"<<endl;
-    bst->searchMovieRating(bst->getRatingMin());
+    bst2->searchMovieRating(bst2->getRatingMin());
     cout<<endl;
     
     //Fer el mirall de l'arbre
