@@ -50,7 +50,8 @@ int main(int argc, char** argv) {
         }
     }
     ////////COMPROVAR METODES////////
-    
+    cout<<"Height: "<<bst->getHeight()<<endl;
+    cout<<"Size: "<<bst->size()<<endl;
     cout<<endl<<"Títol de pel·lícula més llarg: "<<bst->getTitleMaxLen()<<endl<<endl;
     cout<<"Pel·licules millor puntuades amb un "<<bst->getRatingMax()<<":"<<endl;
     bst->searchMovieRating(bst->getRatingMax());

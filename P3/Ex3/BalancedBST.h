@@ -57,14 +57,14 @@ using namespace std;
         void printPostorder(NodeTree<Type>* p) const;
         void printInorder(NodeTree<Type>* p);
         int getHeightAux(const NodeTree<Type>* p) const;
-        void insert(NodeTree<Type>* p, const Type& element, int key);
+        NodeTree<Type>* insert(NodeTree<Type>* p, const Type& element, int key);
         NodeTree<Type>* search(NodeTree<Type>* p, int key);
         void searchMovieRating(NodeTree<Type>* p, float rating);
         NodeTree<Type>* constructor_copia(NodeTree<Type>* from);
         NodeTree<Type>* constructor_mirall(const NodeTree<Type>* from);
 
-        void rightRotation(NodeTree<Type>* p);//Nou mètode. TEST:
-        void leftRotation(NodeTree<Type>* p);//Nou mètode. TEST:
+        NodeTree<Type>* rightRotation(NodeTree<Type>* p);//Nou mètode. TEST:
+        NodeTree<Type>* leftRotation(NodeTree<Type>* p);//Nou mètode. TEST:
         int getBalance(NodeTree<Type>* p) const;//Nou mètode. TEST:
         string getTitleMaxLen(NodeTree<Type>* p) const;//Nou mètode. TEST:
         float getRatingMin(NodeTree<Type>* p) const;//Nou mètode. TEST:
@@ -199,51 +199,52 @@ template <class Type> void BalancedBST<Type>::insert(const Type& element, int ke
     if(this->isEmpty()){//comprovem si l'arbre esta buit
         this->pRoot=new NodeTree<Type>(element, key);
     }
-    else this->insert(pRoot,element, key);//si no esta buit cridem el metode auxiliar
+    else pRoot=insert(pRoot,element, key);//si no esta buit cridem el metode auxiliar
     //cout<<"S'insereix a l'arbre l'element "<<element.toString()<<endl;
 }
 //Metode auxiliar a insert. Se li passa també un node, per a poder ser recursiu
-template <class Type> void BalancedBST<Type>::insert(NodeTree<Type>* p, const Type& element, int key){
+template <class Type> NodeTree<Type>* BalancedBST<Type>::insert(NodeTree<Type>* p, const Type& element, int key){
+    if(p==nullptr)return (new NodeTree<Type>(element, key));
     if(p->getKey()>key){//si el valor es inferior, anira a l'esq
-        if(!p->hasLeft()){
-            p->setLeft(new NodeTree<Type>(element, key));
-        }//si no te fill esq, l'afegim. Si no, cridem el metode pel fill de lesq
-        else this->insert(p->getLeft(),element, key);
+        p->setLeft(insert(p->getLeft(),element, key));
     }
     else{//si es superior anira a la dreta
-       if(!p->hasRight()){//Igual que abans pero per l'altre costat
-            p->setRight(new NodeTree<Type>(element, key));
-        }
-       else this->insert(p->getRight(),element, key);    
+        p->setRight(insert(p->getRight(),element, key));    
     }
     //Ara hem de fer les comprovacions i balancejar l'arbre si s'escau
     int bal=getBalance(p);
     //Cas esquerra
     if(bal>1){
-        if(key>p->getLeft()->getKey())leftRotation(p->getLeft());//cas complexe
-        rightRotation(p);
+        if(key>p->getLeft()->getKey())
+            p->setLeft(leftRotation(p->getLeft()));//cas complexe
+        return rightRotation(p);
     }
     //Cas dreta
     else if(bal<-1){
-        if(key<(p->getRight()->getKey()))rightRotation(p->getRight());//cas complexe
-        leftRotation(p);
+        if(key<(p->getRight()->getKey()))
+            p->setRight(rightRotation(p->getRight()));//cas complexe
+        return leftRotation(p);
     }
+    return p;
+    
 }
 //Metode per a fer una rotacio cap a la dreta
-template <class Type> void BalancedBST<Type>::rightRotation(NodeTree<Type>* p){
+template <class Type> NodeTree<Type>* BalancedBST<Type>::rightRotation(NodeTree<Type>* p){
     NodeTree<Type> *x = p->getLeft();//sera la nova arrel
     NodeTree<Type> *s = x->getRight();
     //Fem la rotacio
     x->setRight(p);
     p->setLeft(s);
+    return x;
 }
 //Metode per a fer una rotacio cap a l'esquerra
-template <class Type> void BalancedBST<Type>::leftRotation(NodeTree<Type>* p){
+template <class Type> NodeTree<Type>* BalancedBST<Type>::leftRotation(NodeTree<Type>* p){
     NodeTree<Type> *x = p->getRight();//sera la nova arrel
     NodeTree<Type> *s = x->getLeft();
     //Fem la rotacio
     x->setLeft(p);
     p->setRight(s);
+    return x;
 }
 //Metode per a calcular el balanceig d'un node
 template <class Type> int BalancedBST<Type>::getBalance(NodeTree<Type>* p)const{
