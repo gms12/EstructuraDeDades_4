@@ -2,7 +2,7 @@
 
 \section{Exercici 1 - Arbre binari de cerca}
 \subsection{Observacions i decisions preses}
-blablabla
+En aquest exercici hem decidit no fer un menú i testejar els mètodes un a un de manera consecutiva, amb un arbre arbitrari. No obstant, aquest procediment l'hem dut a terme per més d'un arbre, per assegurar-nos que tots els mètodes funcionaven correctament.
 \subsection{Qüestions}
 \begin{itemize}
 	\item \textbf{Justifiqueu el cost computacional teòric de les funcions del TAD \cl{BinarySearchTree} i del TAD \cl{NodeTree}. Si implementeu altres mètodes necessaris pel desenvolupament de la pràctica, justifiqueu-ne el seu ús i el seu cost computacional teòric.}
@@ -84,13 +84,19 @@ Finalment, els mètodes afegits per a obtenir el títol de pel·lícula més llarg i 
 Per aquest exercici hem agafat el número dos i hem canviat la classe \cl{BinarySearchTree} per la \cl{BalancedBST}. Com es tracten d'arbres amb les mateixes funcionalitats no hem hagut de canviar res més, tan sols la classe de l'atribut arbre de la classe \cl{BSTMovieFinder}, la resta és totalment compatible.
 \section{Exercici 5 - Avaluació de les estructures}
 \subsection{Observacions i decisions preses}
-blablabla
+En aquest exercici hem decidit no fer un menú, ja que volíem que el test el fes l'ordinador tot sol. És per això que es fan els tests en sèrie, és a dir, primer amb el fitxer petit i després amb el gran. Hem modificat el fitxer de cerca per que sigui més gran i augmentar el temps per veure diferències; tot i això no n'hem pogut trobar (com expliquem més endavant).
 \subsection{Qüestions}
 \begin{itemize}
 	\item \textbf{Raoneu els resultats de temps obtinguts en la comparació dels TADs \cl{BSTMovieFinder} i \cl{BalancedBSTMovieFinder}.}
 	\newline
-	blablabla
+Pel fitxer petit no es poden apreciar diferències en cap de les accions (creació o cerca). Les creacions (procés de llegir el fitxer) són molt ràpides, menys d'un mil·lisegon, ja que no s'aprecia diferència entre el temps inicial i el final. Malgrat els dos arbres tenir 100 elements, el binari té una alçada de 13, mentre que el balancejat en té 8 només (recordem que serà aproximadament $\lceil\log_{2}{n}\rceil+1$). La busca tampoc té diferències significatives.
+\newline
+En canvi, quan fem la prova al fitxer gran, hi ha una diferència molt gran a l'hora de construir els arbres. L'arbre binari ho fa molt de pressa, però el balancejat triga molt més, ja que ha de rotar alguns nodes en algunes ocasions, i això, malgrat ser només reassignacions de punters, el fa endarrerir molt. Recordem que fer una rotació és un cost lineal, però ho fa entre 0 i dues vegades per node, de mitjana unes 10000 vegades.
+\newline
+Analitzant la cerca veiem que tampoc hi ha una diferència apreciable de temps. Suposem que per a un nombre de dades més elevat es notaria molt més (l'arbre binari té 31 nivells i el balancejat 16, diferència gairebé inapreciable al fer una cerca amb un processador decent).
 	\item \textbf{Indiqueu quin és el cost computacional teòric de les operacions d'inserció i cerca en els dos arbres implementats (exercici 1 i exercici 3).}
 	\newline
-	blablabla
+El cost computacional teòric per a la inserció de l'exercici 1 és logarítmic de mitjana, però el pitjor dels casos és lineal, O(n). La cerca és el mateix, ja que la inserció és una cerca i assignacions a un node.
+	\newline
+En el cas de l'exercici 3, al ser balancejat el cost teòric mitjà i el pitjor coincideix, i és O($\log n$). La cerca té el mateix cost, ja que una inserció consta d'una cerca i assignacions de punters (aquí en poden ser més, d'assignacions, ja que es poden fer rotacions dels nodes. Malgrat això, al tenir un cost lineal no alteren el comportament logarítmic de l'algorisme).
 \end{itemize}
