@@ -167,7 +167,7 @@ template <class Type> void BinarySearchTree<Type>::insert(const Type& element, i
         this->pRoot=new NodeTree<Type>(element, key);
     }
     else this->insert(pRoot,element, key);//si no esta buit cridem el metode auxiliar
-    cout<<"S'insereix a l'arbre l'element "<<element.toString()<<endl;
+    //cout<<"S'insereix a l'arbre l'element "<<element.toString()<<endl;
 }
 
 //Retorna un enter el comptador
