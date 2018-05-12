@@ -1,80 +1,96 @@
-\chapter{Comentaris de la prÃ ctica}
+\chapter{Comentaris de la pràctica}
 
 \section{Exercici 1 - Arbre binari de cerca}
 \subsection{Observacions i decisions preses}
 blablabla
-\subsection{QÃ¼estions}
+\subsection{Qüestions}
 \begin{itemize}
-	\item \textbf{Justifiqueu el cost computacional teÃ²ric de les funcions del TAD \cl{BinarySearchTree} i del TAD \cl{NodeTree}. Si implementeu altres mÃ¨todes necessaris pel desenvolupament de la prÃ ctica, justifiqueu-ne el seu Ãºs i el seu cost computacional teÃ²ric.}
+	\item \textbf{Justifiqueu el cost computacional teòric de les funcions del TAD \cl{BinarySearchTree} i del TAD \cl{NodeTree}. Si implementeu altres mètodes necessaris pel desenvolupament de la pràctica, justifiqueu-ne el seu ús i el seu cost computacional teòric.}
 	\newline
-	Els mètodes auxiliars que hem afegit els utilitzem per implementar el mètode de manera recursiva. Per exemple en el mètode insert, tenim un mètode auxiliar que rep com a paràmetre un node. Aleshores comprova si el nou node hauria d'anar a l'esquerra o a la dreta i torna a cridar el mètode per al node fill que correspongui.
-	 //Constructors
-        BinarySearchTree(): Només assigna valors, així que té cost constant, O(1).
-        BinarySearchTree(const BinarySearchTree& orig): El seu cost és el mateix del seu mètode auxiliar constructor_copia, ja que simplement crida aquest mètode.
-
-        //Destructor
-        virtual ~BinarySearchTree(): El seu cost és el mateix del seu mètode auxiliar postDelete, ja que simplement crida aquest mètode.
-
-        //Consultors
-        int size(): El seu cost és el mateix del seu mètode auxiliar size, ja que simplement crida aquest mètode.
-        bool isEmpty(): Només comprova si pRoot és nul, per tant té cost constant, O(1).
-        NodeTree<Type>* root(): Simplement retorna el node arrel, així que té cost constant, O(1).
-        bool search(const Type& element): El seu cost és el mateix del seu mètode auxiliar search, ja que simplement crida aquest mètode.
-        void printInorder() const: El seu cost és el mateix del seu mètode auxiliar printInorder, ja que simplement crida aquest mètode.
-        void printPreorder() const: El seu cost és el mateix del seu mètode auxiliar printPreorder, ja que simplement crida aquest mètode.
-        void printPostorder() const: El seu cost és el mateix del seu mètode auxiliar printPostorder, ja que simplement crida aquest mètode.
-        int getHeight():El seu cost és el mateix del seu mètode auxiliar getHeight, ja que simplement crida aquest mètode.
-
-        //Modificadors
-        void insert(const Type& element): El seu cost és el mateix del seu mètode auxiliar insert, ja que simplement crida aquest mètode.
-        //Mirall
-        BinarySearchTree<Type>* mirror(): El seu cost és el mateix del seu mètode auxiliar constructor_mirall, ja que simplement crida aquest mètode.
-    
-        //Mètodes privats interns. Són mètodes auxiliars.
-        void postDelete(NodeTree<Type>* p); Mètode recursiu que recorre l'arbre en postOrdre i n'elimina els nodes. Com recorre tots els nodes el seu cost és O(n).
-        int size(NodeTree<Type>* p) const: Com abans, es recorren tots els nodes. Cost O(n).
-        void printPreorder(NodeTree<Type>* p) const: Mateix cas, O(n).
-        void printPostorder(NodeTree<Type>* p) const: Mateix cas, O(n).
-        void printInorder(NodeTree<Type>* p) const: Mateix cas, O(n).
-        int getHeight(NodeTree<Type>* p): Mateix cas, O(n).
-
-        void insert(NodeTree<Type>* p,const Type& element): Mètode recursiu auxiliar per a insertar un node. En general recorrerà un nombre de nodes igual a l'alçada, pero pot ser que els hagi de recorrer tots, per tal com està construit l'arbre binari. Per tant el cost es O(n).
-        NodeTree<Type>* search(NodeTree<Type>* p,const Type& element): Mateix cas que abans. Cost O(n).
-        NodeTree<Type>* constructor_copia(NodeTree<Type>* from): Mètode recursiu auxiliar per al constructor còpia. Recorre tot els nodes de l'arbre del qual es vol fer la copia, així que té cost lineal O(n).
-        NodeTree<Type>* constructor_mirall(NodeTree<Type>* from): Similar al d'abans. Cost O(n).
-        
+	Els mètodes auxiliars que hem afegit els utilitzem per implementar el mètode de manera recursiva. Per exemple en el mètode \met{insert}, tenim un mètode auxiliar que rep com a paràmetre un node. Aleshores comprova si el nou node hauria d'anar a l'esquerra o a la dreta i torna a cridar el mètode per al node fill que correspongui.
+	\begin{itemize}
+	\item \textbf{Constructors:}
+				\begin{itemize}
+					\item \underline{\met{BinarySearchTree}():} Només assigna valors, així que té cost constant, O(1).
+					\item \underline{\met{BinarySearchTree}(const \cl{BinarySearchTree}\& orig):} El seu cost és el mateix del seu mètode auxiliar \met{constructor\_copia}, ja que simplement crida aquest mètode.
+				\end{itemize}
+	\item \textbf{Destructor:}
+				\begin{itemize}
+					\item \underline{\primary{virtual} \met{$\sim$ BinarySearchTree}():} El seu cost és el mateix del seu mètode auxiliar \met{postDelete}, ja que simplement crida aquest mètode.
+				\end{itemize}
+	\item \textbf{Consultors:}
+				\begin{itemize}
+					\item \underline{\primary{int} \met{size}():} El seu cost és el mateix del seu mètode auxiliar \met{size}, ja que simplement crida aquest mètode.
+					\item \underline{\primary{bool} \met{isEmpty}():} Només comprova si \cl{pRoot} és nul, per tant té cost constant, O(1).
+					\item \underline{\cl{NodeTree\textless Type\textgreater }* \met{root}():} Simplement retorna el node arrel, així que té cost constant, O(1).
+					\item \underline{\primary{bool} \met{search}(const \cl{Type}\& element):} El seu cost és el mateix del seu mètode auxiliar \met{search}, ja que simplement crida aquest mètode.
+					\item \underline{\primary{void} \met{printInorder}() const:} El seu cost és el mateix del seu mètode auxiliar \met{printInorder}, ja que simplement crida aquest mètode.
+					\item \underline{\primary{void} \met{printPreorder}() const:} El seu cost és el mateix del seu mètode auxiliar \met{printPreorder}, ja que simplement crida aquest mètode.
+					\item \underline{\primary{void} \met{printPostorder}() const:} El seu cost és el mateix del seu mètode auxiliar \met{printPostorder}, ja que simplement crida aquest mètode.
+					\item \underline{\primary{int} \met{getHeight}():} El seu cost és el mateix del seu mètode auxiliar \met{getHeight}, ja que simplement crida aquest mètode.
+				\end{itemize}
+	\item \textbf{Modificadors:}
+				\begin{itemize}
+					\item \underline{\primary{void} \met{insert}(const \cl{Type}\& element):} El seu cost és el mateix del seu mètode auxiliar \met{insert}, ja que simplement crida aquest mètode.
+				\end{itemize}
+	\item \textbf{Mirall:}
+				\begin{itemize}
+					\item \underline{\cl{BinarySearchTree\textless Type\textgreater }* \met{mirror}():} El seu cost és el mateix del seu mètode auxiliar \met{constructor\_mirall}, ja que simplement crida aquest mètode.
+				\end{itemize}
+	\item \textbf{Mètodes privats interns. Són mètodes auxiliars:}
+				\begin{itemize}
+					\item \underline{\primary{void} \met{postDelete}(\cl{NodeTree\textless Type\textgreater }* p):} Mètode recursiu que recorre l'arbre en post ordre i n'elimina els nodes. Com que recorre tots els nodes el seu cost és O(n).
+					\item \underline{\primary{int} \met{size}(\cl{NodeTree\textless Type\textgreater }* p) const:} Com abans, es recorren tots els nodes. Cost O(n).
+					\item \underline{\primary{void} \met{printPreorder}(\cl{NodeTree\textless Type\textgreater }* p) const:} Mateix cas, O(n).
+					\item \underline{\primary{void} \met{printPostorder}(\cl{NodeTree\textless Type\textgreater }* p) const:} Mateix cas, O(n).
+					\item \underline{\primary{void} \met{printInorder}(\cl{NodeTree\textless Type\textgreater }* p) const:} Mateix cas, O(n).
+					\item \underline{\primary{int} \met{getHeight}(\cl{NodeTree\textless Type\textgreater }* p):} Mateix cas, O(n).
+					
+					\item \underline{\primary{void} \met{insert}(\cl{NodeTree\textless Type\textgreater }* p, const \cl{Type}\& element):} Mètode recursiu auxiliar per a insertar un node. En general recorrerà un nombre de nodes igual a l'alçada (log n), però pot ser que els hagi de recorrer tots, per tal com està construit l'arbre binari. Per tant el cost és O(n).
+					\item \underline{\cl{NodeTree\textless Type\textgreater }* \met{search}(\cl{NodeTree\textless Type\textgreater }* p, const \cl{Type}\& element):} Mateix cas que abans. Cost O(n).
+					\item \underline{\cl{NodeTree\textless Type\textgreater }* \met{constructor\_copia}(\cl{NodeTree\textless Type\textgreater }* from):} Mètode recursiu auxiliar per al constructor còpia. Recorre tot els nodes de l'arbre del qual es vol fer la copia, així que té cost lineal O(n).
+					\item \underline{\cl{NodeTree\textless Type\textgreater }* \met{constructor\_mirall}(\cl{NodeTree\textless Type\textgreater }* from):} Similar al d'abans. Cost O(n).
+				\end{itemize}
+	\end{itemize}        
 \end{itemize}
 
-\section{Exercici 2 - Cercador de pelÂ·lÃ­cules amb arbres de cerca binÃ ria}
+\section{Exercici 2 - Cercador de pel·lícules amb arbres de cerca binària}
 \subsection{Observacions i decisions preses}
-Per a dur a terme aquesta part de l'entrega hem agafat les classes programades a l'exercici 1 i hem afegit les classes Movie i BSTMovieFinder. La segona contindrà l'arbre binari, format per nodes amb pel·lícules. Hem adaptat les classes BinarySearchTree per tal que disposin d'una clau i fer més simple l'ús de la classe Movie.
-Per a realitzar la funció de lectura de fitxers, com cada 40 elements volem preguntar a l'usuari si segueix interessat en llegir-ne de més, hem afegit un comptador a la classe BinarySearchTree que es va actualitzant cada vegada que s'imprimeix un element.
+Per a dur a terme aquesta part de l'entrega hem agafat les classes programades a l'exercici 1 i hem afegit les classes \cl{Movie} i \cl{BSTMovieFinder}. La segona contindrà l'arbre binari, format per nodes amb pel·lícules. Hem adaptat les classes \cl{BinarySearchTree} per tal que disposin d'una clau i fer més simple l'ús de la classe \cl{Movie}.
+Per a realitzar la funció de lectura de fitxers, com que cada 40 elements volem preguntar a l'usuari si segueix interessat en llegir-ne més, hem afegit un comptador a la classe \cl{BinarySearchTree} que es va actualitzant cada vegada que s'imprimeix un element, és a dir, que també hem modificat lleugerament el mètode \met{printInorder}.
 
 \section{Exercici 3 - Arbres binaris balancejats}
 \subsection{Observacions i decisions preses}
-Respecte els exercicis anteriors essencialment hem canviat tan sols el mètode insert i n'hem afegit de complementaris per a realitzar les rotacions. Inicialment hem seguit l'estructura utilitzada anteriorment, però degut a que obteniem errors hem decidit canviar el mètode i fer que aquesta vegada retornès un node, modificant lleugerament com estava plantejat el mètode insert original.
-\subsection{QÃ¼estions}
+Respecte els exercicis anteriors essencialment hem canviat tan sols el mètode \met{insert} i n'hem afegit de complementaris per a realitzar les rotacions. Inicialment hem seguit l'estructura utilitzada anteriorment, però degut a que obteniem errors hem decidit canviar el mètode i fer que aquesta vegada retornès un node, modificant lleugerament com estava plantejat el mètode \met{insert} original.
+\newline
+Respecte les funcions de saber el títol més llarg i la puntuació més baixa [alta] i les pel·lícules amb aquesta puntuació, hem modificat el mètode \met{toString} de \cl{Movie} perquè retornés el títol i la puntuació en un mateix \primary{string}. D'aquesta manera, com que la puntuació té sempre la mateixa longitud, no influia en saber el títol més llarg. Pel que fa a les puntuacions, primer hem fet mètodes per buscar recursivament dins l'arbre la millor [pitjor] puntuació, i un cop la teniem hem creat un mètode recursiu que imprimia per pantalla les pel·lícules amb aquella mateixa puntuació.
+\newline
+L'alternativa a aquesta implementació era deixar d'implementar el TAD amb template, cosa que ens ha semblat innecessari i no gaire estètic, ja que volíem que els nostres TAD's tinguessin la major generalitat possible i es poguéssin utilitzar amb classes diferents.
+\subsection{Qüestions}
 \begin{itemize}
-	\item \textbf{Expliqueu les similituds i diferÃ¨ncies en la implementaciÃ³ dâ€™aquest TAD \cl{BalancedBST} respecte al TAD \cl{BinarySearchTree}. Detalleu quin Ã©s el cost computacional teÃ²ric de cadascuna de les operacions del TAD.}
+	\item \textbf{Expliqueu les similituds i diferències en la implementació d'aquest TAD \cl{BalancedBST} respecte al TAD \cl{BinarySearchTree}. Detalleu quin és el cost computacional teòric de cadascuna de les operacions del TAD.}
 	\newline
-	El funcionament del TAD és exactament el mateix, només canvia el mètode insert. En aquest, un cop afegit el nou node, fem comprovacions per a veure si l'arbre està balancejat, i en cas negatiu realitzem les rotacions pertinents. D'aquesta manera ens assegurem que l'alçada de l'arbre sigui sempre logn, on n és el nombre de nodes de l'arbre.
-	Per tant, els mètodes insert i search tindran ara un cost O(logn), inferior al lineal.
-	Per altra banda, els mètodes de les rotacions tenen un cost constant, ja que simplement assignen direccions.
-	Finalment, els mètodes afegits per a obtenir el títol de pel·lícula més llarg i les millors i pitjors puntuacions (amb les pel·lícules corresponents), donat que recorren l'arbre sencer, tindran un cost lineal O(n).
+	El funcionament del TAD és exactament el mateix, només canvia el mètode \met{insert}. En aquest, un cop afegit el nou node, fem comprovacions per a veure si l'arbre està balancejat, i en cas negatiu realitzem les rotacions pertinents. D'aquesta manera ens assegurem que l'alçada de l'arbre sigui sempre $\log n$, on $n$ és el nombre de nodes de l'arbre.
+	\newline
+Per tant, els mètodes \met{insert} i \met{search} tindran ara un cost O($\log n$), inferior al lineal.
+\newline
+Per altra banda, els mètodes de les rotacions tenen un cost constant, ja que simplement reassignen punters.
+\newline
+Finalment, els mètodes afegits per a obtenir el títol de pel·lícula més llarg i les millors i pitjors puntuacions (amb les pel·lícules corresponents), donat que recorren l'arbre sencer, tindran un cost lineal O(n).
 	\end{itemize}
 
-\section{Exercici 4 - Cercador de pelÂ·lÃ­cules amb arbres binaris balancejats}
+\section{Exercici 4 - Cercador de pel·lícules amb arbres binaris balancejats}
 \subsection{Observacions i decisions preses}
-Per aquest exercici hem agafat el número dos i hem canviat la classe BinarySearchTree per la BalancedBST. Com es tracten d'arbres amb les mateixes funcionalitats no hem hagut de canviar res més, tan sols la classe de l'atribut arbre de la classe BSTMovieFinder, la resta és totalment compatible.
-\section{Exercici 5 - AvaluaciÃ³ de les estructures}
+Per aquest exercici hem agafat el número dos i hem canviat la classe \cl{BinarySearchTree} per la \cl{BalancedBST}. Com es tracten d'arbres amb les mateixes funcionalitats no hem hagut de canviar res més, tan sols la classe de l'atribut arbre de la classe \cl{BSTMovieFinder}, la resta és totalment compatible.
+\section{Exercici 5 - Avaluació de les estructures}
 \subsection{Observacions i decisions preses}
 blablabla
-\subsection{QÃ¼estions}
+\subsection{Qüestions}
 \begin{itemize}
-	\item \textbf{Raoneu els resultats de temps obtinguts en la comparaciÃ³ dels TADs \cl{BSTMovieFinder} i \cl{BalancedBSTMovieFinder}.}
+	\item \textbf{Raoneu els resultats de temps obtinguts en la comparació dels TADs \cl{BSTMovieFinder} i \cl{BalancedBSTMovieFinder}.}
 	\newline
 	blablabla
-	\item \textbf{Indiqueu quin Ã©s el cost computacional teÃ²ric de les operacions dâ€™inserciÃ³ i cerca en els dos arbres implementats (exercici 1 i exercici 3).}
+	\item \textbf{Indiqueu quin és el cost computacional teòric de les operacions d'inserció i cerca en els dos arbres implementats (exercici 1 i exercici 3).}
 	\newline
 	blablabla
 \end{itemize}
