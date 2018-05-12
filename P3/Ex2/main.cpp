@@ -86,6 +86,8 @@ int main(int argc, char** argv) {
     
     vector<string> vec_options(5);
     int option;
+    string resposta, fileName;
+    clock_t initialTime, finalTime;
 
     vec_options[0]="Llegir fitxer i inicialitzar arbre";
     vec_options[1]="Mostrar l’arbre segons l’ID en ordre creixent";
@@ -99,7 +101,24 @@ int main(int argc, char** argv) {
         option=menu(vec_options);
         switch(option){
             case 0:
-                initialize(mF);
+                delete mF;
+                mF=new BSTMovieFinder();
+
+                cout<<"Quin fitxer vols (P/G)? ";
+                cin>>resposta;
+                while(resposta != "P" && resposta != "G" && resposta != "p" && resposta != "g"){
+                    cout<<"A veure, no és tan difícil. Quin fitxer vols (P/G)? ";
+                    cin>>resposta;
+                }
+                if(resposta == "P" || resposta == "p") fileName = "movie_rating_small.txt";
+                else fileName = "movie_rating.txt";
+
+                initialTime = clock();
+                //cout<<t<<endl;
+                mF->appendMovies(fileName);
+                finalTime = clock();
+                //cout<<t<<endl;
+                cout<<"It took "<< ((float)(finalTime-initialTime))/(CLOCKS_PER_SEC)<<" seconds."<<endl;
                 break;
             case 1:
                 //PART 2-----------------------------------

@@ -4,7 +4,8 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>BSTMovieFinder.h</itemPath>
+      <itemPath>BalancedBST.h</itemPath>
+      <itemPath>BalancedBSTMovieFinder.h</itemPath>
       <itemPath>Movie.h</itemPath>
       <itemPath>NodeTree.h</itemPath>
     </logicalFolder>
@@ -54,7 +55,9 @@
       </toolsSet>
       <compileType>
       </compileType>
-      <item path="BSTMovieFinder.h" ex="false" tool="3" flavor2="0">
+      <item path="BalancedBST.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="BalancedBSTMovieFinder.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Movie.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -91,7 +94,9 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="BSTMovieFinder.h" ex="false" tool="3" flavor2="0">
+      <item path="BalancedBST.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="BalancedBSTMovieFinder.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Movie.h" ex="false" tool="3" flavor2="0">
       </item>

@@ -8,7 +8,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <vector>
-#include "BSTMovieFinder.h"
+#include "BalancedBSTMovieFinder.h"
 
 using namespace std;
 
@@ -28,7 +28,7 @@ int menu(vector<string> a){
 }
 
 //metode per a realitzar la primera opcio del menu
-void initialize(BSTMovieFinder* mF){
+void initialize(BalancedBSTMovieFinder* mF){
     //PART 1-----------------------------------
     /*
      * Aqui el que fem es borrar l'arbre i inicialitzar-ne un de nou
@@ -39,7 +39,7 @@ void initialize(BSTMovieFinder* mF){
      * 
      */
     delete mF;
-    mF=new BSTMovieFinder();
+    mF = new BalancedBSTMovieFinder();
     
     string resposta, fileName;
     cout<<"Quin fitxer vols (P/G)? ";
@@ -57,10 +57,11 @@ void initialize(BSTMovieFinder* mF){
     clock_t finalTime = clock();
     //cout<<t<<endl;
     cout<<"It took "<< ((float)(finalTime-initialTime))/(CLOCKS_PER_SEC)<<" seconds."<<endl;
+    cout<<"Height: "<<mF->getTree()->getHeight()<<endl;
 
 }
 //metode per a realitzar la 3a opcio del menu
-void cerca(BSTMovieFinder* mF){
+void cerca(BalancedBSTMovieFinder* mF){
     //PART 3-----------------------------------
     clock_t initialTime = clock();
     ifstream myFile;
@@ -86,6 +87,8 @@ int main(int argc, char** argv) {
     
     vector<string> vec_options(5);
     int option;
+    string resposta, fileName;
+    clock_t initialTime, finalTime;
 
     vec_options[0]="Llegir fitxer i inicialitzar arbre";
     vec_options[1]="Mostrar l’arbre segons l’ID en ordre creixent";
@@ -93,13 +96,32 @@ int main(int argc, char** argv) {
     vec_options[3]="Visualitzar per pantalla la profunditat de l'arbre";
     vec_options[4]="Sortir";
     
-    BSTMovieFinder* mF = new BSTMovieFinder();
+    BalancedBSTMovieFinder* mF = new BalancedBSTMovieFinder();
     do{
         cout<<"Que vols fer?"<<endl;
         option=menu(vec_options);
         switch(option){
             case 0:
-                initialize(mF);
+                delete mF;
+                mF = new BalancedBSTMovieFinder();
+
+                
+                cout<<"Quin fitxer vols (P/G)? ";
+                cin>>resposta;
+                while(resposta != "P" && resposta != "G" && resposta != "p" && resposta != "g"){
+                    cout<<"A veure, no és tan difícil. Quin fitxer vols (P/G)? ";
+                    cin>>resposta;
+                }
+                if(resposta == "P" || resposta == "p") fileName = "movie_rating_small.txt";
+                else fileName = "movie_rating.txt";
+
+                initialTime = clock();
+                //cout<<t<<endl;
+                mF->appendMovies(fileName);
+                finalTime = clock();
+                //cout<<t<<endl;
+                cout<<"It took "<< ((float)(finalTime-initialTime))/(CLOCKS_PER_SEC)<<" seconds."<<endl;
+                cout<<"Height: "<<mF->getTree()->getHeight()<<endl;
                 break;
             case 1:
                 //PART 2-----------------------------------

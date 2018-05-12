@@ -11,8 +11,8 @@
  * Created on 27 de abril de 2018, 14:06
  */
 
-#ifndef BSTMOVIEFINDER_H
-#define BSTMOVIEFINDER_H
+#ifndef BALANCEDBSTMOVIEFINDER_H
+#define BALANCEDBSTMOVIEFINDER_H
 #include "Movie.h"
 #include "BalancedBST.h"
 #include "NodeTree.h"
@@ -22,13 +22,13 @@
 using namespace std;
 
 
-class BSTMovieFinder {
+class BalancedBSTMovieFinder {
     public:
         //Constructors
-        BSTMovieFinder();//Test: OK
-        BSTMovieFinder(const BSTMovieFinder& orig);//TEST: OK
+        BalancedBSTMovieFinder();//Test: OK
+        BalancedBSTMovieFinder(const BalancedBSTMovieFinder& orig);//TEST: OK
         //Destructor
-        virtual ~BSTMovieFinder();//TEST: OK
+        virtual ~BalancedBSTMovieFinder();//TEST: OK
         //Consultores
         string showMovie(const int id);//TEST: OK
         Movie findMovie(const int id);//TEST: OK
@@ -46,22 +46,22 @@ class BSTMovieFinder {
 
 
 //Constructor per defecte
-BSTMovieFinder::BSTMovieFinder() {
+BalancedBSTMovieFinder::BalancedBSTMovieFinder() {
     this->bst = new BalancedBST<Movie>();
 }
 
 //Constructor còpia
-BSTMovieFinder::BSTMovieFinder(const BSTMovieFinder& orig) {
+BalancedBSTMovieFinder::BalancedBSTMovieFinder(const BalancedBSTMovieFinder& orig) {
     this->bst = new BalancedBST<Movie>( *orig.getTree() );
 }
 
 //Destructor
-BSTMovieFinder::~BSTMovieFinder() {
+BalancedBSTMovieFinder::~BalancedBSTMovieFinder() {
     delete this->bst;
 }
 
 //Mostra la informació d'una pel·lícula donat el seu id
-string BSTMovieFinder::showMovie(const int id) {
+string BalancedBSTMovieFinder::showMovie(const int id) {
     try{
         return this->findMovie(id).toString();
     }catch(invalid_argument& e){
@@ -70,7 +70,7 @@ string BSTMovieFinder::showMovie(const int id) {
 }
 
 //Mostra la Movie donat el seu id
-Movie BSTMovieFinder::findMovie(const int id) {
+Movie BalancedBSTMovieFinder::findMovie(const int id) {
     NodeTree<Movie>* movieNode = this->bst->search(id);
     if( movieNode == nullptr ){
         throw invalid_argument("Movie not in tree.");
@@ -80,7 +80,7 @@ Movie BSTMovieFinder::findMovie(const int id) {
 }
 
 //Busca la Movie donat el seu id
-bool BSTMovieFinder::searchMovie(const int id) {
+bool BalancedBSTMovieFinder::searchMovie(const int id) {
     NodeTree<Movie>* movieNode = this->bst->search(id);
     if( movieNode == nullptr ){
         return false;
@@ -90,7 +90,7 @@ bool BSTMovieFinder::searchMovie(const int id) {
 }
 
 //Mostra la puntuació d'una pel·lícula donat el seu id
-float BSTMovieFinder::findRatingMovie(const int id) {
+float BalancedBSTMovieFinder::findRatingMovie(const int id) {
     try{
         return this->findMovie(id).getRating();
     }catch(invalid_argument& e){
@@ -99,12 +99,12 @@ float BSTMovieFinder::findRatingMovie(const int id) {
 }
 
 //Retorna el seu bst
-BalancedBST<Movie>* BSTMovieFinder::getTree() const{
+BalancedBST<Movie>* BalancedBSTMovieFinder::getTree() const{
     return this->bst;
 }
 
 //Afegeix movies a partir d'un fitxer
-void BSTMovieFinder::appendMovies(const string filename) {
+void BalancedBSTMovieFinder::appendMovies(const string filename) {
     ifstream myFile;
     myFile.open(filename);
     int id;
@@ -133,15 +133,15 @@ void BSTMovieFinder::appendMovies(const string filename) {
 }
 
 //Afegeix una movie donada tota la seva informació
-void BSTMovieFinder::insertMovie(const int id, const string title, const float rating) {
+void BalancedBSTMovieFinder::insertMovie(const int id, const string title, const float rating) {
     Movie* newMovie = new Movie(id, title, rating);
     this->bst->insert(*newMovie, id);
 }
 
 //Imprimeix segons ordre creixent
-void BSTMovieFinder::printAscendingOrder() {
+void BalancedBSTMovieFinder::printAscendingOrder() {
     this->bst->printInorder();
 }
 
-#endif /* BSTMOVIEFINDER_H */
+#endif /* BALANCEDBSTMOVIEFINDER_H */
 
