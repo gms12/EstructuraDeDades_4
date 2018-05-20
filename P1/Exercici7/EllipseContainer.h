@@ -29,7 +29,7 @@ extern "C" {
 #include "circle.h"
 using namespace std;
 class EllipseContainer{
-public:
+private:
     vector<Ellipse*> v;
 public:
     EllipseContainer();
