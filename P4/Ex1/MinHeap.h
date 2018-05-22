@@ -37,6 +37,8 @@ template <class Type> class MinHeap{
         //Modificadors
         void insert(const Type& element);//TEST:
         void removeMin();//TEST
+        bool hasLeft(int position) const;//TEST:
+        bool hasRight(int position) const;//TEST:
     private:
         //Metodes privats
         void upHeap(int index);
@@ -145,7 +147,12 @@ template<class Type> Type MinHeap<Type>::minValue() const{
     }
 }
 //PrintHeap
-template<class Type> void MinHeap<Type>::printHeap() const{}
+template<class Type> void MinHeap<Type>::printHeap() const{
+    for(Type element : minHeap){
+        cout<<element.toString()<<endl;
+    }
+    if(minHeap.isEmpty()) cout<<"The Heap is empty"<<endl;
+}
 
 //Search
 template<class Type> Type MinHeap<Type>::search(int key) const{}
@@ -165,6 +172,14 @@ template<class Type> void MinHeap<Type>::removeMin() const{
     else{
         throw invalid_argument("El MinHeap és buit.");
     }
+}
+
+template<class Type> bool minHeap<Type>::hasLeft(int pos) const{
+    return (minHeap.size() >= 2*pos+1);
+}
+
+template<class Type> bool minHeap<Type>::hasRight(int pos) const{
+    return (minHeap.size() >= 2*pos+2);
 }
 #ifdef __cplusplus
 #endif
