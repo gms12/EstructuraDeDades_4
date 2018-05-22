@@ -41,6 +41,7 @@ template <class Type> class MinHeap{
         //Metodes privats
         void upHeap(int index);
         void downHeap(int index);
+        int search(int index, int key);
         //Atributs
         vector<Type> minHeap;
     };
@@ -148,8 +149,26 @@ template<class Type> Type MinHeap<Type>::minValue() const{
 template<class Type> void MinHeap<Type>::printHeap() const{}
 
 //Search
-template<class Type> Type MinHeap<Type>::search(int key) const{}
-
+template<class Type> Type MinHeap<Type>::search(int key) const{
+    if(size()>0){
+        for(int i;i<size();i++){
+            if(minHeap[i].getId()==key)return minHeap[i];
+        }
+    }
+    else{
+        throw invalid_argument("El MinHeap és buit.");
+    }
+}
+//Search recursiu
+template<class Type> int MinHeap<Type>::search(int index, int key){
+    if(minHeap[index]==key)return minHeap[index];
+    else if(minHeap[index]>key)return -1;
+    else{
+        if(hasleft && hasRight)return max(search(left),search(right))
+        else if(hasleft)return search(left)
+        else return -1;
+    }
+}
 //RemoveMin
 template<class Type> void MinHeap<Type>::removeMin() const{
     if(size()>0){
