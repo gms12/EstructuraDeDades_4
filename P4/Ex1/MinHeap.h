@@ -33,11 +33,15 @@ template <class Type> class MinHeap{
         void print();//TEST: 
         int min() const;//TEST
         Type minValue() const;//TEST
+        void printHeap() const;//TEST
+        Type search(int key) const;//TEST
         //Modificadors
-        void insert(const Type& element);//TEST: 
+        void insert(const Type& element);//TEST:
+        void removeMin();//TEST
     private:
         //Metodes privats
-        void bubbleUp(int index);
+        void upHeap(int index);
+        void downHeap(int index);
         //Atributs
         vector<Type> minHeap;
     };
@@ -66,9 +70,6 @@ template<class Type> int MinHeap<Type>::size() const{
 template<class Type> void MinHeap<Type>::isEmpty() const{
     return this->size();//si la mida es 0 retornara true, i si es meajor aleshores false
 }
-//Print
-
-
 //Insert
 template<class Type> void MinHeap<Type>::insert(const Type& element){
     int index=this->size();
@@ -83,10 +84,10 @@ template<class Type> void MinHeap<Type>::insert(const Type& element){
         indexParent=(index-1)/2;
     }
     this->minHeap.push_back(element);
-    this->bubbleUp(index);
+    this->upHeap(index);
 }
-//Bubble up. Anira pujant i comprovant que tot està bé. Si no canviarà els nodes que toquin
-template<class Type> void MinHeap<Type>::bubbleUp(int index){
+//Up Heap. Anira pujant i comprovant que tot està bé. Si no canviarà els nodes que toquin
+template<class Type> void MinHeap<Type>::upHeap(int index){
     if(index==0)return;
     int indexParent;
     if(index%2==0){
@@ -101,11 +102,40 @@ template<class Type> void MinHeap<Type>::bubbleUp(int index){
         aux=minHeap[index];
         minHeap[index]=minHeap[indexParent];
         minHeap[indexParent]=aux;
-        this->bubbleUp(indexParent);
+        this->upHeap(indexParent);
     }
        
 }
+//Down Heap. Anira baixant i comprovant que tot està bé. Si no canviarà els nodes que toquin
+template<class Type> void MinHeap<Type>::downHeap(int index){
+    int size = minHeap.size();
+    int indexLeftChild = 2*index + 1;
+    int indexRightChild = 2*index + 2;
 
+    if(indexLeftChild >= size)
+        return; //Es una fulla
+
+    int minIndex = index;
+    //Comprovem el fill de l'esq
+    if(minHeap[index] > minHeap[indexLeftChild])
+    {
+        minIndex = indexLeftChild;
+    }
+    //Comprovem ara el fill de la dreta. Nomes l'agafem si es mes petit que el de l'esq
+    if((indexRightChild < size) && (minHeap[minIndex] > minHeap[indexRightChild]))
+    {
+        minIndex = indexRightChild;
+    }
+
+    if(minIndex != index){
+        //Fem el canvi
+        int aux = minHeap[index];
+        minHeap[index] = minHeap[minIndex];
+        minHeap[minIndex] = aux;
+        downHeap(minIndex);
+    }
+       
+}
 //MinKey
 template<class Type> int MinHeap<Type>::min() const{
     if(size()>0){
@@ -120,6 +150,28 @@ template<class Type> int MinHeap<Type>::min() const{
 template<class Type> Type MinHeap<Type>::minValue() const{
     if(size()>0){
         return this->minHeap[0];
+    }
+    else{
+        throw invalid_argument("El MinHeap és buit.");
+    }
+}
+//PrintHeap
+template<class Type> void MinHeap<Type>::printHeap() const{}
+
+//Search
+template<class Type> Type MinHeap<Type>::search(int key) const{}
+
+//RemoveMin
+template<class Type> void MinHeap<Type>::removeMin() const{
+    if(size()>0){
+        //Primer intercanviem el primer element amb l'ultim
+        Type aux=minHeap[0];
+        minHeap[0]=minHeap[size()-1];
+        minHeap[size()-1]=aux;
+        //Ara eliminem l'ultim
+        minHeap.pop_back();
+        //Ara fem un downHeap
+        downHeap(0);
     }
     else{
         throw invalid_argument("El MinHeap és buit.");
