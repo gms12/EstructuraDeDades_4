@@ -16,7 +16,7 @@
 #include <iostream>
 #include <math.h>
 #include <vector>
-#include "NodeHeap.h"
+
 using namespace std;
 #ifdef __cplusplus
 #endif
@@ -34,28 +34,28 @@ template <class Type> class MinHeap{
         int min() const;//TEST
         Type minValue() const;//TEST
         //Modificadors
-        void insert(const Type& element, int key);//TEST: 
+        void insert(const Type& element);//TEST: 
     private:
         //Metodes privats
         void bubbleUp(int index);
         //Atributs
-        vector<NodeHeap*> minHeap;
+        vector<Type> minHeap;
     };
     
 //Constructor per defecte. Punter arrel a null.
 template <class Type> MinHeap<Type>::MinHeap(){
-    vector<NodeHeap*> mH;
+    vector<Type> mH;
     this->minHeap=mH;
     cout << "MinHeap creat" << endl;
 }
 //Destructor
 template<class Type> MinHeap<Type>::~MinHeap(){
-    vector<NodeHeap *>::iterator it;
+    vector<Type>::iterator it;
     for(it=this->minHeap.begin();it!=this->minHeap.end();it++){
         delete *it;
     }
     this->minHeap.clear();
-    vector<NodeHeap*>().swap(this->minHeap);
+    vector<Type>().swap(this->minHeap);
     cout<<"MinHeap eliminat."<<endl;
 }
 //Size
@@ -70,10 +70,9 @@ template<class Type> void MinHeap<Type>::isEmpty() const{
 
 
 //Insert
-template<class Type> void MinHeap<Type>::insert(const Type& element, int key){
+template<class Type> void MinHeap<Type>::insert(const Type& element){
     int index=this->size();
     int indexParent;
-    NodeHeap* node=new NodeHeap(element,key);
     //connectem pare i fill
     //cas parell
     if(index%2==0){
@@ -83,9 +82,7 @@ template<class Type> void MinHeap<Type>::insert(const Type& element, int key){
     else{
         indexParent=(index-1)/2;
     }
-    this->minHeap[indexParent]->setRight(node);
-    node->setParent(this->minHeap[indexParent]); 
-    this->minHeap.push_back(node);
+    this->minHeap.push_back(element);
     this->bubbleUp(index);
 }
 //Bubble up. Anira pujant i comprovant que tot està bé. Si no canviarà els nodes que toquin
@@ -98,17 +95,9 @@ template<class Type> void MinHeap<Type>::bubbleUp(int index){
     else{
         indexParent=(index-1)/2;
     }
-    if(minHeap[indexParent]->getKey()>minHeap[index]->getKey()){
-        //Intercanviem els nodes. Primer movem els punters
-        NodeHeap* tmp=new NodeHeap(minHeap[index]);
-        NodeHeap* aux;
-        minHeap[index]->setParent(minHeap[indexParent]->getParent());
-        minHeap[index]->setLeft(minHeap[indexParent]->getLeft());
-        minHeap[index]->setRight(minHeap[indexParent]->getRight());
-        minHeap[indexParent]->setParent(minHeap[index]);
-        minHeap[indexParent]->setLeft(tmp->getLeft());
-        minHeap[indexParent]->setRight(tmp->getRight());
-        delete(tmp);
+    if(minHeap[indexParent]->getId()>minHeap[index]->getId()){
+        //Intercanviem els nodes.
+        Type aux;
         aux=minHeap[index];
         minHeap[index]=minHeap[indexParent];
         minHeap[indexParent]=aux;
@@ -120,7 +109,7 @@ template<class Type> void MinHeap<Type>::bubbleUp(int index){
 //MinKey
 template<class Type> int MinHeap<Type>::min() const{
     if(size()>0){
-        return this->minHeap[0]->getKey();
+        return this->minHeap[0]->getId();
     }
     else{
         throw invalid_argument("El MinHeap és buit.");
@@ -130,7 +119,7 @@ template<class Type> int MinHeap<Type>::min() const{
 //MinValue
 template<class Type> Type MinHeap<Type>::minValue() const{
     if(size()>0){
-        return this->minHeap[0]->getValue();
+        return this->minHeap[0];
     }
     else{
         throw invalid_argument("El MinHeap és buit.");
