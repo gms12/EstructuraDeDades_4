@@ -24,24 +24,24 @@ using namespace std;
 template <class Type> class MinHeap{
         public:
         //Constructors
-        MinHeap();//TEST: 
+        MinHeap();//TEST: OK
         //Destructor
-        virtual ~MinHeap();//TEST: 
+        virtual ~MinHeap();//TEST: OK
         //Consultors
-        int size() const;//TEST: 
-        bool isEmpty() const;//TEST: 
-        int min() const;//TEST
+        int size() const;//TEST: OK
+        bool isEmpty() const;//TEST: OK
+        int min() const;//TEST: 
         Type minValue() const;//TEST
-        void printHeap() const;//TEST
-        Type search(int key) const;//TEST
-        bool hasLeft(int position) const;//TEST:
-        bool hasRight(int position) const;//TEST:
+        void printHeap() const;//TEST: OK
+        Type search(int key);//TEST: OK
+        bool hasLeft(int position) const;//TEST: OK
+        bool hasRight(int position) const;//TEST: OK
         //Modificadors
-        void insert(const Type& element);//TEST:
-        void removeMin();//TEST
+        void insert(const Type& element);//TEST: OK
+        void removeMin();//TEST OK
     private:
         //Metodes privats
-        void upHeap(int index);
+        void upHeap(int index); 
         void downHeap(int index);
         int search(int index, int key);
         //Atributs
@@ -56,10 +56,6 @@ template <class Type> MinHeap<Type>::MinHeap(){
 }
 //Destructor
 template<class Type> MinHeap<Type>::~MinHeap(){
-    vector<Type>::iterator it;
-    for(it=this->minHeap.begin();it!=this->minHeap.end();it++){
-        delete *it;
-    }
     this->minHeap.clear();
     vector<Type>().swap(this->minHeap);
     cout<<"MinHeap eliminat."<<endl;
@@ -69,7 +65,7 @@ template<class Type> int MinHeap<Type>::size() const{
     return this->minHeap.size();
 }
 //isEmpty
-template<class Type> void MinHeap<Type>::isEmpty() const{
+template<class Type> bool MinHeap<Type>::isEmpty() const{
     return !(this->size());//si la mida es 0 retornara true, i si es major aleshores false
 }
 //Insert
@@ -155,10 +151,11 @@ template<class Type> void MinHeap<Type>::printHeap() const{
             cout<<element.toString()<<endl;
         }
     }
+    
 }
 
 //Search
-template<class Type> Type MinHeap<Type>::search(int key) const{
+template<class Type> Type MinHeap<Type>::search(int key){
     if(size()>0){
         int index=search(0,key);
         if(index==-1)throw invalid_argument("Aquest key no es troba al MinHeap");
@@ -170,16 +167,18 @@ template<class Type> Type MinHeap<Type>::search(int key) const{
 }
 //Search recursiu
 template<class Type> int MinHeap<Type>::search(int index, int key){
-    if(minHeap[index].getId()==key)return minHeap[index];
+    if(minHeap[index].getId()==key)return index;
     else if(minHeap[index].getId()>key)return -1;
     else{
+        int left=2*index + 1;
+        int right=2*index + 2;
         if(hasLeft(index) && hasRight(index))return max(search(left,key),search(right,key));
         else if(hasLeft(index))return search(left,key);
         else return -1;
     }
 }
 //RemoveMin
-template<class Type> void MinHeap<Type>::removeMin() const{
+template<class Type> void MinHeap<Type>::removeMin(){
     if(size()>0){
         //Primer intercanviem el primer element amb l'ultim
         Type aux=minHeap[0];
