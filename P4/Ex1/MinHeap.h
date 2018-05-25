@@ -34,11 +34,11 @@ template <class Type> class MinHeap{
         Type minValue() const;//TEST
         void printHeap() const;//TEST
         Type search(int key) const;//TEST
+        bool hasLeft(int position) const;//TEST:
+        bool hasRight(int position) const;//TEST:
         //Modificadors
         void insert(const Type& element);//TEST:
         void removeMin();//TEST
-        bool hasLeft(int position) const;//TEST:
-        bool hasRight(int position) const;//TEST:
     private:
         //Metodes privats
         void upHeap(int index);
@@ -149,18 +149,20 @@ template<class Type> Type MinHeap<Type>::minValue() const{
 }
 //PrintHeap
 template<class Type> void MinHeap<Type>::printHeap() const{
-    for(Type element : minHeap){
-        cout<<element.toString()<<endl;
+    if(isEmpty())throw invalid_argument("El MinHeap és buit.");
+    else{
+        for(Type element : minHeap){
+            cout<<element.toString()<<endl;
+        }
     }
-    if(minHeap.isEmpty()) cout<<"The Heap is empty"<<endl;
 }
 
 //Search
 template<class Type> Type MinHeap<Type>::search(int key) const{
     if(size()>0){
-        for(int i;i<size();i++){
-            if(minHeap[i].getId()==key)return minHeap[i];
-        }
+        int index=search(0,key);
+        if(index==-1)throw invalid_argument("Aquest key no es troba al MinHeap");
+        else return minHeap[index];
     }
     else{
         throw invalid_argument("El MinHeap és buit.");
@@ -168,11 +170,11 @@ template<class Type> Type MinHeap<Type>::search(int key) const{
 }
 //Search recursiu
 template<class Type> int MinHeap<Type>::search(int index, int key){
-    if(minHeap[index]==key)return minHeap[index];
-    else if(minHeap[index]>key)return -1;
+    if(minHeap[index].getId()==key)return minHeap[index];
+    else if(minHeap[index].getId()>key)return -1;
     else{
-        if(hasleft && hasRight)return max(search(left),search(right))
-        else if(hasleft)return search(left)
+        if(hasLeft(index) && hasRight(index))return max(search(left,key),search(right,key));
+        else if(hasLeft(index))return search(left,key);
         else return -1;
     }
 }
@@ -193,12 +195,12 @@ template<class Type> void MinHeap<Type>::removeMin() const{
     }
 }
 
-template<class Type> bool minHeap<Type>::hasLeft(int pos) const{
-    return (minHeap.size() >= 2*pos+1);
+template<class Type> bool MinHeap<Type>::hasLeft(int pos) const{
+    return (size() >= 2*pos+1);
 }
 
-template<class Type> bool minHeap<Type>::hasRight(int pos) const{
-    return (minHeap.size() >= 2*pos+2);
+template<class Type> bool MinHeap<Type>::hasRight(int pos) const{
+    return (size() >= 2*pos+2);
 }
 #ifdef __cplusplus
 #endif
