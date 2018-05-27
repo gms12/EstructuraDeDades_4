@@ -98,9 +98,9 @@ void Movie::setId(int i){
 //Retorna una string amb la info de Movie
 string Movie::toString() const{
     string rt=to_string(this->rating);
-    //string id=to_string(this->id);
-    //return id+"::"+this->name+"::"+rt;
-    return this->name+"::"+rt;
+    string id=to_string(this->id);
+    return id+"::"+this->name+"::"+rt;
+    //return this->name+"::"+rt;
 }
 
 

@@ -30,7 +30,7 @@ template <class Type> class MinHeap{
         //Consultors
         int size() const;//TEST: OK
         bool isEmpty() const;//TEST: OK
-        int min() const;//TEST: 
+        int min() const;//TEST: OK
         Type minValue() const;//TEST
         void printHeap() const;//TEST: OK
         Type search(int key);//TEST: OK

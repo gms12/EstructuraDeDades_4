@@ -26,13 +26,17 @@ int main(int argc, char** argv) {
     Movie m2(3,"movie2",1.6);
     Movie m3(8,"movie3",2.6);
     Movie m4(2,"movie4",0.3);
-    Movie m5(1,"movie5",4.6);
+    Movie m5(7,"movie5",4.6);
+    Movie m6(19,"movie6",2.6);
+    Movie m7(1,"movie7",1.6);
     try{
         movies_minHeap->insert(m1);
         movies_minHeap->insert(m2);
         movies_minHeap->insert(m3);
         movies_minHeap->insert(m4);
         movies_minHeap->insert(m5);
+        movies_minHeap->insert(m6);
+        movies_minHeap->insert(m7);
         movies_minHeap->printHeap();
 
         cout<<"Minim: "<<movies_minHeap->minValue().toString()<<endl;
@@ -40,6 +44,8 @@ int main(int argc, char** argv) {
         cout<<"Size: "<<movies_minHeap->size()<<endl;
         movies_minHeap->removeMin();
         cout<<"Minim: "<<movies_minHeap->minValue().toString()<<endl;
+        cout<<"minim: "<<movies_minHeap->min()<<endl;
+        
     }
     catch(invalid_argument& e){
         cout<<e.what()<<endl;
