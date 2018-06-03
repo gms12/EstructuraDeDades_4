@@ -77,8 +77,8 @@ void cerca(HeapMovieFinder* mF){
         }
     }
     clock_t finalTime = clock();
-    cout<<"It took "<< ((float)(finalTime-initialTime))/(CLOCKS_PER_SEC)<<" seconds to search the whole tree."<<endl;
-    cout<<"There are "<< isInHeap <<" movies in the tree."<<endl;
+    cout<<"It took "<< ((float)(finalTime-initialTime))/(CLOCKS_PER_SEC)<<" seconds to search the whole heap."<<endl;
+    cout<<"There are "<< isInHeap <<" movies in the heap."<<endl;
 }
 /*
  * Main
@@ -135,6 +135,11 @@ int main(int argc, char** argv) {
                 //PART 4-----------------------------------
                 try{
                     cout<<"Profunditat: "<< mF->getMinHeap()->depth()<<endl;
+                }catch(invalid_argument& e){
+                    cout<<e.what()<<endl;
+                }
+                try{
+                    cout<<"Mida: "<< mF->getMinHeap()->size()<<endl;
                 }catch(invalid_argument& e){
                     cout<<e.what()<<endl;
                 }

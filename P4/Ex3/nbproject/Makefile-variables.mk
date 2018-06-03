@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=Cygwin-Windows
 CND_ARTIFACT_DIR_Debug=dist/Debug/Cygwin-Windows
-CND_ARTIFACT_NAME_Debug=ex1
-CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin-Windows/ex1
+CND_ARTIFACT_NAME_Debug=ex3
+CND_ARTIFACT_PATH_Debug=dist/Debug/Cygwin-Windows/ex3
 CND_PACKAGE_DIR_Debug=dist/Debug/Cygwin-Windows/package
-CND_PACKAGE_NAME_Debug=ex1.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin-Windows/package/ex1.tar
+CND_PACKAGE_NAME_Debug=ex3.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/Cygwin-Windows/package/ex3.tar
 # Release configuration
-CND_PLATFORM_Release=GNU-Linux
-CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux
-CND_ARTIFACT_NAME_Release=ex1
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/ex1
-CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux/package
-CND_PACKAGE_NAME_Release=ex1.tar
-CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/ex1.tar
+CND_PLATFORM_Release=Cygwin-Windows
+CND_ARTIFACT_DIR_Release=dist/Release/Cygwin-Windows
+CND_ARTIFACT_NAME_Release=ex3
+CND_ARTIFACT_PATH_Release=dist/Release/Cygwin-Windows/ex3
+CND_PACKAGE_DIR_Release=dist/Release/Cygwin-Windows/package
+CND_PACKAGE_NAME_Release=ex3.tar
+CND_PACKAGE_PATH_Release=dist/Release/Cygwin-Windows/package/ex3.tar
 #
 # include compiler specific variables
 #
