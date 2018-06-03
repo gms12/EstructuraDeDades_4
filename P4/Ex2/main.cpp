@@ -66,19 +66,19 @@ void cerca(HeapMovieFinder* mF){
     clock_t initialTime = clock();
     ifstream myFile;
     myFile.open("cercaPelicules.txt");
-    int isInTree = 0;
+    int isInHeap = 0;
     string line;
     
     if(!myFile.is_open()){
         cout<< "Unable to open file."<<endl;
     }else{
         while( getline((myFile), line) ){
-            //if( mF->searchMovie( atoi(line.c_str()) ) ) isInTree++;
+            if( mF->searchMovie( atoi(line.c_str()) ) ) isInHeap++;
         }
     }
     clock_t finalTime = clock();
     cout<<"It took "<< ((float)(finalTime-initialTime))/(CLOCKS_PER_SEC)<<" seconds to search the whole tree."<<endl;
-    cout<<"There are "<< isInTree <<" movies in the tree."<<endl;
+    cout<<"There are "<< isInHeap <<" movies in the tree."<<endl;
 }
 /*
  * Main

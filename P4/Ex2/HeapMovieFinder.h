@@ -34,6 +34,7 @@ public:
     Movie findMovie(int movieID) const;
     void printAscendingOrder();
     MinHeap<Movie>* getMinHeap() const;
+    bool searchMovie(const int id);
 private:
     //ATRIBUTS
     MinHeap<Movie>* minHeap;
@@ -126,11 +127,21 @@ void HeapMovieFinder::printAscendingOrder() {
             }
             else counter++;
         }
-    }while(counter<40);//si el comptador arriba a 40, sortim
+    }while(counter<40 && minHeapAux->size()>0);//si el comptador arriba a 40, sortim
 }
 //Getter del minHeap
 MinHeap<Movie>* HeapMovieFinder::getMinHeap() const{
     return this->minHeap;
+}
+//Metode que busca una Movie en el minHeap donat el seu id
+bool HeapMovieFinder::searchMovie(const int id){
+    try{
+        Movie movie=this->minHeap->search(id);
+        return true;
+    }
+    catch(invalid_argument& e){
+        return false;
+    }
 }
 #endif /* HEAPMOVIEFINDER_H */
 
