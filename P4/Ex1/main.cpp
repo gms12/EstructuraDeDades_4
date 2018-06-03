@@ -24,7 +24,7 @@ int main(int argc, char** argv) {
     movies_minHeap=new MinHeap<Movie>();
     Movie m1(4,"movie1",3.2);
     Movie m2(3,"movie2",1.6);
-    Movie m3(8,"movie3",2.6);
+    Movie m3(10,"movie3",2.6);
     Movie m4(2,"movie4",0.3);
     Movie m5(7,"movie5",4.6);
     Movie m6(19,"movie6",2.6);
@@ -32,10 +32,10 @@ int main(int argc, char** argv) {
     try{
         movies_minHeap->insert(m1);
         movies_minHeap->insert(m2);
-        movies_minHeap->insert(m3);
+        movies_minHeap->insert(m6);
         movies_minHeap->insert(m4);
         movies_minHeap->insert(m5);
-        movies_minHeap->insert(m6);
+        movies_minHeap->insert(m3);
         movies_minHeap->insert(m7);
         movies_minHeap->printHeap();
 

@@ -25,6 +25,7 @@ template <class Type> class MinHeap{
         public:
         //Constructors
         MinHeap();//TEST: OK
+        MinHeap(const MinHeap& orig);
         //Destructor
         virtual ~MinHeap();//TEST: OK
         //Consultors
@@ -53,6 +54,12 @@ template <class Type> MinHeap<Type>::MinHeap(){
     vector<Type> mH;
     this->minHeap=mH;
     cout << "MinHeap creat" << endl;
+}
+//Constructor copia
+template <class Type> MinHeap<Type>::MinHeap(const MinHeap& orig){
+    for(int i=0;i<orig.size();i++){
+        this->insert(orig.minHeap[i]);
+    }
 }
 //Destructor
 template<class Type> MinHeap<Type>::~MinHeap(){

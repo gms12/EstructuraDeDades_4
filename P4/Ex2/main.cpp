@@ -125,7 +125,7 @@ int main(int argc, char** argv) {
                 break;
             case 1:
                 //PART 2-----------------------------------
-                //mF->printAscendingOrder();
+                mF->printAscendingOrder();
                 break;
             case 2:
                 cerca(mF);

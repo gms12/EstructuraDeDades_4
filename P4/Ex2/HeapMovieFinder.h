@@ -16,6 +16,8 @@
 #include "Movie.h"
 #include "MinHeap.h"
 #include <string>
+#include <fstream>
+#include <stdexcept>
 using namespace std;
 
 class HeapMovieFinder{
@@ -30,6 +32,7 @@ public:
     //CONSULTORS
     string showMovie(int movieID) const;
     Movie findMovie(int movieID) const;
+    void printAscendingOrder();
 private:
     //ATRIBUTS
     MinHeap<Movie>* minHeap;
@@ -74,7 +77,7 @@ void HeapMovieFinder::appendMovies(string filename){
 }
 //Metode per inserir una pelicula al minHeap
 void HeapMovieFinder::insertMovie(int movieID, string title, float rating){
-    Movie* newMovie = new Movie(id, title, rating);
+    Movie* newMovie = new Movie(movieID, title, rating);
     this->minHeap->insert(*newMovie);
 }
 
@@ -98,6 +101,31 @@ Movie HeapMovieFinder::findMovie(int movieID) const{
         throw e;
     }
 }
-
+//Imprimeix segons ordre creixent
+void HeapMovieFinder::printAscendingOrder() {
+    //Primer creem un nou minHeap, d'on anirem imprimint el mes petit
+    MinHeap<Movie>* minHeapAux= new MinHeap<Movie>(*(this->minHeap));
+    int counter=0;//posem el comptador a zero
+    string resposta;
+    do{
+        if(counter<39){//mentres no arribem a 40, anem imprimint
+            cout<<minHeapAux->minValue().toString()<<endl;//imprimim el valor amb id mes baix
+            minHeapAux->removeMin();//l'eliminem del minHeap, per a tenir sempre el mes petit a dalt
+            counter++;//augmentem el comptador
+        }
+        else{//preguntem si l'usuari vol seguir veient pelicules
+            cout<<"Vols seguir veient pel·licules (Y/N)?";
+            cin>>resposta;
+            while(resposta != "Y" && resposta != "N" && resposta != "y" && resposta != "n"){
+                    cout<<"Recorda, respon Y o N";
+                    cin>>resposta;
+                }
+            if(resposta =="Y" || resposta=="y"){
+                counter=0;
+            }
+            else counter++;
+        }
+    }while(counter<40);//si el comptador arriba a 40, sortim
+}
 #endif /* HEAPMOVIEFINDER_H */
 
