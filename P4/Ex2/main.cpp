@@ -128,15 +128,19 @@ int main(int argc, char** argv) {
                 mF->printAscendingOrder();
                 break;
             case 2:
+                //PART 3-----------------------------------
                 cerca(mF);
                 break;
             case 3:
                 //PART 4-----------------------------------
-                //cout<<"Depth: "<< mF->getTree()->getHeight()<<endl;
+                try{
+                    cout<<"Profunditat: "<< mF->getMinHeap()->depth()<<endl;
+                }catch(invalid_argument& e){
+                    cout<<e.what()<<endl;
+                }
                 break;
             case 4:
                 cout<<"Adéu!"<<endl;
-               
         }
     }while(option!=4);
     vec_options.clear();

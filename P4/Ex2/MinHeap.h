@@ -16,6 +16,7 @@
 #include <iostream>
 #include <math.h>
 #include <vector>
+#include <stdexcept>
 
 using namespace std;
 #ifdef __cplusplus
@@ -25,7 +26,7 @@ template <class Type> class MinHeap{
         public:
         //Constructors
         MinHeap();//TEST: OK
-        MinHeap(const MinHeap& orig);
+        MinHeap(const MinHeap& orig);//TEST: OK
         //Destructor
         virtual ~MinHeap();//TEST: OK
         //Consultors
@@ -35,16 +36,18 @@ template <class Type> class MinHeap{
         Type minValue() const;//TEST
         void printHeap() const;//TEST: OK
         Type search(int key);//TEST: OK
-        bool hasLeft(int position) const;//TEST: OK
-        bool hasRight(int position) const;//TEST: OK
+        int depth() const;//TEST:
         //Modificadors
         void insert(const Type& element);//TEST: OK
         void removeMin();//TEST OK
     private:
         //Metodes privats
+        int depth(int index) const;
         void upHeap(int index); 
         void downHeap(int index);
         int search(int index, int key);
+        bool hasLeft(int position) const;//TEST: OK
+        bool hasRight(int position) const;//TEST: OK
         //Atributs
         vector<Type> minHeap;
     };
@@ -200,13 +203,26 @@ template<class Type> void MinHeap<Type>::removeMin(){
         throw invalid_argument("El MinHeap és buit.");
     }
 }
-
+//Metode que comprova si hi ha fill esquerre
 template<class Type> bool MinHeap<Type>::hasLeft(int pos) const{
     return (size() >= 2*pos+1);
 }
-
+//Metode que comprova si hi ha fill dret
 template<class Type> bool MinHeap<Type>::hasRight(int pos) const{
     return (size() >= 2*pos+2);
+}
+//Metode que retorna l'alçada
+template<class Type> int MinHeap<Type>::depth() const{
+    if(this->isEmpty()){
+        throw invalid_argument("El MinHeap és buit.");
+    }
+    else return this->depth(0);
+}
+//Metode recursiu que retorna l'alçada d'un punt
+template<class Type> int MinHeap<Type>::depth(int index) const{
+    //nomes comprovem el costat esq, ja que per construccio es el que sera mes llarg sempre
+    if(this->hasLeft(index))return 1+depth(2*index +1);
+    else return 0;//cas per defecte, si no te fill es que hem arribat al final
 }
 #ifdef __cplusplus
 #endif

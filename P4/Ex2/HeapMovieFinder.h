@@ -33,6 +33,7 @@ public:
     string showMovie(int movieID) const;
     Movie findMovie(int movieID) const;
     void printAscendingOrder();
+    MinHeap<Movie>* getMinHeap() const;
 private:
     //ATRIBUTS
     MinHeap<Movie>* minHeap;
@@ -126,6 +127,10 @@ void HeapMovieFinder::printAscendingOrder() {
             else counter++;
         }
     }while(counter<40);//si el comptador arriba a 40, sortim
+}
+//Getter del minHeap
+MinHeap<Movie>* HeapMovieFinder::getMinHeap() const{
+    return this->minHeap;
 }
 #endif /* HEAPMOVIEFINDER_H */
 
